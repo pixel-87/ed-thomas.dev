@@ -23,24 +23,33 @@
       version = siteVersion;
       src = lib.cleanSource ./.;
 
-      nativeBuildInputs = [pkgs.hugo];
+      nativeBuildInputs = [pkgs.hugo pkgs.go];
       # If the theme is a git submodule / module, ensure it's vendored beforehand
       # or add extra fetch steps here.
       buildPhase = ''
-                echo "Building Hugo site (production, minified)" >&2
-                # Copy source to a temporary build dir so we can inject a generated
-                # data file that Hugo will read at build time. This avoids needing
-                # the .git metadata and lets templates access .Site.Data.build.
-                rm -rf "$TMPDIR/src"
-                mkdir -p "$TMPDIR/src"
-                cp -a --preserve=mode . "$TMPDIR/src/"
+        echo "Building Hugo site (production, minified)" >&2
+        # Copy source to a temporary build dir so we can inject a generated
+        # data file that Hugo will read at build time. This avoids needing
+        # the .git metadata and lets templates access .Site.Data.build.
+        rm -rf "$TMPDIR/src"
+        mkdir -p "$TMPDIR/src"
+        cp -a --preserve=mode . "$TMPDIR/src/"
 
-                mkdir -p "$TMPDIR/src/data"
-                cat > "$TMPDIR/src/data/build.json" <<EOF
+        mkdir -p "$TMPDIR/src/data"
+        cat > "$TMPDIR/src/data/build.json" <<EOF
         { "rev": "${siteRev}", "version": "${siteVersion}" }
         EOF
 
-                hugo --minify --destination "$TMPDIR/out" --source "$TMPDIR/src"
+        # Create a small, non-invasive override config to disable Hugo GitInfo
+        # so Hugo won't try to read .git during a pure Nix build.
+        cat > "$TMPDIR/src/override-config.yaml" <<EOF
+        enableGitInfo: false
+        EOF
+
+        # Build with a relative baseURL so generated assets point to / and
+        # include drafts (match `hugo server -D` behavior used during dev).
+        # Pass the main config and the override so the override disables GitInfo.
+        hugo --minify --baseURL "/" --buildDrafts --destination "$TMPDIR/out" --source "$TMPDIR/src" --config "$TMPDIR/src/config/_default/hugo.toml,$TMPDIR/src/override-config.yaml"
       '';
       installPhase = ''
         mkdir -p $out
@@ -61,7 +70,7 @@
 
     # Docker image bundling Caddy + static site output.
     siteImage = pkgs.dockerTools.buildImage {
-      name = "ed-thomasdev";
+      name = "ed-thomas-site";
       tag = siteVersion;
       copyToRoot = pkgs.buildEnv {
         name = "image-root";
