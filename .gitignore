@@ -1,3 +1,10 @@
 /public/
 /resources/_gen/
 .hugo_build.lock
+result
+
+# build artifacts
+result
+tmp-out
+tmp-srv
+tmp-*
