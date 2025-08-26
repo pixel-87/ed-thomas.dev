@@ -9,13 +9,14 @@
     self,
     nixpkgs,
   }: let
+    # Very much inspired by https://github.com/jnsgruk/jnsgr.uk/blob/main/flake.nix
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     lib = pkgs.lib;
 
     siteVersion = self.shortRev or (builtins.substring 0 7 self.dirtyRev);
     siteRev = self.rev or self.dirtyRev;
-
+    
     # Reproducible build of the static site. We avoid using ./public as an input;
     # instead we let `hugo` render directly into $out.
     site = pkgs.stdenv.mkDerivation {
@@ -26,34 +27,28 @@
       nativeBuildInputs = [pkgs.hugo pkgs.go];
       # If the theme is a git submodule / module, ensure it's vendored beforehand
       # or add extra fetch steps here.
+
       buildPhase = ''
-        echo "Building Hugo site (production, minified)" >&2
-        # Copy source to a temporary build dir so we can inject a generated
-        # data file that Hugo will read at build time. This avoids needing
-        # the .git metadata and lets templates access .Site.Data.build.
+        # Nix doesnt play well with Hugo's "GitInfo" module,
+        # so disable and inject the revision
+
         rm -rf "$TMPDIR/src"
         mkdir -p "$TMPDIR/src"
         cp -a --preserve=mode . "$TMPDIR/src/"
 
         mkdir -p "$TMPDIR/src/data"
-        cat > "$TMPDIR/src/data/build.json" <<EOF
-        { "rev": "${siteRev}", "version": "${siteVersion}" }
-        EOF
+        printf '%s\n' '{ "rev": "${siteRev}", "version": "${siteVersion}" }' > "$TMPDIR/src/data/build.json"
 
         # Create a small, non-invasive override config to disable Hugo GitInfo
-        # so Hugo won't try to read .git during a pure Nix build.
-        cat > "$TMPDIR/src/override-config.yaml" <<EOF
-        enableGitInfo: false
-        EOF
+        printf '%s\n' 'enableGitInfo: false' > "$TMPDIR/src/override-config.yaml"
 
-        # Build with a relative baseURL so generated assets point to / and
-        # include drafts (match `hugo server -D` behavior used during dev).
         # Pass the main config and the override so the override disables GitInfo.
-        hugo --minify --baseURL "/" --buildDrafts --destination "$TMPDIR/out" --source "$TMPDIR/src" --config "$TMPDIR/src/config/_default/hugo.toml,$TMPDIR/src/override-config.yaml"
+        hugo --minify --baseURL "/" --destination "$TMPDIR/out" --source "$TMPDIR/src" --config "$TMPDIR/src/config/_default/hugo.toml,$TMPDIR/src/override-config.yaml"
       '';
+
       installPhase = ''
         mkdir -p $out
-        cp -R "$TMPDIR/out"/* $out/
+        cp -a "$TMPDIR/out/." $out/
       '';
       # Pure build: no network access after evaluation; ensure modules are vendored.
       # If you use hugo modules, run `hugo mod vendor` and commit _vendor/.
@@ -64,7 +59,6 @@
       :80 {
         root * /srv
         file_server
-        # Add headers / compression etc here as desired
       }
     '';
 
@@ -75,13 +69,11 @@
       copyToRoot = pkgs.buildEnv {
         name = "image-root";
         paths = [pkgs.caddy site];
-        pathsToLink = ["/bin"]; # caddy in /bin; we'll copy site manually below
+        pathsToLink = ["/bin"];
       };
       extraCommands = ''
-        # Place site at /srv
         mkdir -p srv
-        cp -R ${site}/* srv/
-        # Caddyfile
+        cp -a ${site}/. srv/
         mkdir -p etc
         cp ${caddyfile} etc/Caddyfile
       '';
@@ -108,7 +100,7 @@
         alejandra
       ];
       shellHook = ''
-        echo "Dev shell: hugo available. Run 'hugo server -D' for drafts or 'hugo --minify' to rebuild." >&2
+        echo "Entered Dev Shell"
       '';
     };
   };
