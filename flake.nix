@@ -14,13 +14,13 @@
     pkgs = nixpkgs.legacyPackages.${system};
     lib = pkgs.lib;
 
-    #siteVersion = self.shortRev or (builtins.substring 0 7 self.dirtyRev);
-    #siteRev = self.rev or self.dirtyRev;
+    siteVersion = self.shortRev or (builtins.substring 0 7 self.dirtyRev);
+    siteRev = self.rev or self.dirtyRev;
     
     # Reproducible build of the static site. We avoid using ./public as an input;
     # instead we let `hugo` render directly into $out.
     site = pkgs.stdenv.mkDerivation {
-      pname = "ed-thomasdev";
+      pname = "ed-thomas.dev";
       version = siteVersion;
       src = lib.cleanSource ./.;
 
@@ -46,7 +46,7 @@
 
     # Docker image bundling Caddy + static site output.
     siteImage = pkgs.dockerTools.buildImage {
-      name = "ed-thomas-site";
+      name = "ed-thomas.dev";
       tag = siteVersion;
       copyToRoot = pkgs.buildEnv {
         name = "image-root";
