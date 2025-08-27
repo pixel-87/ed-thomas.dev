@@ -37,6 +37,12 @@
   [main.params]
     action = "locale"
 
+# Miscellaneous page
+[[main]]
+  name = "Misc"
+  pageRef = "misc"
+  weight = 30
+
 # -- Footer Menu --
 # The footer menu is displayed at the bottom of the page, just before
 # the copyright notice. Configure as per the main menu above.
