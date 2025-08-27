@@ -28,27 +28,9 @@
       # If the theme is a git submodule / module, ensure it's vendored beforehand
       # or add extra fetch steps here.
 
-      buildPhase = ''
-        # Nix doesnt play well with Hugo's "GitInfo" module,
-        # so disable and inject the revision
-
-        rm -rf "$TMPDIR/src"
-        mkdir -p "$TMPDIR/src"
-        cp -a --preserve=mode . "$TMPDIR/src/"
-
-        mkdir -p "$TMPDIR/src/data"
-        printf '%s\n' '{ "rev": "${siteRev}", "version": "${siteVersion}" }' > "$TMPDIR/src/data/build.json"
-
-        # Create a small, non-invasive override config to disable Hugo GitInfo
-        printf '%s\n' 'enableGitInfo: false' > "$TMPDIR/src/override-config.yaml"
-
-        # Pass the main config and the override so the override disables GitInfo.
-        hugo --minify --baseURL "/" --destination "$TMPDIR/out" --source "$TMPDIR/src" --config "$TMPDIR/src/config/_default/hugo.toml,$TMPDIR/src/override-config.yaml"
-      '';
-
       installPhase = ''
         mkdir -p $out
-        cp -a "$TMPDIR/out/." $out/
+        hugo --minify --baseURL "/" --destination "$out" --source . --config "config/_default/hugo.toml"
       '';
       # Pure build: no network access after evaluation; ensure modules are vendored.
       # If you use hugo modules, run `hugo mod vendor` and commit _vendor/.
