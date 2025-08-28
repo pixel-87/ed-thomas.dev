@@ -9,14 +9,13 @@
     self,
     nixpkgs,
   }: let
-    
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     lib = pkgs.lib;
 
     siteVersion = self.shortRev or (builtins.substring 0 7 self.dirtyRev);
     siteRev = self.rev or self.dirtyRev;
-    
+
     # Reproducible build of the static site. We avoid using ./public as an input;
     # instead we let `hugo` render directly into $out.
     site = pkgs.stdenv.mkDerivation {
