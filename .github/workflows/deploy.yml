@@ -23,6 +23,9 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v19
 
+      - name: Setup Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
       - name: Github Container Registry Login
         uses: docker/login-action@v3
         with:
@@ -30,11 +33,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build nix pkg
-        run: nix build -L .#site
-
-      - name: build docker image
-        run: nix build -L .#siteImage
+      - name: Build site and image
+        run: |
+          # Build only the image since it includes the site
+          nix build -L .#siteImage --max-jobs auto
 
       - name: Load, tag and push Docker image to GHCR
         run: |
