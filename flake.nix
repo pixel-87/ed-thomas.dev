@@ -16,21 +16,6 @@
     siteVersion = self.shortRev or (builtins.substring 0 7 self.dirtyRev);
     siteRev = self.rev or self.dirtyRev;
 
-    # Simple Caddyfile for both IP and domain access
-    caddyfile = pkgs.writeText "Caddyfile" ''
-      # Serve HTTP on any IP address
-      :80 {
-        root * /srv
-        file_server
-      }
-      
-      # Serve HTTPS with auto-TLS for the domain
-      ed-thomas.dev {
-        root * /srv
-        file_server
-      }
-    '';
-
     # Reproducible build of the static site. We avoid using ./public as an input;
     # instead we let `hugo` render directly into $out.
     site = pkgs.stdenv.mkDerivation {
@@ -45,8 +30,21 @@
       installPhase = ''
         mkdir -p $out
         hugo --minify --baseURL "/" --destination "$out" --source . --config "config/_default/hugo.toml"
+        # Create Caddyfile using writeText in install phase
         mkdir -p $out/etc/caddy
-        cp ${caddyfile} $out/etc/caddy/Caddyfile
+        cp ${pkgs.writeText "Caddyfile" ''
+          # Serve HTTP on any IP address
+          :80 {
+            root * /srv
+            file_server
+          }
+          
+          # Serve HTTPS with auto-TLS for the domain
+          ed-thomas.dev {
+            root * /srv
+            file_server
+          }
+        ''} $out/etc/caddy/Caddyfile
       '';
       # Pure build: no network access after evaluation; ensure modules are vendored.
       # If using hugo modules, run `hugo mod vendor` and commit _vendor/.
