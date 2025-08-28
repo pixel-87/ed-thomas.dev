@@ -16,6 +16,21 @@
     siteVersion = self.shortRev or (builtins.substring 0 7 self.dirtyRev);
     siteRev = self.rev or self.dirtyRev;
 
+    # Simple Caddyfile for both IP and domain access
+    caddyfile = pkgs.writeText "Caddyfile" ''
+      # Serve HTTP on any IP address
+      :80 {
+        root * /srv
+        file_server
+      }
+      
+      # Serve HTTPS with auto-TLS for the domain
+      ed-thomas.dev {
+        root * /srv
+        file_server
+      }
+    '';
+
     # Reproducible build of the static site. We avoid using ./public as an input;
     # instead we let `hugo` render directly into $out.
     site = pkgs.stdenv.mkDerivation {
@@ -47,6 +62,9 @@
       extraCommands = ''
         mkdir -p srv
         cp -a ${site}/. srv/
+        # Copy the minimal Caddyfile
+        mkdir -p etc/caddy
+        cp ${caddyfile} etc/caddy/Caddyfile
       '';
       config = {
         ExposedPorts = {
@@ -55,7 +73,7 @@
           "443/tcp" = {};
         };
         Entrypoint = ["caddy"];
-        Cmd = ["file-server" "--root" "/srv" "--listen" ":80" "--listen" ":443"];
+        Cmd = ["run" "--config" "/etc/caddy/Caddyfile"];
       };
     });
   in {
