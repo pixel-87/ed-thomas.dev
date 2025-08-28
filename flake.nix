@@ -45,6 +45,8 @@
       installPhase = ''
         mkdir -p $out
         hugo --minify --baseURL "/" --destination "$out" --source . --config "config/_default/hugo.toml"
+        mkdir -p $out/etc/caddy
+        cp ${caddyfile} $out/etc/caddy/Caddyfile
       '';
       # Pure build: no network access after evaluation; ensure modules are vendored.
       # If using hugo modules, run `hugo mod vendor` and commit _vendor/.
@@ -57,14 +59,11 @@
       copyToRoot = buildEnv {
         name = "image-root";
         paths = [caddy site];
-        pathsToLink = ["/bin"];
+        pathsToLink = ["/bin" "/etc"];
       };
       extraCommands = ''
         mkdir -p srv
         cp -a ${site}/. srv/
-        # Copy the minimal Caddyfile (absolute path needed)
-        mkdir -p /etc/caddy
-        cp ${caddyfile} /etc/caddy/Caddyfile
       '';
       config = {
         ExposedPorts = {
