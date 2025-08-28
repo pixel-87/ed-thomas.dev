@@ -62,9 +62,9 @@
       extraCommands = ''
         mkdir -p srv
         cp -a ${site}/. srv/
-        # Copy the minimal Caddyfile
-        mkdir -p etc/caddy
-        cp ${caddyfile} etc/caddy/Caddyfile
+        # Copy the minimal Caddyfile (absolute path needed)
+        mkdir -p /etc/caddy
+        cp ${caddyfile} /etc/caddy/Caddyfile
       '';
       config = {
         ExposedPorts = {
