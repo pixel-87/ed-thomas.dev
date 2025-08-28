@@ -51,9 +51,11 @@
       config = {
         ExposedPorts = {
           "80/tcp" = {};
+          # expose 443 for HTTPS
+          "443/tcp" = {};
         };
         Entrypoint = ["caddy"];
-        Cmd = ["file-server" "--root" "/srv" "--listen" ":80"];
+        Cmd = ["file-server" "--root" "/srv" "--listen" ":80" "--listen" ":443"];
       };
     };
   in {
