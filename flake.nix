@@ -51,12 +51,12 @@
     };
 
     # Docker image bundling Caddy + static site output.
-    siteImage = pkgs.dockerTools.buildImage (with pkgs; {
+    siteImage = pkgs.dockerTools.buildImage {
       name = "ed-thomas.dev";
       tag = siteVersion;
-      copyToRoot = buildEnv {
+      copyToRoot = pkgs.buildEnv {
         name = "image-root";
-        paths = [caddy site];
+        paths = [pkgs.caddy site];
         pathsToLink = ["/bin" "/etc"];
       };
       extraCommands = ''
@@ -72,7 +72,7 @@
         Entrypoint = ["caddy"];
         Cmd = ["run" "--config" "/etc/caddy/Caddyfile"];
       };
-    });
+    };
   in {
     packages.${system} = {
       site = site;
