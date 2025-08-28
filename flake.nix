@@ -33,16 +33,8 @@
         hugo --minify --baseURL "/" --destination "$out" --source . --config "config/_default/hugo.toml"
       '';
       # Pure build: no network access after evaluation; ensure modules are vendored.
-      # If you use hugo modules, run `hugo mod vendor` and commit _vendor/.
+      # If using hugo modules, run `hugo mod vendor` and commit _vendor/.
     };
-
-    # Minimal Caddyfile baked into the image; can be overridden at run-time.
-    caddyfile = pkgs.writeText "Caddyfile" ''
-      :80 {
-        root * /srv
-        file_server
-      }
-    '';
 
     # Docker image bundling Caddy + static site output.
     siteImage = pkgs.dockerTools.buildImage {
@@ -56,14 +48,13 @@
       extraCommands = ''
         mkdir -p srv
         cp -a ${site}/. srv/
-        mkdir -p etc
-        cp ${caddyfile} etc/Caddyfile
       '';
       config = {
         ExposedPorts = {
           "80/tcp" = {};
         };
-        Entrypoint = ["caddy" "run" "--config" "/etc/Caddyfile"];
+        Entrypoint = ["caddy"];
+        Cmd = ["file-server" "--root" "/srv" "--listen" ":80"];
       };
     };
   in {
