@@ -10,8 +10,6 @@ on:
     branches:
       - main
 
-
-
 permissions:
   packages: write
 
@@ -41,5 +39,9 @@ jobs:
       - name: Load, tag and push Docker image to GHCR
         run: |
           docker load < result
-          docker tag ed-thomas.dev:$(git rev-parse --short HEAD) ghcr.io/pixel-87/ed-thomas.dev:$(git rev-parse --short HEAD)
-          docker push ghcr.io/pixel-87/ed-thomas.dev:$(git rev-parse --short HEAD)
+          # Get the actual tag from the loaded image
+          IMAGE_TAG=$(docker images --format "table {{.Tag}}" ed-thomas.dev | tail -n +2 | head -1)
+          docker tag ed-thomas.dev:$IMAGE_TAG ghcr.io/pixel-87/ed-thomas.dev:$IMAGE_TAG
+          docker tag ed-thomas.dev:$IMAGE_TAG ghcr.io/pixel-87/ed-thomas.dev:latest
+          docker push ghcr.io/pixel-87/ed-thomas.dev:$IMAGE_TAG
+          docker push ghcr.io/pixel-87/ed-thomas.dev:latest
