@@ -21,9 +21,9 @@
     site = pkgs.stdenv.mkDerivation {
       pname = "ed-thomas.dev";
       version = siteVersion;
-      src = lib.cleanSource ./.;
+      src = lib.cleanSource ./site;
 
-      nativeBuildInputs = [pkgs.hugo pkgs.go];
+      nativeBuildInputs = [ pkgs.hugo ];
       # If the theme is a git submodule / module, ensure it's vendored beforehand
       # or add extra fetch steps here.
 
@@ -32,8 +32,8 @@
 
       installPhase = ''
         mkdir -p $out
-        # Use faster Hugo build with caching
-        hugo --minify --gc --baseURL "/" --destination "$out" --source ./site --config "site/config/_default/hugo.toml"
+        # Build Hugo from the site source (src is ./site in the flake)
+        hugo --minify --gc --baseURL "/" --destination "$out" --source . --config "config/_default/hugo.toml"
         # Create Caddyfile using writeText in install phase
         mkdir -p $out/etc/caddy
         cp ${pkgs.writeText "Caddyfile" ''
@@ -52,18 +52,18 @@
     };
 
     # Docker image bundling Caddy + static site output.
-    siteImage = pkgs.dockerTools.buildLayeredImage {
+    siteImage = pkgs.dockerTools.buildImage {
       name = "ed-thomas.dev";
       tag = siteVersion;
-      maxLayers = 10;  # Better layer caching
-      contents = [
-        pkgs.caddy
-        site
-        (pkgs.runCommand "srv-setup" {} ''
-          mkdir -p $out/srv
-          cp -a ${site}/. $out/srv/
-        '')
-      ];
+      copyToRoot = pkgs.buildEnv {
+        name = "image-root";
+        paths = [pkgs.caddy site];
+        pathsToLink = ["/bin" "/etc"];
+      };
+      extraCommands = ''
+        mkdir -p srv
+        cp -a ${site}/. srv/
+      '';
       config = {
         ExposedPorts = {
           "80/tcp" = {};
