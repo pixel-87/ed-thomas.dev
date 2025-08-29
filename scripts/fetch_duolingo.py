@@ -7,7 +7,11 @@ gist_token = os.environ["GIST_TOKEN"]
 
 # fetch streak
 url = f"https://www.duolingo.com/2017-06-30/users?username={username}&fields=streak"
-r = requests.get(url)
+headers = {
+    "User-Agent": "curl/8.0.1",
+    "Accept": "*/*",
+}
+r = requests.get(url, headers=headers)
 r.raise_for_status()
 streak = r.json()["users"][0]["streak"]
 
