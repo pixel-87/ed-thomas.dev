@@ -6,14 +6,18 @@ gist_id = os.environ["GIST_ID"]
 gist_token = os.environ["GIST_TOKEN"]
 
 # fetch streak
-url = f"https://www.duolingo.com/2017-06-30/users?username={username}&fields=streak"
+url = (
+    f"https://www.duolingo.com/2017-06-30/users"
+    f"?username={username}&fields=streak,streakData%7BcurrentStreak,previousStreak%7D%7D"
+)
 headers = {
-    "User-Agent": "curl/8.0.1",
+    "User-Agent": "curl/8.0.1",  # mimic curl
     "Accept": "*/*",
 }
-r = requests.get(url, headers=headers)
-r.raise_for_status()
-streak = r.json()["users"][0]["streak"]
+response = requests.get(url, headers=headers)
+response.raise_for_status()
+data = response.json()
+streak = data["users"][0]["streakData"]["currentStreak"]["length"]
 
 # update gist
 gist_url = f"https://api.github.com/gists/{gist_id}"
