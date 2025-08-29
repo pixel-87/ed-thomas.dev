@@ -1,0 +1,6 @@
+{{ $title := .Get "label" | default "Visitors" }}
+{{ $ctx := dict "title" $title "tileClass" "widget-visitor" }}
+{{ partial "tile.html" $ctx }}
+<div data-widget="visitor" data-key="ed-thomas.dev">
+  <div class="visitor-count">…</div>
+</div>

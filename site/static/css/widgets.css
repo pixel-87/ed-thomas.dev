@@ -1,0 +1,35 @@
+.widgets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.tile {
+  background: #1f2226;
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 1rem;
+  border-radius: 8px;
+  color: #e6eef6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tile-header { font-weight:600; color:#9fd3ff }
+.tile-body { text-align: right; font-size: 1.1rem }
+.tile .duo-streak, .tile .visitor-count, .tile .time-value { font-weight:700 }
+.widgets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.widget {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  color: #e6eef6;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+.widget strong { display:block; margin-bottom:0.5rem; color:#9fd3ff }
+.time-value, .visitor-count { font-size: 1.25rem; font-weight:600 }

@@ -1,0 +1,6 @@
+{{ $title := .Get "label" | default "Local time" }}
+{{ $ctx := dict "title" $title "tileClass" "widget-time" }}
+{{ partial "tile.html" $ctx }}
+<div data-widget="time" data-label="{{ $title }}">
+  <div class="time-value">--:--:--</div>
+</div>
