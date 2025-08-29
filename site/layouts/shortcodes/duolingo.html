@@ -1,4 +1,4 @@
 {{ $title := "Duolingo streak" }}
 {{ $ctx := dict "title" $title "tileClass" "widget-duolingo" }}
 {{ partial "tile.html" $ctx }}
-<div class="duo-streak">{{ .Site.Data.duolingo }}</div>
+<div class="duo-streak">{{ with .Site.Data.duolingo }}{{ .streak }}{{ else }}n/a{{ end }}</div>
