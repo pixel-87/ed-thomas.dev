@@ -18,6 +18,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
+      - name: Cache Hugo resources
+        uses: actions/cache@v4
+        with:
+          path: |
+            site/resources
+            site/.hugo_build.lock
+          key: ${{ runner.os }}-hugo-${{ hashFiles('site/**') }}
+          restore-keys: |
+            ${{ runner.os }}-hugo-
+
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v19
 
@@ -35,7 +45,11 @@ jobs:
       - name: Build site and image
         run: |
           # Build only the image since it includes the site
-          nix build -L .#siteImage --max-jobs auto
+          # Use more parallel jobs and show progress
+          nix build -L .#siteImage \
+            --max-jobs 4 \
+            --cores 0 \
+            --show-trace
 
       - name: Load, tag and push Docker image to GHCR
         if: github.ref == 'refs/heads/main'
