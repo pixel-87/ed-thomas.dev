@@ -14,10 +14,10 @@
     var key = el.dataset.key || 'ed-thomas.dev';
     var target = el.querySelector('.visitor-count');
     if(!target) return;
-    fetch('https://api.countapi.xyz/hit/'+encodeURIComponent(key)+'/visits')
-      .then(r=>r.json())
-      .then(j=>{ target.textContent = j.value })
-      .catch(()=>{ target.textContent = 'n/a' });
+    // Placeholder implementation: avoid external API call for now.
+    // When you add a self-hosted counter later, replace this with the proper fetch.
+    target.textContent = 'n/a';
+    target.setAttribute('title', 'visitor counter placeholder');
   }
 
   // Duolingo widget is now rendered server-side from data/duolingo.json
