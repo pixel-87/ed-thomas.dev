@@ -27,19 +27,19 @@
       # If the theme is a git submodule / module, ensure it's vendored beforehand
       # or add extra fetch steps here.
 
+      # Set reproducible timestamps for faster builds
+      SOURCE_DATE_EPOCH = "0";
+
       installPhase = ''
         mkdir -p $out
-        hugo --minify --baseURL "/" --destination "$out" --source . --config "config/_default/hugo.toml"
+        hugo --minify --baseURL "/" --destination "$out" --source ./site --config "site/config/_default/hugo.toml"
         # Create Caddyfile using writeText in install phase
         mkdir -p $out/etc/caddy
         cp ${pkgs.writeText "Caddyfile" ''
-          # Serve HTTP on any IP address
           :80 {
             root * /srv
             file_server
           }
-          
-          # Serve HTTPS with auto-TLS for the domain
           ed-thomas.dev {
             root * /srv
             file_server
