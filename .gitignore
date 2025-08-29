@@ -2,6 +2,7 @@
 /resources/_gen/
 .hugo_build.lock
 result
+Caddyfile
 
 # build artifacts
 result
