@@ -3,9 +3,7 @@ name: "CodeQL Security Analysis"
 on:
   schedule:
     # Run weekly on Monday at 2 AM UTC
-    - cron: '0 2 * * 1'
-  push:
-    branches: [ main ]
+    - cron: "0 2 * * 1"
   workflow_dispatch: # Allow manual runs
 
 jobs:
@@ -23,22 +21,22 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - language: go
-          build-mode: autobuild
-        - language: javascript-typescript
-          build-mode: none # Static analysis only
+          - language: go
+            build-mode: autobuild
+          - language: javascript-typescript
+            build-mode: none # Static analysis only
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: ${{ matrix.language }}
-        build-mode: ${{ matrix.build-mode }}
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:${{matrix.language}}"
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
