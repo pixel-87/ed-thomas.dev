@@ -1,0 +1,8 @@
+{{ $title := .Get "label" | default "Visitors" }}
+{{ $inner := (print
+"<div data-widget=\"visitor\" data-key=\"ed-thomas.dev\">"
+  "<div class=\"visitor-count\">…</div>"
+  "</div>"
+) | safeHTML }}
+{{ $ctx := dict "title" $title "tileClass" "widget-visitor" "Inner" $inner }}
+{{ partial "tile.html" $ctx }}

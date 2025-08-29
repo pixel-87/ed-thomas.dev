@@ -1,0 +1,8 @@
+{{ $title := .Get "label" | default "Local time" }}
+{{ $inner := (print
+"<div data-widget=\"time\" data-label=\"" $title "\">"
+  "<div class=\"time-value\">--:--:--</div>"
+  "</div>"
+) | safeHTML }}
+{{ $ctx := dict "title" $title "tileClass" "widget-time" "Inner" $inner }}
+{{ partial "tile.html" $ctx }}
