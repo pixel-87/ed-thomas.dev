@@ -56,15 +56,14 @@
       name = "ed-thomas.dev";
       tag = siteVersion;
       maxLayers = 10;  # Better layer caching
-      copyToRoot = pkgs.buildEnv {
-        name = "image-root";
-        paths = [pkgs.caddy site];
-        pathsToLink = ["/bin" "/etc"];
-      };
-      extraCommands = ''
-        mkdir -p srv
-        cp -a ${site}/. srv/
-      '';
+      contents = [
+        pkgs.caddy
+        site
+        (pkgs.runCommand "srv-setup" {} ''
+          mkdir -p $out/srv
+          cp -a ${site}/. $out/srv/
+        '')
+      ];
       config = {
         ExposedPorts = {
           "80/tcp" = {};
