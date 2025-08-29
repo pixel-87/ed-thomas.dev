@@ -32,7 +32,8 @@
 
       installPhase = ''
         mkdir -p $out
-        hugo --minify --baseURL "/" --destination "$out" --source ./site --config "site/config/_default/hugo.toml"
+        # Use faster Hugo build with caching
+        hugo --minify --gc --baseURL "/" --destination "$out" --source ./site --config "site/config/_default/hugo.toml"
         # Create Caddyfile using writeText in install phase
         mkdir -p $out/etc/caddy
         cp ${pkgs.writeText "Caddyfile" ''
@@ -51,9 +52,10 @@
     };
 
     # Docker image bundling Caddy + static site output.
-    siteImage = pkgs.dockerTools.buildImage {
+    siteImage = pkgs.dockerTools.buildLayeredImage {
       name = "ed-thomas.dev";
       tag = siteVersion;
+      maxLayers = 10;  # Better layer caching
       copyToRoot = pkgs.buildEnv {
         name = "image-root";
         paths = [pkgs.caddy site];
