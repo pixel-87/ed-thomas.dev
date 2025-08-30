@@ -1,6 +1,5 @@
 {{ $title := "Duolingo streak" }}
-{{ $value := "n/a" }}
-{{ with .Site.Data.duolingo }}{{ $value = printf "%v" .streak }}{{ end }}
+{{ $value := "…" }}
 {{ $inner := (print "<div data-widget=\"duolingo\"> <div class=\"duo-streak\">" $value "</div> </div>") | safeHTML }}
 {{ $ctx := dict "title" $title "tileClass" "widget-duolingo" "Inner" $inner }}
 {{ partial "tile.html" $ctx }}

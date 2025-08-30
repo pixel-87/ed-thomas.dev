@@ -21,7 +21,7 @@ streak = data["users"][0]["streakData"]["currentStreak"]["length"]
 
 # update gist
 gist_url = f"https://api.github.com/gists/{gist_id}"
-payload = {"files": {"duolingo.json": {"content": str(streak)}}}
+payload = {"files": {"duolingo.txt": {"content": str(streak)}}}
 requests.patch(
     gist_url, json=payload, headers={"Authorization": f"token {gist_token}"}
 ).raise_for_status()
