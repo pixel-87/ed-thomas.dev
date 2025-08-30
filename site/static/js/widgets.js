@@ -20,9 +20,8 @@
     target.setAttribute('title', 'visitor counter placeholder');
   }
 
-  // Duolingo widget is now rendered server-side from data/duolingo.json
-  // We'll fetch an external gist (raw JSON) and update any duo-streak elements.
-  const DUO_GIST_RAW = 'https://gist.githubusercontent.com/pixel-87/f4db826c7a94c24c6dde14ce28cd86dd/raw/duolingo.json';
+  // Duolingo widget fetches from external gist (raw text) and updates any duo-streak elements.
+  const DUO_GIST_RAW = 'https://gist.githubusercontent.com/pixel-87/f4db826c7a94c24c6dde14ce28cd86dd/raw/duolingo.txt';
   const DUO_CACHE_KEY = 'duo_json_v1';
   const DUO_TTL = 6 * 60 * 60 * 1000; // 6 hours
 
