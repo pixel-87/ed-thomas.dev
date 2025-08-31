@@ -1,22 +1,34 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
+import BaseHead from "../components/BaseHead.astro";
 
 export interface Props {
   title: string;
+  description?: string;
+  image?: string;
 }
 
-const { title } = Astro.props;
+const { title, description, image } = Astro.props;
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <BaseHead title={title} description={description} image={image} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Ed Thomas | Blog"
+      href="/rss.xml"
+    />
   </head>
-  <body>
+  <body class="max-w-2xl mx-auto px-6 py-8 font-mono text-sm leading-relaxed">
+    <nav class="mb-8 text-center">
+      <a href="/" class="mx-3 hover:underline">HOME</a>
+      <a href="/blog" class="mx-3 hover:underline">BLOG</a>
+      <a href="/projects" class="mx-3 hover:underline">PROJECTS</a>
+      <a href="/misc" class="mx-3 hover:underline">MISC</a>
+    </nav>
     <slot />
   </body>
 </html>

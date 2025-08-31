@@ -1,0 +1,69 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const projectEntries = await getCollection("projects");
+  return projectEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+type Props = {
+  entry: CollectionEntry<"projects">;
+};
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title}>
+  <main>
+    <article class="prose prose-sm max-w-none">
+      <header class="mb-8">
+        <h1 class="text-lg font-bold mb-2">{entry.data.title}</h1>
+        <p class="text-gray-600 mb-4">{entry.data.description}</p>
+
+        <div class="flex gap-2 mb-4">
+          {
+            entry.data.technologies.map((tech: string) => (
+              <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
+                {tech}
+              </span>
+            ))
+          }
+        </div>
+
+        <div class="flex gap-4 text-sm">
+          {
+            entry.data.github && (
+              <a
+                href={entry.data.github}
+                class="hover:underline"
+                target="_blank"
+              >
+                GitHub →
+              </a>
+            )
+          }
+          {
+            entry.data.url && (
+              <a href={entry.data.url} class="hover:underline" target="_blank">
+                Visit →
+              </a>
+            )
+          }
+        </div>
+      </header>
+
+      <Content />
+
+      <footer class="mt-8 pt-4 border-t text-center">
+        <a href="/projects" class="text-sm hover:underline"
+          >← Back to projects</a
+        >
+      </footer>
+    </article>
+  </main>
+</Layout>

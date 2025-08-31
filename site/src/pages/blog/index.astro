@@ -1,0 +1,46 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout title="Notes">
+  <main>
+    <h1 class="text-lg font-bold mb-6">Notes</h1>
+
+    <div class="space-y-4">
+      {
+        sortedPosts.map((post) => (
+          <article>
+            <div class="mb-1">
+              <a href={`/blog/${post.slug}`} class="hover:underline">
+                {post.data.title}
+              </a>
+              <span class="text-gray-500 ml-2 text-xs">
+                {post.data.pubDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+            </div>
+            <p class="text-gray-600 text-sm">{post.data.description}</p>
+            {post.data.tags && (
+              <div class="flex gap-1 mt-2">
+                {post.data.tags.map((tag: string) => (
+                  <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </main>
+</Layout>

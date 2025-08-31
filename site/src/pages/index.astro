@@ -1,16 +1,107 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
+// Get latest 5 blog posts
+const allBlogPosts = await getCollection("blog");
+const latestPosts = allBlogPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
+
+// Get latest 3 projects
+const allProjects = await getCollection("projects");
+const latestProjects = allProjects
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Ed Thomas">
+  <main class="space-y-12">
+    <!-- Intro -->
+    <section class="text-center">
+      <h1 class="text-lg mb-4">Welcome to my personal website!</h1>
+      <p class="text-gray-700">
+        Hi there → I'm Ed, a developer who likes making
+        <a href="/blog" class="underline hover:no-underline">stuff</a>,
+        <a href="/projects" class="underline hover:no-underline">code</a>, and
+        learning new things. Nice to meet you.
+      </p>
+    </section>
+
+    <!-- Latest Notes -->
+    <section>
+      <h2 class="text-base font-bold mb-4">## Latest notes</h2>
+      <div class="space-y-3">
+        {
+          latestPosts.map((post) => (
+            <div>
+              <a href={`/blog/${post.slug}`} class="hover:underline">
+                {post.data.title}
+              </a>
+              <span class="text-gray-500 ml-2">
+                {post.data.pubDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+            </div>
+          ))
+        }
+        <div>
+          <a href="/blog" class="hover:underline">More notes →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section>
+      <h2 class="text-base font-bold mb-4">## Some things I've built</h2>
+      <div class="space-y-4">
+        {
+          latestProjects.map((project) => (
+            <div>
+              <a
+                href={`/projects/${project.slug}`}
+                class="hover:underline font-medium"
+              >
+                {project.data.title}
+              </a>
+              <p class="text-gray-700 text-sm mt-1">
+                {project.data.description}
+              </p>
+              <div class="flex gap-2 mt-2">
+                {project.data.technologies.map((tech) => (
+                  <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+        <div>
+          <a href="/projects" class="hover:underline">More projects →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section>
+      <h2 class="text-base font-bold mb-4">## About me</h2>
+      <div class="space-y-3">
+        <p>My name is Ed Thomas.</p>
+        <p>I want to build good things.</p>
+        <p>My interests are programming, web development, and technology.</p>
+        <div>
+          <a href="/about" class="hover:underline">More about me</a>.
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center text-gray-500 text-xs border-t pt-6">
+      <p>Thanks for visiting. Have a look around!</p>
+    </footer>
+  </main>
+</Layout>
