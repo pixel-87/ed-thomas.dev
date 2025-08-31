@@ -17,6 +17,7 @@
       buildInputs = with pkgs; [
         nodejs_24
         alejandra
+        pnpm
       ];
       shellHook = ''
         echo "Entered Dev Shell"
