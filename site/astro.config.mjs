@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+  outDir: '../docs',
   site: 'https://ed-thomas.dev',
   integrations: [tailwind(), sitemap()],
   markdown: {
