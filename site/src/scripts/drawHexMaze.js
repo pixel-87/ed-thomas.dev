@@ -18,13 +18,13 @@ export default function initHexMaze({ canvas, container } = {}) {
   const SQRT3 = Math.sqrt(3);
   const LINE_SPEED = 3; // nodes per second
   const LINE_SEGMENT_COUNT_MAX = 20; // increase max segments so agents wander farther
-  const LINE_SEGMENT_COUNT_VARIANCE = 40; // wider variance for longer/shorter paths
+  const LINE_SEGMENT_COUNT_VARIANCE = 10; // wider variance for longer/shorter paths
   // Default stroke colour for the maze lines (can be overridden with CSS var)
   const LINE_COLOR = '#00A69C'; // , #538349ff,  , #9AB5FF, #61cf5a, #FF46A2, #00A69C, #61cf5a
 
   // Spawning behavior
   const SPAWN_COUNT_CLICK = 6; 
-  const SPAWN_COUNT_MOVE = 11;  
+  const SPAWN_COUNT_MOVE = 1;  
   const MOVE_THROTTLE_MS = 150;
 
   let allEnded = false;
