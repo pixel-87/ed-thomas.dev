@@ -5,6 +5,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+  base: '/ed-thomas.dev/',
+
   outDir: '../docs',
   site: 'https://ed-thomas.dev',
   integrations: [tailwind(), sitemap()],
