@@ -26,3 +26,6 @@ site/.idea/
 site/.vscode/
 
 *.Identifier
+
+# Ignore generated docs build output
+
