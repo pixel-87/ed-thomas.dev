@@ -15,9 +15,33 @@
         );
     in
     {
-      packages = forAllSystems (pkgs: {
+      packages = forAllSystems (pkgs: rec {
         example = pkgs.callPackage ./default.nix { };
         default = self.packages.${pkgs.stdenv.hostPlatform.system}.example;
+
+        site = pkgs.dockerTools.buildImage {
+          name = "ed-thomas.dev";
+
+          copyToRoot = pkgs.buildEnv {
+            name = "image-root";
+            paths = [ pkgs.caddy example ];
+            pathsToLink = [ "/bin" "/etc" ];
+          };
+
+          extraCommands = ''
+            mkdir -p /srv
+            cp -a ${example}/. /srv/
+          '';
+
+          config = {
+            ExposedPorts = {
+              "80/tcp" = {};
+              "443/tcp" = {};
+            };
+            Entrypoint = [ "caddy" ];
+            Cmd = [ "run" "--config" "/etc/caddy/Caddyfile" ];
+          };
+        };
       });
 
       devShells = forAllSystems (pkgs: {
