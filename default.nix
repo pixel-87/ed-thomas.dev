@@ -23,7 +23,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   pnpmDeps = pnpm.fetchDeps {
     inherit (finalAttrs) pname version src;
     fetcherVersion = 2;
-    hash = lib.fakeHash;
+    # Replaced fakeHash with the real sha256 reported by the last build attempt
+    hash = "sha256-vfFXcjKsOVVhBAG8dC8QaDBNCs9+/P7+0LQmEWicIzo=";
   };
 
   env.ASTRO_TELEMETRY_DISABLED = 1;
