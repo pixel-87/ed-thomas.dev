@@ -1,3 +1,7 @@
+result/
+build
+node_modules
+
 # build output
 site/dist/
 # generated types
@@ -28,4 +32,5 @@ site/.vscode/
 *.Identifier
 
 # Ignore generated docs build output
+
 
