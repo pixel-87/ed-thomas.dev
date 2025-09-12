@@ -1,27 +1,29 @@
 {
-  description = "My dev website, using astro";
+  description = "My dev site, using astro";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-  }: let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-    lib = pkgs.lib;
-  in {
-    devShells.${system}.default = pkgs.mkShell {
-      buildInputs = with pkgs; [
-        nodejs_24
-        alejandra
-        pnpm
-      ];
-      shellHook = ''
-        echo "Entered Dev Shell"
-      '';
+  outputs =
+    { self, nixpkgs }:
+    let
+      forAllSystems =
+        function:
+        nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (
+          system: function nixpkgs.legacyPackages.${system}
+        );
+    in
+    {
+      packages = forAllSystems (pkgs: {
+        example = pkgs.callPackage ./default.nix { };
+        default = self.packages.${pkgs.stdenv.hostPlatform.system}.example;
+      });
+
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.callPackage ./shell.nix { };
+      });
+
+      overlays.default = final: _: { example = final.callPackage ./default.nix { }; };
     };
-  };
 }
