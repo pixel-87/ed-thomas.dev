@@ -3,6 +3,7 @@
   stdenvNoCC,
   nodejs_24,
   pnpm_10,
+  writeText,
 }:
 let
   nodejs = nodejs_24;
@@ -45,6 +46,18 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     else
       echo "Warning: no dist directory found after build"
     fi
+
+    mkdir -p "$out/etc/caddy"
+    cp ${writeText "Caddyfile" ''
+      :80 {
+        root * /srv
+        file_server
+      }
+      ed-thomas.dev {
+        root * /srv
+        file_server
+      }
+    ''} "$out/etc/caddy/Caddyfile"
 
     runHook postInstall
   '';
