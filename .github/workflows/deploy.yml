@@ -1,0 +1,52 @@
+name: Upload image to GCR
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v19
+
+      - name: Setup Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: GitHub Container Registry login
+        if: github.ref == 'refs/heads/main'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build flake image (Nix)
+        run: |
+          # Build the docker image derivation (create `result` symlink -> tarball)
+          # Adjust this attribute if you later add a top-level alias like `.#siteImage`
+          nix build -L .#packages.x86_64-linux.site 
+
+      - name: Load image into Docker, tag & push to GHCR
+        if: github.ref == 'refs/heads/main'
+        run: |
+          # Simple load, tag and push flow (as used previously).
+          docker load < result
+          # Get the actual tag from the loaded image
+          IMAGE_TAG=$(docker images --format "table {{.Tag}}" ed-thomas.dev | tail -n +2 | head -1)
+          docker tag ed-thomas.dev:$IMAGE_TAG ghcr.io/pixel-87/ed-thomas.dev:$IMAGE_TAG
+          docker tag ed-thomas.dev:$IMAGE_TAG ghcr.io/pixel-87/ed-thomas.dev:latest
+          docker push ghcr.io/pixel-87/ed-thomas.dev:$IMAGE_TAG
+          docker push ghcr.io/pixel-87/ed-thomas.dev:latest
