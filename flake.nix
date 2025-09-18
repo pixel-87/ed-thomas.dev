@@ -28,7 +28,7 @@
             pathsToLink = [ "/bin" "/etc" ];
           };
 
-          extraCommands = ''
+          runAsRoot = ''
             mkdir -p /srv
             cp -a ${example}/. /srv/
           '';
