@@ -7,6 +7,7 @@
   typescript,
   eslint_d,
   prettierd,
+  nixfmt-rfc-style,
 }:
 let
   mainPkg = callPackage ./default.nix { };
@@ -21,6 +22,7 @@ mkShell {
     typescript
     eslint_d
     prettierd
+    nixfmt-rfc-style
   ];
 
   shellHook = ''
