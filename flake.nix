@@ -13,6 +13,9 @@
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         packages = {
           site = pkgs.callPackage ./default.nix { };
+          docker = pkgs.callPackage ./docker.nix { 
+            site = config.packages.site;
+          };
           default = config.packages.site;
         };
 
