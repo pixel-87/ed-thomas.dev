@@ -17,8 +17,8 @@
   <div class="relative z-10">
     <slot />
   </div>
-  <script type="module">
-    import initMaze from "/src/scripts/drawHexMaze.js";
+  <script>
+    import initMaze from "../scripts/drawHexMaze.js";
     const canvas = document.getElementById("mazeCanvas");
     const container = canvas?.parentElement ?? document.body;
     const instance = initMaze({ canvas, container });
