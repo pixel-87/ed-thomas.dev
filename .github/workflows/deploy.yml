@@ -35,18 +35,15 @@ jobs:
 
       - name: Build flake image (Nix)
         run: |
-          # Build the docker image derivation (create `result` symlink -> tarball)
-          # Adjust this attribute if you later add a top-level alias like `.#siteImage`
-          nix build -L .#packages.x86_64-linux.site 
+          nix build -L .#packages.x86_64-linux.docker
 
-      - name: Load image into Docker, tag & push to GHCR
+      - name: Load image into Docker and push to GHCR
         if: github.ref == 'refs/heads/main'
         run: |
-          # Simple load, tag and push flow (as used previously).
           docker load < result
-          # Get the actual tag from the loaded image
-          IMAGE_TAG=$(docker images --format "table {{.Tag}}" ed-thomas.dev | tail -n +2 | head -1)
-          docker tag ed-thomas.dev:$IMAGE_TAG ghcr.io/pixel-87/ed-thomas.dev:$IMAGE_TAG
-          docker tag ed-thomas.dev:$IMAGE_TAG ghcr.io/pixel-87/ed-thomas.dev:latest
-          docker push ghcr.io/pixel-87/ed-thomas.dev:$IMAGE_TAG
+          docker tag ed-thomas-dev:latest ghcr.io/pixel-87/ed-thomas.dev:latest
           docker push ghcr.io/pixel-87/ed-thomas.dev:latest
+
+          SHORT_SHA=${GITHUB_SHA::8}
+          docker tag ed-thomas-dev:latest ghcr.io/pixel-87/ed-thomas.dev:${SHORT_SHA}
+          docker push ghcr.io/pixel-87/ed-thomas.dev:${SHORT_SHA}
