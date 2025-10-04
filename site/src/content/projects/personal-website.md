@@ -1,6 +1,6 @@
 ---
 title: "Personal Website"
-description: "A minimal, fast personal website built with Astro and Tailwind CSS"
+description: "A minimal, fast personal website built with Astro"
 technologies: ["Astro", "Tailwind CSS", "JavaScript", "Nix"]
 date: 2025-08-31
 featured: true
