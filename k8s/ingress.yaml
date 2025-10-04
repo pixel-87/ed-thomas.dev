@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ed-thomas-dev
+  namespace: default
+  annotations:
+    trafik.Ingress.kubernetes.io/router.entrypoints: web, websecure
+
+spec:
+  rules:
+    - host: ed-thomas.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ed-thomas-dev
+                port:
+                  number: 80
