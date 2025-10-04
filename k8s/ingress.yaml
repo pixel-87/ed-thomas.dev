@@ -4,7 +4,7 @@ metadata:
   name: ed-thomas-dev
   namespace: default
   annotations:
-    trafik.Ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.Ingress.kubernetes.io/router.entrypoints: web, websecure
 
 spec:
   rules:
