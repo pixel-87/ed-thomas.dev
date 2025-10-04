@@ -1,7 +1,7 @@
 { pkgs, site }:
 
 let
-  port = "8080";
+  port = "80";
 in
 pkgs.dockerTools.buildLayeredImage {
   name = "ed-thomas-dev";
