@@ -5,9 +5,15 @@ metadata:
   namespace: default
   annotations:
     traefik.Ingress.kubernetes.io/router.entrypoints: web, websecure
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 
 spec:
   ingressClassName: traefik
+  tls:
+    - hosts:
+        - ed-thomas.dev
+        - www.ed-thomas.dev
+      secretName: ed-thomas-dev-tls
   rules:
     - host: ed-thomas.dev
       http:
