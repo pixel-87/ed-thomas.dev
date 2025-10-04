@@ -21,9 +21,9 @@ const latestProjects = allProjects
     <section class="text-center">
       <h1 class="text-lg mb-4">Welcome to my personal website!</h1>
       <p class="text-gray-700">
-        Hi there → I'm Ed, a developer who likes making
+        Hi! I'm Ed, a developer who likes making
         <a href="/blog" class="underline hover:no-underline">stuff</a>,
-        <a href="/projects" class="underline hover:no-underline">code</a>, and
+        <a href="/projects" class="underline hover:no-underline">coding</a>, and
         learning new things.
       </p>
     </section>
@@ -39,7 +39,7 @@ const latestProjects = allProjects
                 {post.data.title}
               </a>
               <span class="text-gray-500 ml-2">
-                {post.data.pubDate.toLocaleDateString("en-US", {
+                {post.data.pubDate.toLocaleDateString("en-GB", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
@@ -90,15 +90,15 @@ const latestProjects = allProjects
     <section>
       <h2 class="text-base font-bold mb-4">## About me</h2>
       <div class="space-y-3">
-        <p>My name is Ed Thomas.</p>
-        <p>I want to build good things.</p>
-        <p>My interests are WIP.</p>
+        <p>I'm a final year computer science student at the University of Exeter.</p>
+        <p>I enjoy working with backend systems, DevOps, and cloud computing.</p>
+        <p>In my spare time, I enjoy hiking, reading, and playing video games.</p>
       </div>
     </section>
 
     <!-- Footer -->
     <footer class="text-center text-gray-500 text-xs border-t pt-6">
-      <p>Thanks for visiting. Have a look around!</p>
+      <!--<p>Thanks for visiting. Have a look around!</p>-->
     </footer>
   </main>
 </Layout>
