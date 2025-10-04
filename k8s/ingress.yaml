@@ -7,8 +7,19 @@ metadata:
     traefik.Ingress.kubernetes.io/router.entrypoints: web, websecure
 
 spec:
+  ingressClassName: traefik
   rules:
     - host: ed-thomas.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ed-thomas-dev
+                port:
+                  number: 80
+    - host: www.ed-thomas.dev
       http:
         paths:
           - path: /
