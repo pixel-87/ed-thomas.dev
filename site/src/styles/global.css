@@ -140,3 +140,9 @@ html.dark main a { color: #60a5fa !important; }
 html.dark main ul > li::marker {
   color: #9ca3af !important;
 }
+
+/* Custom dash marker for ULs with class list-dash */
+ul.list-dash > li::marker {
+  content: "- ";
+  font-weight: bold;
+}
