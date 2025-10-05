@@ -120,3 +120,23 @@ html.dark .border-t { border-color: rgba(255,255,255,0.06) !important; }
   --tw-prose-th-borders: #374151; /* gray-700 for dark mode */
   --tw-prose-td-borders: #4b5563; /* gray-600 for dark mode */
 }
+
+/* Additional dark-mode overrides specifically for main content */
+html.dark main,
+html.dark main h1,
+html.dark main h2,
+html.dark main h3,
+html.dark main h4,
+html.dark main p,
+html.dark main a,
+html.dark main li {
+  color: #d1d5db !important; /* readable light gray */
+}
+
+/* Make links slightly brighter in main when dark mode */
+html.dark main a { color: #60a5fa !important; }
+
+/* Ensure list markers are visible */
+html.dark main ul > li::marker {
+  color: #9ca3af !important;
+}
