@@ -301,14 +301,8 @@ export default function initHexMaze({ canvas, container } = {}) {
     canvas.style.width = rect.width + 'px';
     canvas.style.height = rect.height + 'px';
 
-    // Rebuild graph and clear lines
-    buildGraph(canvas.width, canvas.height);
-    lines = [];
-    
-    if (animating) return;
-    animating = true;
-    allEnded = false;
-    rafId = requestAnimationFrame(animate);
+    // Don't rebuild graph or clear lines - just update canvas size
+    // The existing lines will continue animating on the resized canvas
   }
 
   // Pointer controls
@@ -333,6 +327,7 @@ export default function initHexMaze({ canvas, container } = {}) {
 
   // Initialize
   resizeCanvas();
+  buildGraph(canvas.width, canvas.height); // Build initial graph
   window.addEventListener('resize', resizeCanvas);
   host.addEventListener('click', onClick);
   host.addEventListener('pointermove', onPointerMove);
