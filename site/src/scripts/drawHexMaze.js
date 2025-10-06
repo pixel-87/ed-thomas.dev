@@ -33,6 +33,8 @@ export default function initHexMaze({ canvas, container } = {}) {
   let rafId = 0;
   let nodeList = [];
   let adj = new Map();
+  let graphWidth = 0;
+  let graphHeight = 0;
 
   // Build the hex graph - create hexagon edges only
   function buildGraph(width, height) {
@@ -44,6 +46,10 @@ export default function initHexMaze({ canvas, container } = {}) {
     adj = new Map();
     const nodeMap = new Map();
     let nodeIdCounter = 0;
+    
+    // Store the dimensions this graph was built for
+    graphWidth = width;
+    graphHeight = height;
     
     const minCol = Math.floor(-margin / hexWidth);
     const maxCol = Math.ceil((width + margin) / hexWidth);
@@ -296,13 +302,27 @@ export default function initHexMaze({ canvas, container } = {}) {
       { width: window.innerWidth, height: window.innerHeight } : 
       host.getBoundingClientRect();
     
-    canvas.width = Math.round(rect.width);
-    canvas.height = Math.round(rect.height);
+    const newWidth = Math.round(rect.width);
+    const newHeight = Math.round(rect.height);
+    
+    canvas.width = newWidth;
+    canvas.height = newHeight;
     canvas.style.width = rect.width + 'px';
     canvas.style.height = rect.height + 'px';
 
-    // Don't rebuild graph or clear lines - just update canvas size
-    // The existing lines will continue animating on the resized canvas
+    // Rebuild graph only if canvas expanded beyond current graph bounds
+    if (newWidth > graphWidth || newHeight > graphHeight) {
+      // Clear lines before rebuilding to prevent stale node references
+      lines = [];
+      buildGraph(newWidth, newHeight);
+      
+      // Restart animation if needed
+      if (!animating) {
+        animating = true;
+        allEnded = false;
+        rafId = requestAnimationFrame(animate);
+      }
+    }
   }
 
   // Pointer controls
