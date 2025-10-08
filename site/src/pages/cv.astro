@@ -1,0 +1,128 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="CV">
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold">Edward Thomas</h1>
+      <p class="text-gray-600 mt-1">
+        Final-year Computer Science student at the University of Exeter
+      </p>
+    </header>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Professional summary</h2>
+      <p class="text-gray-700">
+        Final-year Computer Science student focusing on back-end systems and automation. Bringing hands-on experience in Python, Linux, and containerisation to a graduate software or DevOps role.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Education</h2>
+
+      <div class="mb-4">
+        <p class="font-semibold">BSc (Hons) Computer Science — University of Exeter</p>
+        <p class="text-sm text-gray-500">Exeter, England · Sept 2023 — May 2026 (predicted high 2:1)</p>
+        <ul class="list-disc ml-5 mt-2 text-gray-700">
+          <li>Relevant modules: Data Structures, Software Development, Computational Maths, Discrete Maths, Artificial Intelligence and Applications, Database Theory and Design, Computer Languages and Representations, Mobile and Ubiquitous Computing, Network and Computer Security.</li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-semibold">A-Levels & AS-Level — St. Michael's School</p>
+        <p class="text-sm text-gray-500">Llanelli, Wales · Sept 2016 — June 2023</p>
+        <ul class="list-disc ml-5 mt-2 text-gray-700">
+          <li>A-Levels: A* A* A — Maths, Physics, Computer Science</li>
+          <li>AS-Level: A — Chemistry</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Experience</h2>
+
+      <article>
+        <p class="font-semibold">Excode Workshop Leader</p>
+        <p class="text-sm text-gray-500"><a href="https://excode.co.uk" class="underline"> excode.co.uk</a> · Sept 2025 — Nov 2025</p>
+        <ul class="list-disc ml-5 mt-2 text-gray-700">
+          <li>Assisted in delivering beginner-friendly Python workshops.</li>
+          <li>Mentored beginners with troubleshooting, syntax and general programming design.</li>
+        </ul>
+      </article>
+
+      <article class="mb-6">
+        <p class="font-semibold">Onboarding Assistant — Pembrokeshire County Council</p>
+        <p class="text-sm text-gray-500">Pembrokeshire, Wales · June 2024 — Sept 2024</p>
+        <ul class="list-disc ml-5 mt-2 text-gray-700">
+          <li>Streamlined daily workflow by developing a Python script to automate data filtering, reducing manual processing time by ~60% and eliminating human error.</li>
+          <li>Enabled system access for new employees, processing sensitive data in compliance with GDPR.</li>
+          <li>Successfully managed multiple tasks concurrently.</li>
+        </ul>
+      </article>
+
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Projects</h2>
+
+      <article class="mb-4">
+        <p class="font-semibold">Home server</p>
+        <ul class="list-disc ml-5 mt-2 text-gray-700">
+          <li>2-node cluster running NixOS and K3s.</li>
+          <li>Hosts services for media, ad-blocking, web hosting, game servers and automations.</li>
+        </ul>
+      </article>
+
+      <article class="mb-4">
+        <p class="font-semibold">Personal Website — ed-thomas.dev</p>
+        <ul class="list-disc ml-5 mt-2 text-gray-700">
+          <li>Built using Astro, HTML, CSS and JavaScript; writes blog posts about technical topics.</li>
+        </ul>
+      </article>
+
+      <article>
+        <p class="font-semibold">Custom Split Ergonomic Keyboard — github.com/pixel-87/cantor-pixel</p>
+        <ul class="list-disc ml-5 mt-2 text-gray-700">
+          <li>Adapted and assembled a split ergonomic keyboard, soldered switches and microcontrollers.</li>
+          <li>Configured and flashed the firmware.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Positions of responsibility</h2>
+
+      <article class="mb-4">
+        <p class="font-semibold">Social Secretary — University of Exeter Climbing Club</p>
+        <p class="text-sm text-gray-500">Sept 2024 — June 2025</p>
+        <ul class="list-disc ml-5 mt-2 text-gray-700">
+          <li>Organised weekly socials for 100+ people and coordinated logistics with venues.</li>
+          <li>Taught new members climbing fundamentals and safety.</li>
+        </ul>
+      </article>
+
+      <article>
+        <p class="font-semibold">Digital Prefect</p>
+        <p class="text-sm text-gray-500">Sept 2022 — June 2023</p>
+        <ul class="list-disc ml-5 mt-2 text-gray-700">
+          <li>Provided weekly technical guidance and mentorship to younger students.</li>
+          <li>Troubleshot common issues and explained complex ideas to assist with coursework.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Skills</h2>
+      <div class="text-gray-700">
+        <p><strong>Programming languages:</strong> Python, Java, Haskell, Nix, HTML/CSS, Prolog</p>
+        <p class="mt-2"><strong>Technologies:</strong> Linux, Git, Docker, Kubernetes, Django, Astro, Google Cloud Platform</p>
+        <p class="mt-2"><strong>Key competencies:</strong> Independent learning, problem-solving, mentoring & organisation</p>
+      </div>
+    </section>
+
+    <footer class="text-sm text-gray-500">
+      <p>Source: converted from basic-resume/main.typ. If you want a downloadable PDF or the original Typst source linked from this page, I can add download/open buttons that point to files in public/ or your chosen path.</p>
+    </footer>
+  </main>
+</Layout>
