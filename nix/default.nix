@@ -13,7 +13,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   version = "0.1.0";
 
   # Build from the site/ directory which contains the Astro project
-  src = ./site;
+  src = ../site;
 
   nativeBuildInputs = [
     nodejs
