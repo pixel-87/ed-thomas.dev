@@ -12,19 +12,19 @@
       
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         packages = {
-          site = pkgs.callPackage ./default.nix { };
-          docker = pkgs.callPackage ./docker.nix { 
+          site = pkgs.callPackage ./nix/default.nix { };
+          docker = pkgs.callPackage ./nix/docker.nix { 
             site = config.packages.site;
           };
           default = config.packages.site;
         };
 
-        devShells.default = pkgs.callPackage ./shell.nix { };
+        devShells.default = pkgs.callPackage ./nix/shell.nix { };
       };
 
       flake = {
         overlays.default = final: _: { 
-          ed-thomas-dev = final.callPackage ./default.nix { }; 
+          ed-thomas-dev = final.callPackage ./nix/default.nix { }; 
         };
       };
     };
