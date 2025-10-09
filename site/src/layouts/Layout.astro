@@ -10,6 +10,16 @@ export interface Props {
   image?: string;
 }
 const { title, description, image } = Astro.props;
+// Determine the current request path so we can highlight active nav links
+const currentPath =
+  typeof Astro.request !== "undefined" && Astro.request?.url
+    ? new URL(Astro.request.url).pathname
+    : "/";
+
+function isActive(path: string) {
+  if (path === "/") return currentPath === "/";
+  return currentPath === path || currentPath.startsWith(path + "/");
+}
 ---
 
 <html lang="en">
@@ -30,10 +40,31 @@ const { title, description, image } = Astro.props;
       >
         <nav class="mb-8 relative">
           <div class="flex justify-center gap-6 items-center tracking-wide">
-            <a href="/" class="px-1 hover:underline">HOME</a>
-            <a href="/blog" class="px-1 hover:underline">BLOG</a>
-            <a href="/projects" class="px-1 hover:underline">PROJECTS</a>
-            <a href="/misc" class="px-1 hover:underline">MISC</a>
+            <a
+              href="/"
+              class={`px-1 hover:underline ${isActive("/") ? "font-bold underline" : ""}`}
+              >HOME</a
+            >
+            <a
+              href="/blog"
+              class={`px-1 hover:underline ${isActive("/blog") ? "font-bold underline" : ""}`}
+              >BLOG</a
+            >
+            <a
+              href="/projects"
+              class={`px-1 hover:underline ${isActive("/projects") ? "font-bold underline" : ""}`}
+              >PROJECTS</a
+            >
+            <a
+              href="/misc"
+              class={`px-1 hover:underline ${isActive("/misc") ? "font-bold underline" : ""}`}
+              >MISC</a
+            >
+            <a
+              href="/cv"
+              class={`px-1 hover:underline ${isActive("/cv") ? "font-bold underline" : ""}`}
+              >CV</a
+            >
           </div>
 
           <div class="absolute right-0 top-0">
