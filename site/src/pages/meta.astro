@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Meta">
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Meta</h1>
+
+    <div class="space-y-8">
+      <section>
+        <div class="prose max-w-none">
+          <p>This site is built with <a href="https://astro.build/">Astro</a> and <a href="https://nixos.org/">Nix</a>.
+            <br/>
+            I self host it on a K3s <a href="https://github.com/pixel-87/nixos-config">homelab</a>.</p>
+
+          <p>The site is packaged using a <a href="https://www.nixos.wiki/Flakes.com/">Nix flake</a>, producing both a package and an OCI container, uploaded to the <a href="https://github.com/features/packages">GitHub Container Registry</a> using <a href="https://github.com/pixel-87/ed-thomas.dev/blob/main/.github/workflows/deploy.yml">GitHub Actions</a>.</p>
+
+          <p>There is also a <a href="rss.xml">RSS feed</a> for this site.</p>
+
+          <p>The source code is available on <a href="https://github.com/pixel-87/ed-thomas.dev">GitHub</a>.</p>
+      </section>
+    </div>
+  </main>
+
+</Layout>
