@@ -327,7 +327,7 @@ export default function initHexMaze({ canvas, container } = {}) {
 
   // Pointer controls
   function onClick(e) {
-    const rect = host.getBoundingClientRect();
+    const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     spawnFromCursor(x, y, SPAWN_COUNT_CLICK);
@@ -338,7 +338,7 @@ export default function initHexMaze({ canvas, container } = {}) {
     const now = Date.now();
     if (now - lastMove > MOVE_THROTTLE_MS) {
       lastMove = now;
-      const rect = host.getBoundingClientRect();
+      const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       spawnFromCursor(x, y, SPAWN_COUNT_MOVE);
