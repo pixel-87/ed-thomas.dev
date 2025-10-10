@@ -1,4 +1,4 @@
-name: Upload image to GCR
+name: Build and Deploy Site
 
 on:
   push:
@@ -13,8 +13,10 @@ permissions:
   packages: write
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    outputs:
+      image_name: ${{ steps.image_name.outputs.name }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -25,25 +27,43 @@ jobs:
       - name: Setup Nix cache
         uses: DeterminateSystems/magic-nix-cache-action@v13
 
+      - name: Build flake image (Nix)
+        run: |
+          nix build -L .#packages.x86_64-linux.docker
+
+      - name: Define image name
+        id: image_name
+        run: echo "name=ed-thomas-dev" >> "$GITHUB_OUTPUT"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: result
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+
       - name: GitHub Container Registry login
-        if: github.ref == 'refs/heads/main'
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build flake image (Nix)
-        run: |
-          nix build -L .#packages.x86_64-linux.docker
-
       - name: Load image into Docker and push to GHCR
-        if: github.ref == 'refs/heads/main'
         run: |
-          docker load < result
-          docker tag ed-thomas-dev:latest ghcr.io/pixel-87/ed-thomas.dev:latest
+          docker load < docker-image/result
+          docker tag ${{ needs.build.outputs.image_name }}:latest ghcr.io/pixel-87/ed-thomas.dev:latest
           docker push ghcr.io/pixel-87/ed-thomas.dev:latest
 
           SHORT_SHA=${GITHUB_SHA::8}
-          docker tag ed-thomas-dev:latest ghcr.io/pixel-87/ed-thomas.dev:${SHORT_SHA}
+          docker tag ${{ needs.build.outputs.image_name }}:latest ghcr.io/pixel-87/ed-thomas.dev:${SHORT_SHA}
           docker push ghcr.io/pixel-87/ed-thomas.dev:${SHORT_SHA}
