@@ -35,13 +35,17 @@ The rest I ordered:
 - TRRS cable (ebay)
 - x2 STM32F401 blackpill microcontroller (ebay)
 
-> Wrong microcontrollers (warning #1)
-> I orginally bought a pair, however they were slightly too big, some boards have slightly more spacing between the pin holes and the chip itself. So if ordering yourself, look for the smaller version.
+<div class="callout warning">
+ <div class="callout-heading">Wrong microcontrollers (warning #1)</div>
+ <p>I originally bought a pair, however they were slightly too big; some boards have slightly more spacing between the pin holes and the chip itself. So if ordering yourself, look for the smaller version.</p>
+</div>
 
 ## Building
 
-> READ DON'T WING IT (warning #2)
-> Actually read the [build guide](https://github.com/nilokr/cantor-remix/blob/main/doc/build_guide.md) its there for a reason, I soldered the pins in the wrong holes :P.
+<div class="callout warning">
+ <div class="callout-heading">READ — DON'T WING IT (warning #2)</div>
+ <p>Actually read the <a href="https://github.com/nilokr/cantor-remix/blob/main/doc/build_guide.md">build guide</a> — it's there for a reason; I soldered the pins in the wrong holes :P.</p>
+</div>
 
 The soldering isn't really that hard, luckily I had an experienced friend to do microcontroller pins as there isn't much room for error.
 
@@ -53,16 +57,19 @@ On nixos, I used the qmk package, and followed this [guide](https://docs.qmk.fm/
 
 I found a shell.nix in this repo, so I used this to compile the firmware locally.
 
-> Note
-> This took absolutely ages for me, as my laptop isn't the fastest, so either have a fast machine, time, or use github actions.
-
+<div class="callout note">
+ <div class="callout-heading">Note</div>
+ <p>This took absolutely ages for me, as my laptop isn't the fastest, so either have a fast machine, time, or use GitHub Actions.</p>
+</div>
 I was shocked at how easy it is to flash a board, just putting the boards in bootloader mode, and just doing `qmk flash -kb cantor -km manna-harbour_miryoku`.
 
-> Another note
-> I didn't change any settings, however I believe it is made for a US keyboard.
-> As I'm in the UK, I need to remap some of the symbol keys, such as @ and #. Although I haven't done this yet, as I'm still learning the alpha keys, and not daily driving it.
+<div class="callout note">
+ <div class="callout-heading">Note</div>
+ <p>I didn't change any settings; however I believe it is made for a US keyboard.</p>
+ <p>As I'm in the UK, I need to remap some of the symbol keys, such as @ and #. Although I haven't done this yet, as I'm still learning the alpha keys, and not daily driving it.</p>
+</div>
 
-## Using
+## Actually using it
 
 With the board working, I've been learning colemak dh.
 I've been using [keybr](https://www.keybr.com/) to learn the layout, an incredible site that I hate.
