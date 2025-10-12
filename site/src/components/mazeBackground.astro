@@ -17,9 +17,10 @@
   </div>
 </div>
 
-<script>
-  // Load maze asynchronously after page loads to avoid render blocking
-  window.addEventListener("load", () => {
+<script is:inline>
+  // Use requestIdleCallback to load maze when browser is idle
+  // Falls back to setTimeout for browsers that don't support it
+  function loadMazeWhenIdle() {
     const container = document.getElementById("maze-canvas-container");
     if (container && container.parentElement) {
       // Create canvas element
@@ -31,10 +32,28 @@
       // Insert canvas at the beginning of the container's parent
       container.parentElement.insertBefore(canvas, container);
 
-      // Initialize maze
-      import("../scripts/drawHexMaze.js").then(({ default: initMaze }) => {
-        initMaze(canvas);
-      });
+      // Dynamically load the maze script
+      const script = document.createElement("script");
+      script.type = "module";
+      script.textContent = `
+        import initMaze from '/src/scripts/drawHexMaze.js';
+        const canvas = document.getElementById('mazeCanvas');
+        if (canvas) {
+          initMaze(canvas);
+        }
+      `;
+      document.head.appendChild(script);
+    }
+  }
+
+  // Wait until page is loaded, then use requestIdleCallback for initialization
+  window.addEventListener("load", () => {
+    if ("requestIdleCallback" in window) {
+      // Use requestIdleCallback to run when browser is idle
+      requestIdleCallback(loadMazeWhenIdle, { timeout: 2000 });
+    } else {
+      // Fallback to setTimeout for browsers without requestIdleCallback
+      setTimeout(loadMazeWhenIdle, 100);
     }
   });
 </script>
