@@ -98,7 +98,7 @@ export default function initHexMaze({ canvas, container } = {}) {
     const validNodes = [];
     const nodeIdMapping = new Map();
     
-    nodeList.forEach((node, i) => {
+    nodeList.forEach((node) => {
       if (node.x >= -margin && node.x <= width + margin && 
           node.y >= -margin && node.y <= height + margin) {
         const newId = validNodes.length;

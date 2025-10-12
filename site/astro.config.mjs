@@ -21,7 +21,6 @@ export default defineConfig({
   },
   vite: {
     build: {
-      cssCodeSplit: true,
       minify: 'esbuild',
     }
   }
