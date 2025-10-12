@@ -23,8 +23,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   pnpmDeps = pnpm.fetchDeps {
     inherit (finalAttrs) pname version src;
     fetcherVersion = 2;
-    # Updated hash for new @astrojs/mdx dependency
-    hash = "sha256-ww4YRgi/EiDhG0zeoGpBthwvyZ+cMTmY3mCH0qC+44k=";
+    hash = "sha256-2LSwZWqeTzG/W1Cu2VghZ8MdhUXFGEs5G3AKNm6fosg=";
   };
 
   env.ASTRO_TELEMETRY_DISABLED = 1;
