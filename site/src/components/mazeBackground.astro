@@ -1,12 +1,10 @@
 ---
-
+// This component loads the maze asynchronously to avoid render blocking
 ---
 
 <div class="relative w-full h-full">
-  <canvas
-    id="mazeCanvas"
-    class="fixed inset-0 z-0 w-full h-full pointer-events-none"
-    aria-hidden="true"></canvas>
+  <!-- Canvas will be added dynamically after page load -->
+  <div id="maze-canvas-container"></div>
 
   <!-- Semi-transparent overlay for better text readability -->
   <div class="fixed inset-0 z-5 pointer-events-none">
@@ -17,25 +15,26 @@
   <div class="relative z-10">
     <slot />
   </div>
-  <script>
-    // Load maze script after page becomes interactive
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initMazeScript);
-    } else {
-      initMazeScript();
-    }
+</div>
 
-    function initMazeScript() {
+<script>
+  // Load maze asynchronously after page loads to avoid render blocking
+  window.addEventListener("load", () => {
+    const container = document.getElementById("maze-canvas-container");
+    if (container && container.parentElement) {
+      // Create canvas element
+      const canvas = document.createElement("canvas");
+      canvas.id = "mazeCanvas";
+      canvas.className = "fixed inset-0 z-0 w-full h-full pointer-events-none";
+      canvas.setAttribute("aria-hidden", "true");
+
+      // Insert canvas at the beginning of the container's parent
+      container.parentElement.insertBefore(canvas, container);
+
+      // Initialize maze
       import("../scripts/drawHexMaze.js").then(({ default: initMaze }) => {
-        const canvas = document.getElementById("mazeCanvas");
-        const container = canvas?.parentElement ?? document.body;
-        const instance = initMaze({ canvas, container });
-        if (import.meta.hot) {
-          import.meta.hot.dispose(
-            () => instance && instance.destroy && instance.destroy()
-          );
-        }
+        initMaze(canvas);
       });
     }
-  </script>
-</div>
+  });
+</script>
