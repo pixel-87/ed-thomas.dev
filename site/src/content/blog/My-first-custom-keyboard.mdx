@@ -5,6 +5,12 @@ pubDate: 2025-08-31
 tags: ["hardware", "keyboard"]
 ---
 
+import { Image } from 'astro:assets';
+import partialImage from '../../assets/images/keyboard/keyboard_micro_not_soldered.jpg';
+import completeImage from '../../assets/images/keyboard/keyboard_complete.jpg';
+import finalSetupImage from '../../assets/images/keyboard/keyboard_final_setup.jpg';
+import partsImage from '../../assets/images/keyboard/keyboard_parts.jpg';
+
 So in the effort to make a physical bit of tech this summer, I eventually settled on making a ergo, spilt keyboard.
 
 As a programmer, I tend to type a lot. After hearing about how some software devs develop issues like RSI, I wanted to be proactive with my typing posture.
@@ -14,6 +20,11 @@ I've seen some split boards before and they looked really cool.
 While I've got no experience with microcontrollers, PCBs, or soldering; How hard can it really be?
 
 ## Picking the parts
+
+<figure>
+  <Image src={partsImage} alt="Keyboard parts laid out: switches, microcontroller, TRRS cable" />
+  <figcaption>Partially assembled - only switches soldered.</figcaption>
+</figure>
 
 The biggest considerations for me were:
 
@@ -40,6 +51,7 @@ The rest I ordered:
  <p>I originally bought a pair, however they were slightly too big; some boards have slightly more spacing between the pin holes and the chip itself. So if ordering yourself, look for the smaller version.</p>
 </div>
 
+
 ## Building
 
 <div class="callout warning">
@@ -47,13 +59,19 @@ The rest I ordered:
  <p>Actually read the <a href="https://github.com/nilokr/cantor-remix/blob/main/doc/build_guide.md">build guide</a> — it's there for a reason; I soldered the pins in the wrong holes :P.</p>
 </div>
 
+<figure>
+  <Image src={partialImage} alt="Keyboard parts laid out: switches, microcontroller, TRRS cable" />
+  <figcaption>Partially assembled - only switches soldered.</figcaption>
+</figure>
+
 The soldering isn't really that hard, luckily I had an experienced friend to do microcontroller pins as there isn't much room for error.
 
+<figure>
+  <Image src={completeImage} alt="Close-up of soldered microcontroller pins" />
+  <figcaption>Fully assembled - all components soldered.</figcaption>
+</figure>
+
 ## Flashing
-
-I flashed [miryoku](https://github.com/manna-harbour/miryoku) as it just seems to work.
-
-On nixos, I used the qmk package, and followed this [guide](https://docs.qmk.fm/newbs_getting_started), to get qmk set up.
 
 I found a shell.nix in this repo, so I used this to compile the firmware locally.
 
@@ -82,6 +100,19 @@ The ortholinear design is an odd feeling at first, but you quickly get used to i
 The nicest thing I've noticed about the board is using any non alpha keys; with traditional boards, you have to reach your fingers up for numbers or functions, but with layers and fewer keys, everything is just one away from the home row, which is just a bit less disruptive to your flow.
 
 The sunset switches are nice, I'm coming cherry mx browns, so still having the tactile feel on the low profile keys is great, but they are quite a bit quieter, which means I can take this board with me and not be a nuisance.
+
+<figure>
+  <Image src={finalSetupImage} alt="Assembled Cantor-Remix keyboard" />
+  <figcaption>Keyboard at setup, including 3D printed case.</figcaption>
+</figure>
+
+## `foldl(+:, 0, all)` - To sum it all up
+
+I'm really satisfied with what I've built.
+
+I usually work with software so doing hardware projects are always fun.
+
+This was a bit more ambitous than my last hardware project, making a second monitor from a laptop screen, so maybe the next project can be another step up.
 
 ## `foldl(+:, 0, all)` - To sum it all up
 
