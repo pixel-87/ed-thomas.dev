@@ -1,10 +1,11 @@
 ---
 // This component loads the maze asynchronously to avoid render blocking
+import drawHexMazeUrl from "../scripts/drawHexMaze.js?url";
 ---
 
 <div class="relative w-full h-full">
   <!-- Canvas will be added dynamically after page load -->
-  <div id="maze-canvas-container"></div>
+  <div id="maze-canvas-container" data-maze-script={drawHexMazeUrl}></div>
 
   <!-- Semi-transparent overlay for better text readability -->
   <div class="fixed inset-0 z-5 pointer-events-none">
@@ -32,17 +33,19 @@
       // Insert canvas at the beginning of the container's parent
       container.parentElement.insertBefore(canvas, container);
 
-      // Dynamically load the maze script
-      const script = document.createElement("script");
-      script.type = "module";
-      script.textContent = `
-        import initMaze from '/src/scripts/drawHexMaze.js';
-        const canvas = document.getElementById('mazeCanvas');
-        if (canvas) {
-          initMaze(canvas);
-        }
-      `;
-      document.head.appendChild(script);
+      // Get the maze script URL from data attribute
+      const scriptUrl = container.getAttribute("data-maze-script");
+      if (scriptUrl) {
+        // Dynamically import and initialize the maze
+        import(scriptUrl)
+          .then((module) => {
+            const initMaze = module.default;
+            initMaze({ canvas });
+          })
+          .catch((error) => {
+            console.error("Failed to load maze script:", error);
+          });
+      }
     }
   }
 
