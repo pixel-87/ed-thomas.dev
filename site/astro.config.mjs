@@ -15,5 +15,14 @@ export default defineConfig({
       theme: 'github-light',
       wrap: true
     }
+  },
+  build: {
+    inlineStylesheets: 'always',
+  },
+  vite: {
+    build: {
+      cssCodeSplit: true,
+      minify: 'esbuild',
+    }
   }
 });
