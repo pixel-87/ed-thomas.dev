@@ -26,7 +26,7 @@ const latestProjects = allProjects
         <a href="/projects" class="underline hover:no-underline">coding</a>, and
         learning new things.
       </p>
-      <br>
+      <br />
       <p>
         <div class="text-gray-700">Try clicking / tapping!</div>
       </p>
@@ -35,14 +35,17 @@ const latestProjects = allProjects
     <!-- Latest Notes -->
     <section>
       <h2 class="text-base font-bold mb-4">## Latest notes</h2>
-      <div class="space-y-3">
+      <div class="space-y-4">
         {
           latestPosts.map((post) => (
-            <div>
-              <a href={`/blog/${post.slug}`} class="hover:underline">
+            <div class="min-h-[44px] flex items-center">
+              <a
+                href={`/blog/${post.slug}`}
+                class="hover:underline min-h-[44px] flex items-center px-2 py-2 -mx-2 rounded"
+              >
                 {post.data.title}
               </a>
-              <span class="text-gray-500 ml-2">
+              <span class="text-gray-500 ml-2 text-sm">
                 {post.data.pubDate.toLocaleDateString("en-GB", {
                   year: "numeric",
                   month: "short",
@@ -53,7 +56,12 @@ const latestProjects = allProjects
           ))
         }
         <div>
-          <a href="/blog" class="hover:underline">More notes →</a>
+          <a
+            href="/blog"
+            class="hover:underline min-h-[44px] flex items-center px-2 py-2 -mx-2 rounded"
+          >
+            More notes →
+          </a>
         </div>
       </div>
     </section>
@@ -61,22 +69,22 @@ const latestProjects = allProjects
     <!-- Projects -->
     <section>
       <h2 class="text-base font-bold mb-4">## Some things I've built</h2>
-      <div class="space-y-4">
+      <div class="space-y-6">
         {
           latestProjects.map((project) => (
-            <div>
+            <div class="min-h-[44px]">
               <a
                 href={`/projects/${project.slug}`}
-                class="hover:underline font-medium"
+                class="hover:underline font-medium min-h-[44px] flex items-center px-2 py-2 -mx-2 rounded"
               >
                 {project.data.title}
               </a>
-              <p class="text-gray-700 text-sm mt-1">
+              <p class="text-gray-700 text-sm mt-1 pl-2">
                 {project.data.description}
               </p>
-              <div class="flex gap-2 mt-2">
+              <div class="flex gap-2 mt-2 pl-2">
                 {project.data.technologies.map((tech) => (
-                  <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
+                  <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded min-h-[32px] flex items-center">
                     {tech}
                   </span>
                 ))}
@@ -85,7 +93,12 @@ const latestProjects = allProjects
           ))
         }
         <div>
-          <a href="/projects" class="hover:underline">More projects →</a>
+          <a
+            href="/projects"
+            class="hover:underline min-h-[44px] flex items-center px-2 py-2 -mx-2 rounded"
+          >
+            More projects →
+          </a>
         </div>
       </div>
     </section>
@@ -94,9 +107,17 @@ const latestProjects = allProjects
     <section>
       <h2 class="text-base font-bold mb-4">## About me</h2>
       <div class="space-y-3">
-        <p>I'm a final year computer science student at the University of Exeter.</p>
-        <p>I really enjoy working with DevOps, backend systems, and cloud computing.</p>
-        <p>I really like learning a little about everything, and throwing myself into new things.</p>
+        <p>
+          I'm a final year computer science student at the University of Exeter.
+        </p>
+        <p>
+          I really enjoy working with DevOps, backend systems, and cloud
+          computing.
+        </p>
+        <p>
+          I really like learning a little about everything, and throwing myself
+          into new things.
+        </p>
       </div>
     </section>
 

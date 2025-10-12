@@ -26,6 +26,8 @@ function isActive(path: string) {
   <head>
     <meta charset="utf-8" />
     <BaseHead title={title} description={description} image={image} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -38,8 +40,8 @@ function isActive(path: string) {
       <div
         class="min-h-screen max-w-2xl mx-auto px-6 py-8 font-mono text-sm leading-relaxed flex flex-col"
       >
-        <nav class="mb-8 relative">
-          <div class="flex justify-center gap-6 items-center tracking-wide">
+        <header class="mb-8 relative">
+          <nav class="flex justify-center gap-6 items-center tracking-wide">
             <a
               href="/"
               class={`px-1 hover:underline ${isActive("/") ? "font-bold underline" : ""}`}
@@ -65,12 +67,12 @@ function isActive(path: string) {
               class={`px-1 hover:underline ${isActive("/cv") ? "font-bold underline" : ""}`}
               >CV</a
             >
-          </div>
+          </nav>
 
           <div class="absolute right-0 top-0">
             <ThemeIcon />
           </div>
-        </nav>
+        </header>
 
         <main class="flex-1">
           <slot />
@@ -146,11 +148,7 @@ function isActive(path: string) {
                 ></path></svg
               >
             </a>
-            <a
-              href="/rss.xml"
-              class="hover:text-gray-600"
-              aria-label="RSS"
-            >
+            <a href="/rss.xml" class="hover:text-gray-600" aria-label="RSS">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
