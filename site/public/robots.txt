@@ -1,0 +1,27 @@
+# robots.txt - site-wide crawler rules
+# Block a few known AI / indexing agents while allowing normal search engines.
+# Note: robots.txt is advisory; some scrapers ignore it.
+
+User-agent: OpenAI
+Disallow: /
+
+User-agent: Anthropic
+Disallow: /
+
+User-agent: Perplexity
+Disallow: /
+
+User-agent: Mistral
+Disallow: /
+
+# Allow standard search engine bots (explicit allow is optional)
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Slurp
+User-agent: DuckDuckBot
+User-agent: Yandex
+User-agent: *
+Disallow:
+
+# Point search engines to the sitemap index
+Sitemap: https://ed-thomas.dev/sitemap-index.xml
