@@ -68,19 +68,18 @@ jobs:
         run: |
           docker load < artifact/docker-image.tar
 
-          IMAGE_NAME=${{ needs.build.outputs.image_name }}
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/${IMAGE_NAME}
-          LATEST_TAG=latest
+          # Define all the names and tags we need
+          IMAGE_NAME="ed-thomas-dev" # The name defined in nix/docker.nix
+          IMAGE_ID="ghcr.io/${{ github.repository_owner }}/${IMAGE_NAME}"
+          
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
           SHORT_SHA=${GITHUB_SHA::8}
-          TIMESTAMP=$(date +%Y%m%d%H%M%S) 
-          TS_SHA_TAG=${TIMESTAMP}-${SHORT_SHA}
+          TS_SHA_TAG="${TIMESTAMP}-${SHORT_SHA}"
 
-          LOADED_IMAGE=$(docker images --format "{{.Repository}}:{{.Tag}}" | head -n1)
-
-          # Push latest tag
-          docker tag ${LOADED_IMAGE} ${IMAGE_ID}:${LATEST_TAG}
-          docker push ${IMAGE_ID}:${LATEST_TAG}
-
-          # Push the new timestamped tag
-          docker tag ${LOADED_IMAGE} ${IMAGE_ID}:${TS_SHA_TAG}
-          docker push ${IMAGE_ID}:${TS_SHA_TAG}
+          # Push the sortable timestamped tag
+          docker tag "${IMAGE_NAME}:latest" "${IMAGE_ID}:${TS_SHA_TAG}"
+          docker push "${IMAGE_ID}:${TS_SHA_TAG}"
+          
+          # Also push a 'latest' tag for easy manual pulls
+          docker tag "${IMAGE_NAME}:latest" "${IMAGE_ID}:latest"
+          docker push "${IMAGE_ID}:latest"
