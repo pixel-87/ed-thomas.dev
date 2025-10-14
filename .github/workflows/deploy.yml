@@ -69,7 +69,7 @@ jobs:
           docker load < artifact/docker-image.tar
 
           # Define all the names and tags we need
-          IMAGE_NAME="ed-thomas-dev" # The name defined in nix/docker.nix
+          IMAGE_NAME="ed-thomas.dev" # The name defined in nix/docker.nix
           IMAGE_ID="ghcr.io/${{ github.repository_owner }}/${IMAGE_NAME}"
           
           TIMESTAMP=$(date +%Y%m%d%H%M%S)
