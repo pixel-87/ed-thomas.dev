@@ -8,7 +8,7 @@
   title="Toggle theme"
 >
   <svg
-    width="30px"
+    width="22px"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     aria-hidden="true"
@@ -30,13 +30,22 @@
   #themeToggle {
     border: 0;
     background: none;
-    padding: 8px;
-    min-width: 44px;
-    min-height: 44px;
+    padding: 6px;
+    min-width: 36px;
+    min-height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 4px;
+  }
+
+  /* larger hit target on medium+ screens */
+  @media (min-width: 768px) {
+    #themeToggle {
+      padding: 8px;
+      min-width: 44px;
+      min-height: 44px;
+    }
   }
 
   .sun {
