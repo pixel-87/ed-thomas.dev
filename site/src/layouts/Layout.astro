@@ -80,35 +80,37 @@ function isActive(path: string) {
         class="min-h-screen max-w-2xl mx-auto px-6 py-8 font-mono text-sm leading-relaxed flex flex-col"
       >
         <header class="mb-8 relative">
-          <nav class="flex justify-center gap-6 items-center tracking-wide">
+          <nav
+            class="grid grid-cols-6 gap-x-2 gap-y-1 items-center justify-items-center md:flex md:flex-wrap md:justify-center md:gap-6 tracking-wide text-sm md:text-base pr-10 md:pr-0"
+          >
             <a
               href="/"
-              class={`px-1 hover:underline ${isActive("/") ? "font-bold underline" : ""}`}
+              class={`col-span-2 text-center px-1 hover:underline md:w-auto ${isActive("/") ? "font-bold underline" : ""}`}
               >HOME</a
             >
             <a
               href="/blog"
-              class={`px-1 hover:underline ${isActive("/blog") ? "font-bold underline" : ""}`}
+              class={`col-span-2 text-center px-1 hover:underline md:w-auto ${isActive("/blog") ? "font-bold underline" : ""}`}
               >BLOG</a
             >
             <a
               href="/projects"
-              class={`px-1 hover:underline ${isActive("/projects") ? "font-bold underline" : ""}`}
+              class={`col-span-2 text-center px-1 hover:underline md:w-auto ${isActive("/projects") ? "font-bold underline" : ""}`}
               >PROJECTS</a
             >
             <a
               href="/misc"
-              class={`px-1 hover:underline ${isActive("/misc") ? "font-bold underline" : ""}`}
+              class={`col-start-2 col-span-2 text-center px-1 hover:underline md:w-auto ${isActive("/misc") ? "font-bold underline" : ""}`}
               >MISC</a
             >
             <a
               href="/cv"
-              class={`px-1 hover:underline ${isActive("/cv") ? "font-bold underline" : ""}`}
+              class={`col-start-4 col-span-2 text-center px-1 hover:underline md:w-auto ${isActive("/cv") ? "font-bold underline" : ""}`}
               >CV</a
             >
           </nav>
 
-          <div class="absolute right-0 top-0">
+          <div class="absolute right-2 top-2 z-10">
             <ThemeIcon />
           </div>
         </header>
