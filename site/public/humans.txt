@@ -1,0 +1,16 @@
+/* TEAM */
+Ed Thomas (@pixel-87) - Creator
+
+/* SITE */
+Site: https://ed-thomas.dev
+Technology: Astro, Tailwind CSS, TypeScript, Nix
+
+/* THANKS */
+Icons: Tabler Icons
+
+/* CONTACT */
+GitHub: https://github.com/pixel-87
+Mastodon: https://hachyderm.io/@EdThomas
+
+/* LAST UPDATED */
+2025-10-14
