@@ -38,7 +38,7 @@ jobs:
 
       - name: Define image name
         id: image_name
-        run: echo "name=ed-thomas-dev" >> "$GITHUB_OUTPUT"
+        run: echo "name=ed-thomas.dev" >> "$GITHUB_OUTPUT"
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
