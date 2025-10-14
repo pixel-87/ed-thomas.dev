@@ -1,0 +1,91 @@
+name: Build and Deploy Site
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      image_name: ${{ steps.image_name.outputs.name }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v19
+
+      - name: Setup Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: Build flake image (Nix)
+        run: |
+          nix build -L .#packages.x86_64-linux.docker
+
+      - name: Prepare image artifact
+        run: |
+          mkdir -p artifact
+          cp "$(readlink -f result)" artifact/docker-image.tar
+
+      - name: Define image name
+        id: image_name
+        run: echo "name=ed-thomas.dev" >> "$GITHUB_OUTPUT"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: artifact
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: artifact
+
+      - name: GitHub Container Registry login
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Load image into Docker and push to GHCR
+        run: |
+          # Load the image and capture the output to get the actual image name
+          LOAD_OUTPUT=$(docker load < artifact/docker-image.tar)
+          echo "Docker load output: $LOAD_OUTPUT"
+
+          # Extract the loaded image name from the output
+          LOADED_IMAGE=$(echo "$LOAD_OUTPUT" | grep -o 'Loaded image: .*' | cut -d' ' -f3)
+          echo "Loaded image: $LOADED_IMAGE"
+
+          # Define all the names and tags we need
+          IMAGE_NAME="ed-thomas.dev" # The name defined in nix/docker.nix
+          IMAGE_ID="ghcr.io/${{ github.repository_owner }}/${IMAGE_NAME}"
+
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          SHORT_SHA=${GITHUB_SHA::8}
+          TS_SHA_TAG="${TIMESTAMP}-${SHORT_SHA}"
+
+          # Push the sortable timestamped tag
+          docker tag "${LOADED_IMAGE}" "${IMAGE_ID}:${TS_SHA_TAG}"
+          docker push "${IMAGE_ID}:${TS_SHA_TAG}"
+
+          # Also push a 'latest' tag for easy manual pulls
+          docker tag "${LOADED_IMAGE}" "${IMAGE_ID}:latest"
+          docker push "${IMAGE_ID}:latest"

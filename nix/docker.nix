@@ -4,7 +4,7 @@ let
   port = "80";
 in
 pkgs.dockerTools.buildLayeredImage {
-  name = "ed-thomas-dev";
+  name = "ed-thomas.dev";
   tag = "latest";
   
   contents = [ pkgs.static-web-server ];
