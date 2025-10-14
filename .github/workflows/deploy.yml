@@ -67,9 +67,15 @@ jobs:
       - name: Load image into Docker and push to GHCR
         run: |
           docker load < artifact/docker-image.tar
-          docker tag ${{ needs.build.outputs.image_name }}:latest ghcr.io/pixel-87/ed-thomas.dev:latest
-          docker push ghcr.io/pixel-87/ed-thomas.dev:latest
-
+          LATEST_TAG=latest
           SHORT_SHA=${GITHUB_SHA::8}
-          docker tag ${{ needs.build.outputs.image_name }}:latest ghcr.io/pixel-87/ed-thomas.dev:${SHORT_SHA}
-          docker push ghcr.io/pixel-87/ed-thomas.dev:${SHORT_SHA}
+          TIMESTAMP=$(date +%Y%m%d%H%M%S) 
+          TS_SHA_TAG=${TIMESTAMP}-${SHORT_SHA} 
+          
+          # Push latest tag
+          docker tag ${{ needs.build.outputs.image_name }}:latest $IMAGE_ID:$LATEST_TAG
+          docker push $IMAGE_ID:$LATEST_TAG
+
+          # Push the new timestamped tag
+          docker tag ${{ needs.build.outputs.image_name }}:latest $IMAGE_ID:$TS_SHA_TAG
+          docker push $IMAGE_ID:$TS_SHA_TAG
