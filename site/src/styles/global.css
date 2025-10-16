@@ -10,7 +10,7 @@
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
@@ -37,6 +37,7 @@ body {
   background-color: rgb(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b));
 }
 
+/* Desktop gradient: soft fade with wide solid center for decorative elements */
 .gradient-overlay {
   background: linear-gradient(to right,
       transparent 0%,
@@ -62,6 +63,42 @@ body {
       transparent 100%);
 }
 
+/* Tablet: tighten the gradient transition to keep more of the content area clear */
+@media (max-width: 1024px) {
+  .gradient-overlay {
+    background: linear-gradient(to right,
+        transparent 0%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 5%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 10%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.4) 15%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 20%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 25%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 50%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 75%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 80%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.4) 85%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 90%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 95%,
+        transparent 100%);
+  }
+}
+
+/* Mobile: aggressive tight gradient to preserve text area and reduce visual clutter */
+@media (max-width: 640px) {
+  .gradient-overlay {
+    background: linear-gradient(to right,
+        transparent 0%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.08) 3%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.25) 8%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 12%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 50%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 88%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.25) 92%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.08) 97%,
+        transparent 100%);
+  }
+}
+
 html.dark {
   --maze-line-color: #CC6600;
   --gradient-base-r: 0;
@@ -74,10 +111,6 @@ html.dark nav,
 html.dark .nav-links a,
 html.dark footer {
   color: #fff;
-}
-
-html.dark body {
-  background-color: rgb(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b));
 }
 
 html.dark .gradient-overlay {
@@ -105,46 +138,72 @@ html.dark .gradient-overlay {
       transparent 100%);
 }
 
+/* Tablet dark mode: tighten the gradient */
+@media (max-width: 1024px) {
+  html.dark .gradient-overlay {
+    background: linear-gradient(to right,
+        transparent 0%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 5%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 10%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.4) 15%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 20%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 25%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 50%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 75%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 80%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.4) 85%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 90%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 95%,
+        transparent 100%);
+  }
+}
+
+/* Mobile dark mode: aggressive tight gradient */
+@media (max-width: 640px) {
+  html.dark .gradient-overlay {
+    background: linear-gradient(to right,
+        transparent 0%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.08) 3%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.25) 8%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 12%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 50%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 88%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.25) 92%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.08) 97%,
+        transparent 100%);
+  }
+}
+
 /* Dark-mode utility overrides: keep light-mode classes unchanged, provide readable alternatives when html.dark is enabled */
 html.dark .text-gray-700 {
-  color: #d1d5db !important;
+  color: #d1d5db !important; /* gray-300 */
 }
 
-/* gray-300 */
 html.dark .text-gray-800 {
-  color: #e5e7eb !important;
+  color: #e5e7eb !important; /* gray-200 */
 }
 
-/* gray-200 */
 html.dark .text-gray-900 {
-  color: #ffffff !important;
+  color: #ffffff !important; /* white for primary headings */
 }
 
-/* white for primary headings */
 html.dark .text-gray-600 {
-  color: #9ca3af !important;
+  color: #9ca3af !important; /* gray-400 */
 }
 
-/* gray-400 */
-html.dark .text-gray-500 {
-  color: #9ca3af !important;
-}
-
-/* gray-400 */
+html.dark .text-gray-500,
 html.dark .text-gray-400 {
-  color: #9ca3af !important;
+  color: #9ca3af !important; /* gray-400 */
 }
 
 html.dark .bg-gray-100 {
-  background-color: #111827 !important;
+  background-color: #111827 !important; /* dark badge bg */
 }
 
-/* dark badge bg */
 html.dark .text-gray-700.bg-gray-100 {
-  color: #e5e7eb !important;
+  color: #e5e7eb !important; /* badge text */
 }
 
-/* badge text */
 html.dark .border-t {
   border-color: rgba(255, 255, 255, 0.06) !important;
 }
@@ -209,8 +268,7 @@ html.dark main h4,
 html.dark main p,
 html.dark main a,
 html.dark main li {
-  color: #d1d5db !important;
-  /* readable light gray */
+  color: #d1d5db !important; /* readable light gray */
 }
 
 /* Make links slightly brighter in main when dark mode */
@@ -219,7 +277,7 @@ html.dark main a {
 }
 
 /* Ensure list markers are visible */
-html.dark main ul>li::marker {
+html.dark main ul > li::marker {
   color: #9ca3af !important;
 }
 
@@ -283,17 +341,18 @@ html.dark .prose blockquote::before {
   margin-bottom: 0.25rem;
 }
 
-.callout.note {
-  border-left: 4px solid #2563eb;
-  background: rgba(37, 99, 235, 0.06);
-}
-
-.callout.note::before {
+/* Shared positioning for all callout icons */
+.callout::before {
   content: "";
   position: absolute;
   left: calc(4px + 1.25rem);
   transform: translateX(-50%);
   top: 0.6rem;
+}
+
+.callout.note {
+  border-left: 4px solid #2563eb;
+  background: rgba(37, 99, 235, 0.06);
 }
 
 .callout.warning {
@@ -301,25 +360,9 @@ html.dark .prose blockquote::before {
   background: rgba(245, 158, 11, 0.06);
 }
 
-.callout.warning::before {
-  content: "";
-  position: absolute;
-  left: calc(4px + 1.25rem);
-  transform: translateX(-50%);
-  top: 0.6rem;
-}
-
 .callout.success {
   border-left: 4px solid #10b981;
   background: rgba(16, 185, 129, 0.06);
-}
-
-.callout.success::before {
-  content: "";
-  position: absolute;
-  left: calc(4px + 1.25rem);
-  transform: translateX(-50%);
-  top: 0.6rem;
 }
 
 /* Make sure prose styles inside callouts look correct */
