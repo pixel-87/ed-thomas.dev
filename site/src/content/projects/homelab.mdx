@@ -1,0 +1,28 @@
+---
+title: "homelab / nix configs"
+description: "My configs for my K3s homelab and personal devices."
+technologies: ["Linux (NixOS)", "Docker", "Kubernetes (K3s)", "Homelab"]
+date: 2025-10-10
+featured: true
+github: "https://github.com/pixel-87/nixos-config"
+---
+
+My repo for my homelab and personal device running NixOS.
+
+I use containers to run my services including:
+
+- [This website!](https://github.com/pixel-87/ed-thomas.dev) - Built with Astro
+- [Flux](https://fluxcd.io/) - GitOps for the website
+- [Traefik](https://traefik.io/) - A reverse proxy and load balancer
+- [Home Assistant](https://www.home-assistant.io/) - Home automation platform
+- [n8n](https://n8n.io/) - An automation tool
+- [Minecraft Server](https://github.com/itzg/docker-minecraft-server) - A Minecraft server for me and my friends
+- [Jellyfin](https://jellyfin.org/) - A media server
+- [Pi-hole](https://pi-hole.net/) - A network-wide ad blocker
+- [Unbound](https://unbound.net/) - A validating, recursive, caching DNS resolver
+
+I currently run most of these on my Ubuntu Server (an old laptop), but am gradually migrating them to my K3s cluster (A single node old desktop PC).
+
+Once all the services are migrated, the laptop will be added as a second node to the cluster.
+
+The repo also contains my personal NixOS configs for my laptop, where I am attempting to daily drive NixOS.
