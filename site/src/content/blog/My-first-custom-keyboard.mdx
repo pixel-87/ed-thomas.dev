@@ -5,11 +5,11 @@ pubDate: 2025-08-31
 tags: ["hardware", "keyboard"]
 ---
 
-import { Image } from 'astro:assets';
-import partialImage from '../../assets/images/keyboard/keyboard_micro_not_soldered.jpg';
-import completeImage from '../../assets/images/keyboard/keyboard_complete.jpg';
-import finalSetupImage from '../../assets/images/keyboard/keyboard_final_setup.jpg';
-import partsImage from '../../assets/images/keyboard/keyboard_parts.jpg';
+import { Image } from "astro:assets";
+import partialImage from "../../assets/images/keyboard/keyboard_micro_not_soldered.jpg";
+import completeImage from "../../assets/images/keyboard/keyboard_complete.jpg";
+import finalSetupImage from "../../assets/images/keyboard/keyboard_final_setup.jpg";
+import partsImage from "../../assets/images/keyboard/keyboard_parts.jpg";
 
 So in the effort to make a physical bit of tech this summer, I eventually settled on making a ergo, spilt keyboard.
 
@@ -22,7 +22,12 @@ While I've got no experience with microcontrollers, PCBs, or soldering; How hard
 ## Picking the parts
 
 <figure>
-  <Image src={partsImage} alt="Keyboard parts laid out: switches, microcontroller, TRRS cable" />
+  <Image
+    src={partsImage}
+    alt="Keyboard parts laid out: switches, microcontroller, TRRS cable"
+    loading="eager"
+    fetchpriority="high"
+  />
   <figcaption>Partially assembled - only switches soldered.</figcaption>
 </figure>
 
@@ -47,20 +52,32 @@ The rest I ordered:
 - x2 STM32F401 blackpill microcontroller (ebay)
 
 <div class="callout warning">
- <div class="callout-heading">Wrong microcontrollers (warning #1)</div>
- <p>I originally bought a pair, however they were slightly too big; some boards have slightly more spacing between the pin holes and the chip itself. So if ordering yourself, look for the smaller version.</p>
+  <div class="callout-heading">Wrong microcontrollers (warning #1)</div>
+  <p>
+    I originally bought a pair, however they were slightly too big; some boards
+    have slightly more spacing between the pin holes and the chip itself. So if
+    ordering yourself, look for the smaller version.
+  </p>
 </div>
-
 
 ## Building
 
 <div class="callout warning">
- <div class="callout-heading">READ — DON'T WING IT (warning #2)</div>
- <p>Actually read the <a href="https://github.com/nilokr/cantor-remix/blob/main/doc/build_guide.md">build guide</a> — it's there for a reason; I soldered the pins in the wrong holes :P.</p>
+  <div class="callout-heading">READ — DON'T WING IT (warning #2)</div>
+  <p>
+    Actually read the{" "}
+    <a href="https://github.com/nilokr/cantor-remix/blob/main/doc/build_guide.md">
+      build guide
+    </a>{" "}
+    — it's there for a reason; I soldered the pins in the wrong holes :P.
+  </p>
 </div>
 
 <figure>
-  <Image src={partialImage} alt="Keyboard parts laid out: switches, microcontroller, TRRS cable" />
+  <Image
+    src={partialImage}
+    alt="Keyboard parts laid out: switches, microcontroller, TRRS cable"
+  />
   <figcaption>Partially assembled - only switches soldered.</figcaption>
 </figure>
 
@@ -76,15 +93,27 @@ The soldering isn't really that hard, luckily I had an experienced friend to do 
 I found a shell.nix in this repo, so I used this to compile the firmware locally.
 
 <div class="callout note">
- <div class="callout-heading">Note</div>
- <p>This took absolutely ages for me, as my laptop isn't the fastest, so either have a fast machine, time, or use GitHub Actions.</p>
+  <div class="callout-heading">Note</div>
+  <p>
+    This took absolutely ages for me, as my laptop isn't the fastest, so either
+    have a fast machine, time, or use GitHub Actions.
+  </p>
 </div>
-I was shocked at how easy it is to flash a board, just putting the boards in bootloader mode, and just doing `qmk flash -kb cantor -km manna-harbour_miryoku`.
+I was shocked at how easy it is to flash a board, just putting the boards in
+bootloader mode, and just doing `qmk flash -kb cantor -km
+manna-harbour_miryoku`.
 
 <div class="callout note">
- <div class="callout-heading">Note</div>
- <p>I didn't change any settings; however I believe it is made for a US keyboard.</p>
- <p>As I'm in the UK, I need to remap some of the symbol keys, such as @ and #. Although I haven't done this yet, as I'm still learning the alpha keys, and not daily driving it.</p>
+  <div class="callout-heading">Note</div>
+  <p>
+    I didn't change any settings; however I believe it is made for a US
+    keyboard.
+  </p>
+  <p>
+    As I'm in the UK, I need to remap some of the symbol keys, such as @ and #.
+    Although I haven't done this yet, as I'm still learning the alpha keys, and
+    not daily driving it.
+  </p>
 </div>
 
 ## Actually using it
@@ -113,4 +142,3 @@ I'm really satisfied with what I've built.
 I usually work with software so doing hardware projects are always fun.
 
 This was a bit more ambitous than my last hardware project, making a second monitor from a laptop screen, so maybe the next project can be another step up.
-

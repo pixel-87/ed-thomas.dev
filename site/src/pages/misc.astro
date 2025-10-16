@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Misc">
@@ -94,10 +95,14 @@ import Layout from "../layouts/Layout.astro";
           </p>
 
           <figure class="my-6">
-            <img
+            <Image
               src="/images/lighthouse-100.png"
               alt="Lighthouse 100 score screenshot"
               class="w-full max-w-md mx-auto rounded shadow-md"
+              width={800}
+              height={450}
+              loading="eager"
+              fetchpriority="high"
             />
           </figure>
         </div>
