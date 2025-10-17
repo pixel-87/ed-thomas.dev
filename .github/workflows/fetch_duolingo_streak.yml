@@ -2,7 +2,7 @@ name: Update Duolingo data
 
 on:
   schedule:
-    - cron: "0 */8 * * *" # daily at 06:00 UTC
+    - cron: "0 */8 * * *" # 3 times a day
   workflow_dispatch: {}
 
 jobs:
@@ -10,16 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
-      - name: Install Python deps
-        run: python -m pip install requests
-      - name: Run fetch script and update gist
+      - name: Update Duolingo streak
         env:
           GIST_TOKEN: ${{ secrets.DUO_GIST_TOKEN }}
           GIST_ID: ${{ secrets.DUO_GIST_ID }}
-        run: python3 scripts/fetch_duolingo_streak.py
+        run: node scripts/fetch_duolingo_streak.js
