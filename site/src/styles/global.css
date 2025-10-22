@@ -369,3 +369,11 @@ html.dark .prose blockquote::before {
 .callout :where(p, ul, ol, pre, code) {
   margin: 0.25rem 0;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+}
