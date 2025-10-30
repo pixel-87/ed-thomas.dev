@@ -88,13 +88,15 @@ body {
   .gradient-overlay {
     background: linear-gradient(to right,
         transparent 0%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.08) 3%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.25) 8%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 12%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 50%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 88%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.25) 92%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.08) 97%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 3%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 8%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.8) 12%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.92) 20%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.95) 50%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.92) 80%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.8) 88%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 92%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 97%,
         transparent 100%);
   }
 }
@@ -163,13 +165,15 @@ html.dark .gradient-overlay {
   html.dark .gradient-overlay {
     background: linear-gradient(to right,
         transparent 0%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.08) 3%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.25) 8%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 12%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 50%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 88%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.25) 92%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.08) 97%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 3%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 8%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.8) 12%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.92) 20%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.95) 50%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.92) 80%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.8) 88%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 92%,
+        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 97%,
         transparent 100%);
   }
 }
@@ -370,10 +374,3 @@ html.dark .prose blockquote::before {
   margin: 0.25rem 0;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
-html {
-  scrollbar-width: none;
-}
