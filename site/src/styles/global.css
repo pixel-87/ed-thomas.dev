@@ -238,6 +238,12 @@ html.dark .border-t {
   /* gray-200 for light mode */
 }
 
+/* Improve line length for article prose to aid readability */
+article.prose {
+  max-width: 65ch;
+  line-height: 1.7;
+}
+
 .dark .prose {
   --tw-prose-body: #d1d5db;
   /* gray-300 for dark mode */

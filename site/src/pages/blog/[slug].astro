@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import { estimateReadingTime } from "../../lib/readingTime";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -15,7 +16,12 @@ type Props = {
 };
 
 const { entry } = Astro.props;
+// render content component for MDX/MD rendering
 const { Content } = await entry.render();
+
+// Estimate reading time from the raw entry body (fallback to empty string)
+const raw = (entry as any).body ?? "";
+const { minutes } = estimateReadingTime(String(raw));
 ---
 
 <Layout title={entry.data.title}>
@@ -31,6 +37,7 @@ const { Content } = await entry.render();
               day: "numeric",
             })
           }
+          {` · ${minutes} min read`}
         </div>
         {
           entry.data.tags && (
