@@ -1,0 +1,122 @@
+---
+title: "Building my personal website/blog"
+description: "How I built a personal website with Astro, Tailwind CSS, and Nix"
+pubDate: 2025-10-18
+tags: ["web-dev", "astro", "nix", "tailwind"]
+featured: true
+---
+
+# Why make a blog?
+
+It's fun to have a little corner of the internet I get to design how I want. I don't expect anyone to read it, but I won't know until I make it — ahahah.
+
+As a computer science student, my first job was planning how to build this whole site. Figuring out what to post is a later job.
+
+## Astro
+
+Initially, I made the site with [Hugo](https://gohugo.io/), a static site generator. However, I switched to [Astro](https://astro.build/) because I found Hugo clunky to customise. Astro is a superset of HTML, so I could make the site look exactly how I wanted while adding more functionality.
+
+## Web Server
+
+I self-host this site on my K3s homelab, using Traefik for ingress and cert-manager for TLS. Given that setup, something like Caddy or Nginx would be overkill.
+
+I went with [static-web-server](https://static-web-server.net/) as it's lightweight and written in Rust.
+
+## Nix
+
+I've been trying to learn more about Nix and have been dual-booting with NixOS — although right now it's mostly playing around with configs.
+
+I'm using Nix more to actually learn the language. For this repo I use a dev shell to manage packages; I can immediately see the appeal of not polluting the user environment.
+
+I also use it to package the site and create a Docker image.
+
+``` nix
+# docker.nix
+
+{ pkgs, site }:
+
+let
+  port = "80";
+in
+pkgs.dockerTools.buildLayeredImage {
+  name = "ed-thomas.dev";
+  tag = "latest";
+  
+  contents = [ pkgs.static-web-server ];
+
+  config = {
+    Cmd = [ 
+      "static-web-server"
+      "--port" port
+      "--root" site
+      "--compression" "true"
+      "--page-fallback" "404.html"
+    ];
+    ExposedPorts = {
+      "${port}/tcp" = {};
+    };
+  };
+}
+```
+
+## Building, Deploying and Hosting
+
+### Building
+
+The `docker.nix` file is imported in my [Nix flake](https://github.com/pixel-87/ed-thomas.dev/blob/main/flake.nix).
+
+Now I can run `nix build .#siteImage` to build the static site with Astro and package it into a Docker image with static-web-server serving the files.
+
+``` Nix
+# flake.nix
+
+{
+  description = "My dev site, using astro";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+  };
+
+  outputs = inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" "aarch64-linux" ];
+      
+      perSystem = { config, self', inputs', pkgs, system, ... }: {
+        packages = {
+          site = pkgs.callPackage ./nix/default.nix { };
+          docker = pkgs.callPackage ./nix/docker.nix { 
+            site = config.packages.site;
+          };
+          default = config.packages.site;
+        };
+
+        devShells.default = pkgs.callPackage ./nix/shell.nix { };
+      };
+
+      flake = {
+        overlays.default = final: _: { 
+          ed-thomas-dev = final.callPackage ./nix/default.nix { }; 
+        };
+      };
+    };
+}
+```
+
+A lot of this Nix code was borrowed from [Isabel Roses' site](https://github.com/isabelroses/website).
+
+### Deploying & Hosting
+
+I already self-host a few things, like pi-hole and my minecraft server, so I may as well keep self-hosting everything.
+
+My site doesn't need 100% uptime, won't get that much traffic, so doing everything myself is completely reasonable.
+
+I use [FluxCD](https://fluxcd.io/) to manage my K3s cluster.
+Now I can push commits to my repo, have a GitHub Action build the image, and then Flux will automatically deploy the changes.
+
+## That's all
+
+The site works :)
+I plan to add more posts and features as I go, but for now this is a good start.
+
+There is an [RSS feed](https://ed-thomas.dev/rss.xml) if you want to follow along with new posts.
