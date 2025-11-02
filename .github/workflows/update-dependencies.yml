@@ -1,0 +1,51 @@
+name: Update Dependencies
+
+on:
+  schedule:
+    # Run every Monday at 09:00 UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v19
+
+      - name: Setup Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: Update flake.lock
+        run: |
+          nix flake update --commit-lock-file
+
+      - name: Update pnpm dependencies
+        run: |
+          nix develop --command pnpm update --latest
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore: update dependencies"
+          title: "chore: update dependencies"
+          body: |
+            ## Automated Dependency Updates
+
+            This PR updates:
+            - Nix flake inputs (`flake.lock`)
+            - pnpm dependencies (`pnpm-lock.yaml`)
+
+            Please review the changes before merging.
+          branch: deps/automated-updates
+          delete-branch: true
+          labels: |
+            dependencies
+            automated
