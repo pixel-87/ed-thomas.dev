@@ -1,8 +1,8 @@
 // @ts-check
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import eslintPluginAstro from 'eslint-plugin-astro';
-import globals from 'globals';
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
+import eslintPluginAstro from "eslint-plugin-astro";
+import globals from "globals";
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -17,28 +17,23 @@ export default tseslint.config(
     },
     rules: {
       // Customize rules as needed
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        { 
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_'
-        }
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
       ],
-      '@typescript-eslint/triple-slash-reference': 'off',
+      "@typescript-eslint/triple-slash-reference": "off",
     },
   },
   {
-    files: ['**/*.mjs', '**/*.config.js'],
+    files: ["**/*.mjs", "**/*.config.js"],
     rules: {
-      '@typescript-eslint/no-require-imports': 'off',
+      "@typescript-eslint/no-require-imports": "off",
     },
   },
   {
-    ignores: [
-      'dist/',
-      'node_modules/',
-      '.astro/',
-      'pnpm-lock.yaml',
-    ],
-  }
+    ignores: ["dist/", "node_modules/", ".astro/", "pnpm-lock.yaml"],
+  },
 );

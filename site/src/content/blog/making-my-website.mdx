@@ -30,7 +30,7 @@ I'm using Nix more to actually learn the language. For this repo I use a dev she
 
 I also use it to package the site and create a Docker image.
 
-``` nix
+```nix
 # docker.nix
 
 { pkgs, site }:
@@ -41,11 +41,11 @@ in
 pkgs.dockerTools.buildLayeredImage {
   name = "ed-thomas.dev";
   tag = "latest";
-  
+
   contents = [ pkgs.static-web-server ];
 
   config = {
-    Cmd = [ 
+    Cmd = [
       "static-web-server"
       "--port" port
       "--root" site
@@ -67,7 +67,7 @@ The `docker.nix` file is imported in my [Nix flake](https://github.com/pixel-87/
 
 Now I can run `nix build .#siteImage` to build the static site with Astro and package it into a Docker image with static-web-server serving the files.
 
-``` nix
+```nix
 # flake.nix
 
 {
@@ -81,11 +81,11 @@ Now I can run `nix build .#siteImage` to build the static site with Astro and pa
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" "aarch64-linux" ];
-      
+
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         packages = {
           site = pkgs.callPackage ./nix/default.nix { };
-          docker = pkgs.callPackage ./nix/docker.nix { 
+          docker = pkgs.callPackage ./nix/docker.nix {
             site = config.packages.site;
           };
           default = config.packages.site;
@@ -95,8 +95,8 @@ Now I can run `nix build .#siteImage` to build the static site with Astro and pa
       };
 
       flake = {
-        overlays.default = final: _: { 
-          ed-thomas-dev = final.callPackage ./nix/default.nix { }; 
+        overlays.default = final: _: {
+          ed-thomas-dev = final.callPackage ./nix/default.nix { };
         };
       };
     };

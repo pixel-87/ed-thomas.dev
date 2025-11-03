@@ -7,4 +7,4 @@ featured: true
 github: "https://github.com/pixel-87/ed-thomas.dev"
 ---
 
-This very website! Built with astro. 
+This very website! Built with astro.

@@ -27,82 +27,326 @@
 }
 
 :root {
-  --maze-line-color: #5D5066;
+  --maze-line-color: #5d5066;
   --gradient-base-r: 208;
   --gradient-base-g: 219;
   --gradient-base-b: 203;
 }
 
 body {
-  background-color: rgb(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b));
+  background-color: rgb(
+    var(--gradient-base-r),
+    var(--gradient-base-g),
+    var(--gradient-base-b)
+  );
 }
 
 /* Desktop gradient: soft fade with wide solid center for decorative elements */
 .gradient-overlay {
-  background: linear-gradient(to right,
-      transparent 0%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.01) 8%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 12%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.1) 16%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.3) 20%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 25%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 30%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.85) 35%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.95) 40%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 45%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 50%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 55%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.95) 60%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.85) 65%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 70%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 75%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.3) 80%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.1) 84%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 88%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.01) 92%,
-      transparent 100%);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.01
+      )
+      8%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.05
+      )
+      12%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.1
+      )
+      16%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.3
+      )
+      20%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.5
+      )
+      25%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.7
+      )
+      30%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.85
+      )
+      35%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.95
+      )
+      40%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        1
+      )
+      45%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        1
+      )
+      50%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        1
+      )
+      55%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.95
+      )
+      60%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.85
+      )
+      65%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.7
+      )
+      70%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.5
+      )
+      75%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.3
+      )
+      80%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.1
+      )
+      84%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.05
+      )
+      88%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.01
+      )
+      92%,
+    transparent 100%
+  );
 }
 
 /* Tablet: tighten the gradient transition to keep more of the content area clear */
 @media (max-width: 1024px) {
   .gradient-overlay {
-    background: linear-gradient(to right,
-        transparent 0%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 5%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 10%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.4) 15%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 20%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 25%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 50%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 75%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 80%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.4) 85%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 90%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 95%,
-        transparent 100%);
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.05
+        )
+        5%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.15
+        )
+        10%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.4
+        )
+        15%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.7
+        )
+        20%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          1
+        )
+        25%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          1
+        )
+        50%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          1
+        )
+        75%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.7
+        )
+        80%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.4
+        )
+        85%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.15
+        )
+        90%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.05
+        )
+        95%,
+      transparent 100%
+    );
   }
 }
 
 /* Mobile: aggressive tight gradient to preserve text area and reduce visual clutter */
 @media (max-width: 640px) {
   .gradient-overlay {
-    background: linear-gradient(to right,
-        transparent 0%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 3%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 8%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.8) 12%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.92) 20%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.95) 50%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.92) 80%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.8) 88%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 92%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 97%,
-        transparent 100%);
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.15
+        )
+        3%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.5
+        )
+        8%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.8
+        )
+        12%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.92
+        )
+        20%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.95
+        )
+        50%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.92
+        )
+        80%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.8
+        )
+        88%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.5
+        )
+        92%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.15
+        )
+        97%,
+      transparent 100%
+    );
   }
 }
 
 html.dark {
-  --maze-line-color: #CC6600;
+  --maze-line-color: #cc6600;
   --gradient-base-r: 0;
   --gradient-base-g: 0;
   --gradient-base-b: 0;
@@ -116,65 +360,305 @@ html.dark footer {
 }
 
 html.dark .gradient-overlay {
-  background: linear-gradient(to right,
-      transparent 0%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.01) 8%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 12%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.1) 16%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.3) 20%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 25%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 30%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.85) 35%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.95) 40%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 45%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 50%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 55%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.95) 60%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.85) 65%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 70%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 75%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.3) 80%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.1) 84%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 88%,
-      rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.01) 92%,
-      transparent 100%);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.01
+      )
+      8%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.05
+      )
+      12%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.1
+      )
+      16%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.3
+      )
+      20%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.5
+      )
+      25%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.7
+      )
+      30%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.85
+      )
+      35%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.95
+      )
+      40%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        1
+      )
+      45%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        1
+      )
+      50%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        1
+      )
+      55%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.95
+      )
+      60%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.85
+      )
+      65%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.7
+      )
+      70%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.5
+      )
+      75%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.3
+      )
+      80%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.1
+      )
+      84%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.05
+      )
+      88%,
+    rgba(
+        var(--gradient-base-r),
+        var(--gradient-base-g),
+        var(--gradient-base-b),
+        0.01
+      )
+      92%,
+    transparent 100%
+  );
 }
 
 /* Tablet dark mode: tighten the gradient */
 @media (max-width: 1024px) {
   html.dark .gradient-overlay {
-    background: linear-gradient(to right,
-        transparent 0%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 5%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 10%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.4) 15%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 20%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 25%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 50%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 1) 75%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.7) 80%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.4) 85%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 90%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.05) 95%,
-        transparent 100%);
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.05
+        )
+        5%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.15
+        )
+        10%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.4
+        )
+        15%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.7
+        )
+        20%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          1
+        )
+        25%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          1
+        )
+        50%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          1
+        )
+        75%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.7
+        )
+        80%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.4
+        )
+        85%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.15
+        )
+        90%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.05
+        )
+        95%,
+      transparent 100%
+    );
   }
 }
 
 /* Mobile dark mode: aggressive tight gradient */
 @media (max-width: 640px) {
   html.dark .gradient-overlay {
-    background: linear-gradient(to right,
-        transparent 0%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 3%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 8%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.8) 12%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.92) 20%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.95) 50%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.92) 80%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.8) 88%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.5) 92%,
-        rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b), 0.15) 97%,
-        transparent 100%);
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.15
+        )
+        3%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.5
+        )
+        8%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.8
+        )
+        12%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.92
+        )
+        20%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.95
+        )
+        50%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.92
+        )
+        80%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.8
+        )
+        88%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.5
+        )
+        92%,
+      rgba(
+          var(--gradient-base-r),
+          var(--gradient-base-g),
+          var(--gradient-base-b),
+          0.15
+        )
+        97%,
+      transparent 100%
+    );
   }
 }
 
@@ -292,7 +776,7 @@ html.dark main ul > li::marker {
 }
 
 /* Custom dash marker for ULs with class list-dash */
-ul.list-dash>li::marker {
+ul.list-dash > li::marker {
   content: "- ";
   font-weight: bold;
 }
@@ -379,4 +863,3 @@ html.dark .prose blockquote::before {
 .callout :where(p, ul, ol, pre, code) {
   margin: 0.25rem 0;
 }
-
