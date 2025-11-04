@@ -1,4 +1,6 @@
-My website :) not done yet
+My tech blog / dev website at [ed-thomas.dev](https://ed-thomas.dev). 
+
+I love learning and want to try and express my knowledge to fully test and solidify my learning.
 
 ### License
 
