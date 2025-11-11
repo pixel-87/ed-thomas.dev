@@ -43,142 +43,29 @@ body {
 
 /* Desktop gradient: soft fade with wide solid center for decorative elements */
 .gradient-overlay {
+  --grad: rgba(var(--gradient-base-r), var(--gradient-base-g), var(--gradient-base-b));
   background: linear-gradient(
     to right,
     transparent 0%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.01
-      )
-      8%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.05
-      )
-      12%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.1
-      )
-      16%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.3
-      )
-      20%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.5
-      )
-      25%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.7
-      )
-      30%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.85
-      )
-      35%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.95
-      )
-      40%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        1
-      )
-      45%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        1
-      )
-      50%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        1
-      )
-      55%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.95
-      )
-      60%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.85
-      )
-      65%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.7
-      )
-      70%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.5
-      )
-      75%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.3
-      )
-      80%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.1
-      )
-      84%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.05
-      )
-      88%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.01
-      )
-      92%,
+    color-mix(in srgb, var(--grad) 1%, transparent) 8%,
+    color-mix(in srgb, var(--grad) 5%, transparent) 12%,
+    color-mix(in srgb, var(--grad) 10%, transparent) 16%,
+    color-mix(in srgb, var(--grad) 30%, transparent) 20%,
+    color-mix(in srgb, var(--grad) 50%, transparent) 25%,
+    color-mix(in srgb, var(--grad) 70%, transparent) 30%,
+    color-mix(in srgb, var(--grad) 85%, transparent) 35%,
+    color-mix(in srgb, var(--grad) 95%, transparent) 40%,
+    var(--grad) 45%,
+    var(--grad) 50%,
+    var(--grad) 55%,
+    color-mix(in srgb, var(--grad) 95%, transparent) 60%,
+    color-mix(in srgb, var(--grad) 85%, transparent) 65%,
+    color-mix(in srgb, var(--grad) 70%, transparent) 70%,
+    color-mix(in srgb, var(--grad) 50%, transparent) 75%,
+    color-mix(in srgb, var(--grad) 30%, transparent) 80%,
+    color-mix(in srgb, var(--grad) 10%, transparent) 84%,
+    color-mix(in srgb, var(--grad) 5%, transparent) 88%,
+    color-mix(in srgb, var(--grad) 1%, transparent) 92%,
     transparent 100%
   );
 }
@@ -189,83 +76,17 @@ body {
     background: linear-gradient(
       to right,
       transparent 0%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.05
-        )
-        5%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.15
-        )
-        10%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.4
-        )
-        15%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.7
-        )
-        20%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          1
-        )
-        25%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          1
-        )
-        50%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          1
-        )
-        75%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.7
-        )
-        80%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.4
-        )
-        85%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.15
-        )
-        90%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.05
-        )
-        95%,
+      color-mix(in srgb, var(--grad) 5%, transparent) 5%,
+      color-mix(in srgb, var(--grad) 15%, transparent) 10%,
+      color-mix(in srgb, var(--grad) 40%, transparent) 15%,
+      color-mix(in srgb, var(--grad) 70%, transparent) 20%,
+      var(--grad) 25%,
+      var(--grad) 50%,
+      var(--grad) 75%,
+      color-mix(in srgb, var(--grad) 70%, transparent) 80%,
+      color-mix(in srgb, var(--grad) 40%, transparent) 85%,
+      color-mix(in srgb, var(--grad) 15%, transparent) 90%,
+      color-mix(in srgb, var(--grad) 5%, transparent) 95%,
       transparent 100%
     );
   }
@@ -277,69 +98,15 @@ body {
     background: linear-gradient(
       to right,
       transparent 0%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.15
-        )
-        3%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.5
-        )
-        8%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.8
-        )
-        12%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.92
-        )
-        20%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.95
-        )
-        50%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.92
-        )
-        80%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.8
-        )
-        88%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.5
-        )
-        92%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.15
-        )
-        97%,
+      color-mix(in srgb, var(--grad) 15%, transparent) 3%,
+      color-mix(in srgb, var(--grad) 50%, transparent) 8%,
+      color-mix(in srgb, var(--grad) 80%, transparent) 12%,
+      color-mix(in srgb, var(--grad) 92%, transparent) 20%,
+      color-mix(in srgb, var(--grad) 95%, transparent) 50%,
+      color-mix(in srgb, var(--grad) 92%, transparent) 80%,
+      color-mix(in srgb, var(--grad) 80%, transparent) 88%,
+      color-mix(in srgb, var(--grad) 50%, transparent) 92%,
+      color-mix(in srgb, var(--grad) 15%, transparent) 97%,
       transparent 100%
     );
   }
@@ -363,139 +130,25 @@ html.dark .gradient-overlay {
   background: linear-gradient(
     to right,
     transparent 0%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.01
-      )
-      8%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.05
-      )
-      12%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.1
-      )
-      16%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.3
-      )
-      20%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.5
-      )
-      25%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.7
-      )
-      30%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.85
-      )
-      35%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.95
-      )
-      40%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        1
-      )
-      45%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        1
-      )
-      50%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        1
-      )
-      55%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.95
-      )
-      60%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.85
-      )
-      65%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.7
-      )
-      70%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.5
-      )
-      75%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.3
-      )
-      80%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.1
-      )
-      84%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.05
-      )
-      88%,
-    rgba(
-        var(--gradient-base-r),
-        var(--gradient-base-g),
-        var(--gradient-base-b),
-        0.01
-      )
-      92%,
+    color-mix(in srgb, var(--grad) 1%, transparent) 8%,
+    color-mix(in srgb, var(--grad) 5%, transparent) 12%,
+    color-mix(in srgb, var(--grad) 10%, transparent) 16%,
+    color-mix(in srgb, var(--grad) 30%, transparent) 20%,
+    color-mix(in srgb, var(--grad) 50%, transparent) 25%,
+    color-mix(in srgb, var(--grad) 70%, transparent) 30%,
+    color-mix(in srgb, var(--grad) 85%, transparent) 35%,
+    color-mix(in srgb, var(--grad) 95%, transparent) 40%,
+    var(--grad) 45%,
+    var(--grad) 50%,
+    var(--grad) 55%,
+    color-mix(in srgb, var(--grad) 95%, transparent) 60%,
+    color-mix(in srgb, var(--grad) 85%, transparent) 65%,
+    color-mix(in srgb, var(--grad) 70%, transparent) 70%,
+    color-mix(in srgb, var(--grad) 50%, transparent) 75%,
+    color-mix(in srgb, var(--grad) 30%, transparent) 80%,
+    color-mix(in srgb, var(--grad) 10%, transparent) 84%,
+    color-mix(in srgb, var(--grad) 5%, transparent) 88%,
+    color-mix(in srgb, var(--grad) 1%, transparent) 92%,
     transparent 100%
   );
 }
@@ -506,83 +159,17 @@ html.dark .gradient-overlay {
     background: linear-gradient(
       to right,
       transparent 0%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.05
-        )
-        5%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.15
-        )
-        10%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.4
-        )
-        15%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.7
-        )
-        20%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          1
-        )
-        25%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          1
-        )
-        50%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          1
-        )
-        75%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.7
-        )
-        80%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.4
-        )
-        85%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.15
-        )
-        90%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.05
-        )
-        95%,
+      color-mix(in srgb, var(--grad) 5%, transparent) 5%,
+      color-mix(in srgb, var(--grad) 15%, transparent) 10%,
+      color-mix(in srgb, var(--grad) 40%, transparent) 15%,
+      color-mix(in srgb, var(--grad) 70%, transparent) 20%,
+      var(--grad) 25%,
+      var(--grad) 50%,
+      var(--grad) 75%,
+      color-mix(in srgb, var(--grad) 70%, transparent) 80%,
+      color-mix(in srgb, var(--grad) 40%, transparent) 85%,
+      color-mix(in srgb, var(--grad) 15%, transparent) 90%,
+      color-mix(in srgb, var(--grad) 5%, transparent) 95%,
       transparent 100%
     );
   }
@@ -594,69 +181,15 @@ html.dark .gradient-overlay {
     background: linear-gradient(
       to right,
       transparent 0%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.15
-        )
-        3%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.5
-        )
-        8%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.8
-        )
-        12%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.92
-        )
-        20%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.95
-        )
-        50%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.92
-        )
-        80%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.8
-        )
-        88%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.5
-        )
-        92%,
-      rgba(
-          var(--gradient-base-r),
-          var(--gradient-base-g),
-          var(--gradient-base-b),
-          0.15
-        )
-        97%,
+      color-mix(in srgb, var(--grad) 15%, transparent) 3%,
+      color-mix(in srgb, var(--grad) 50%, transparent) 8%,
+      color-mix(in srgb, var(--grad) 80%, transparent) 12%,
+      color-mix(in srgb, var(--grad) 92%, transparent) 20%,
+      color-mix(in srgb, var(--grad) 95%, transparent) 50%,
+      color-mix(in srgb, var(--grad) 92%, transparent) 80%,
+      color-mix(in srgb, var(--grad) 80%, transparent) 88%,
+      color-mix(in srgb, var(--grad) 50%, transparent) 92%,
+      color-mix(in srgb, var(--grad) 15%, transparent) 97%,
       transparent 100%
     );
   }
