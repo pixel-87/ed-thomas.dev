@@ -337,11 +337,18 @@ export default function initHexMaze({ canvas, container } = {}) {
     }
   }
 
+  // Helper to convert pointer coordinates to canvas space
+  function getCanvasCoordinates(e) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    };
+  }
+
   // Pointer controls
   function onClick(e) {
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const { x, y } = getCanvasCoordinates(e);
     spawnFromCursor(x, y, SPAWN_COUNT_CLICK);
   }
 
@@ -350,9 +357,7 @@ export default function initHexMaze({ canvas, container } = {}) {
     const now = Date.now();
     if (now - lastMove > MOVE_THROTTLE_MS) {
       lastMove = now;
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const { x, y } = getCanvasCoordinates(e);
       spawnFromCursor(x, y, SPAWN_COUNT_MOVE);
     }
   }

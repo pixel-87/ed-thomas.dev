@@ -1,0 +1,17 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  isActive: boolean;
+  colSpan?: string;
+  colStart?: string;
+}
+
+const { href, label, isActive, colSpan = "col-span-2", colStart } = Astro.props;
+const baseClasses = `text-center px-1 hover:underline md:w-auto ${isActive ? "font-bold underline" : ""}`;
+const mobileClasses = colStart ? colStart : colSpan;
+---
+
+<a href={href} class={`${mobileClasses} ${baseClasses}`}>
+  {label}
+</a>
