@@ -20,7 +20,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 // Estimate reading time from the raw entry body (fallback to empty string)
-const raw = (entry as any).body ?? "";
+const raw = entry.body ?? "";
 const { minutes } = estimateReadingTime(String(raw));
 ---
 
@@ -55,7 +55,7 @@ const { minutes } = estimateReadingTime(String(raw));
       <Content />
 
       <footer class="mt-8 pt-4 border-t text-center">
-        <a href="/blog" class="text-sm hover:underline">← Back to notes</a>
+  <a href="/blog" class="text-sm">← Back to notes</a>
       </footer>
     </article>
   </main>

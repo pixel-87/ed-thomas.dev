@@ -17,7 +17,7 @@ const sortedPosts = allPosts.sort(
         sortedPosts.map((post) => (
           <article>
             <div class="mb-1">
-              <a href={`/blog/${post.slug}`} class="hover:underline">
+              <a href={`/blog/${post.slug}`}>
                 {post.data.title}
               </a>
               <span class="text-gray-500 ml-2 text-xs">

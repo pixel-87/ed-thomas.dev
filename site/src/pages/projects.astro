@@ -16,7 +16,7 @@ const projects = allProjects.sort(
         projects.map((project) => (
           <article class="border border-gray-200 rounded-lg p-6 w-full">
             <h2 class="text-xl font-semibold mb-2">
-              <a href={`/projects/${project.slug}`} class="hover:underline">
+              <a href={`/projects/${project.slug}`}>
                 {project.data.title}
               </a>
             </h2>
