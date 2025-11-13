@@ -2,11 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
-// Get latest 5 blog posts
+// Get featured blog posts (for homepage)
 const allBlogPosts = await getCollection("blog");
-const latestPosts = allBlogPosts
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 5);
+const featuredPosts = allBlogPosts
+  .filter((post) => post.data.featured)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Get latest 3 projects
 const allProjects = await getCollection("projects");
@@ -34,10 +34,10 @@ const latestProjects = allProjects
 
     <!-- Latest Notes -->
     <section>
-      <h2 class="text-base font-bold mb-4">## Latest notes</h2>
+      <h2 class="text-base font-bold mb-4">## Featured notes</h2>
       <div class="space-y-4">
         {
-          latestPosts.map((post) => (
+          featuredPosts.map((post) => (
             <div class="min-h-[44px]">
               <a
                 href={`/blog/${post.slug}`}
@@ -69,7 +69,7 @@ const latestProjects = allProjects
             href="/blog"
             class="hover:underline min-h-[36px] flex items-center px-2 py-1 -mx-2 rounded"
           >
-            More notes →
+            All notes →
           </a>
         </div>
       </div>
