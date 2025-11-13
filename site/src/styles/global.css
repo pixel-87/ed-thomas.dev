@@ -128,6 +128,73 @@
     }
   }
 
+  html.dark .gradient-overlay {
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      color-mix(in srgb, var(--grad) 1%, transparent) 8%,
+      color-mix(in srgb, var(--grad) 5%, transparent) 12%,
+      color-mix(in srgb, var(--grad) 10%, transparent) 16%,
+      color-mix(in srgb, var(--grad) 30%, transparent) 20%,
+      color-mix(in srgb, var(--grad) 50%, transparent) 25%,
+      color-mix(in srgb, var(--grad) 70%, transparent) 30%,
+      color-mix(in srgb, var(--grad) 85%, transparent) 35%,
+      color-mix(in srgb, var(--grad) 95%, transparent) 40%,
+      var(--grad) 45%,
+      var(--grad) 50%,
+      var(--grad) 55%,
+      color-mix(in srgb, var(--grad) 95%, transparent) 60%,
+      color-mix(in srgb, var(--grad) 85%, transparent) 65%,
+      color-mix(in srgb, var(--grad) 70%, transparent) 70%,
+      color-mix(in srgb, var(--grad) 50%, transparent) 75%,
+      color-mix(in srgb, var(--grad) 30%, transparent) 80%,
+      color-mix(in srgb, var(--grad) 10%, transparent) 84%,
+      color-mix(in srgb, var(--grad) 5%, transparent) 88%,
+      color-mix(in srgb, var(--grad) 1%, transparent) 92%,
+      transparent 100%
+    );
+  }
+
+  @media (max-width: 1024px) {
+    html.dark .gradient-overlay {
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        color-mix(in srgb, var(--grad) 5%, transparent) 5%,
+        color-mix(in srgb, var(--grad) 15%, transparent) 10%,
+        color-mix(in srgb, var(--grad) 40%, transparent) 15%,
+        color-mix(in srgb, var(--grad) 70%, transparent) 20%,
+        var(--grad) 25%,
+        var(--grad) 50%,
+        var(--grad) 75%,
+        color-mix(in srgb, var(--grad) 70%, transparent) 80%,
+        color-mix(in srgb, var(--grad) 40%, transparent) 85%,
+        color-mix(in srgb, var(--grad) 15%, transparent) 90%,
+        color-mix(in srgb, var(--grad) 5%, transparent) 95%,
+        transparent 100%
+      );
+    }
+  }
+
+  @media (max-width: 640px) {
+    html.dark .gradient-overlay {
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        color-mix(in srgb, var(--grad) 15%, transparent) 3%,
+        color-mix(in srgb, var(--grad) 50%, transparent) 8%,
+        color-mix(in srgb, var(--grad) 80%, transparent) 12%,
+        color-mix(in srgb, var(--grad) 92%, transparent) 20%,
+        color-mix(in srgb, var(--grad) 95%, transparent) 50%,
+        color-mix(in srgb, var(--grad) 92%, transparent) 80%,
+        color-mix(in srgb, var(--grad) 80%, transparent) 88%,
+        color-mix(in srgb, var(--grad) 50%, transparent) 92%,
+        color-mix(in srgb, var(--grad) 15%, transparent) 97%,
+        transparent 100%
+      );
+    }
+  }
+
   /* Article prose styling */
   article.prose {
     max-width: 65ch;
@@ -222,4 +289,136 @@
     content: "- ";
     font-weight: bold;
   }
+}
+/* Dark-mode utility overrides: keep light-mode classes unchanged, provide readable alternatives when html.dark is enabled */
+html.dark .text-gray-700 {
+  color: #d1d5db !important; /* gray-300 */
+}
+
+html.dark .text-gray-800 {
+  color: #e5e7eb !important; /* gray-200 */
+}
+
+html.dark .text-gray-900 {
+  color: #ffffff !important; /* white for primary headings */
+}
+
+html.dark .text-gray-600 {
+  color: #9ca3af !important; /* gray-400 */
+}
+
+html.dark .text-gray-500,
+html.dark .text-gray-400 {
+  color: #9ca3af !important; /* gray-400 */
+}
+
+html.dark .bg-gray-100 {
+  background-color: #111827 !important; /* dark badge bg */
+}
+
+html.dark .text-gray-700.bg-gray-100 {
+  color: #e5e7eb !important; /* badge text */
+}
+
+html.dark .border-t {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Prose content color overrides for better readability */
+.prose {
+  --tw-prose-body: #374151;
+  /* gray-700 for light mode */
+  --tw-prose-headings: #111827;
+  /* gray-900 for light mode */
+  --tw-prose-links: #2563eb;
+  /* blue-600 for light mode */
+  --tw-prose-quotes: #6b7280;
+  /* gray-500 for light mode */
+  --tw-prose-quote-borders: #d1d5db;
+  /* gray-300 for light mode */
+  --tw-prose-captions: #6b7280;
+  /* gray-500 for light mode */
+  --tw-prose-code: #111827;
+  /* gray-900 for light mode */
+  --tw-prose-pre-code: #e5e7eb;
+  /* gray-200 for light mode */
+  --tw-prose-pre-bg: #1f2937;
+  /* gray-800 for light mode */
+  --tw-prose-th-borders: #d1d5db;
+  /* gray-300 for light mode */
+  --tw-prose-td-borders: #e5e7eb;
+  /* gray-200 for light mode */
+}
+
+/* Dark-mode prose palette override */
+.dark .prose {
+  --tw-prose-body: #d1d5db;
+  --tw-prose-headings: #f9fafb;
+  --tw-prose-links: #60a5fa;
+  --tw-prose-quotes: #9ca3af;
+  --tw-prose-quote-borders: #374151;
+  --tw-prose-captions: #9ca3af;
+  --tw-prose-code: #f9fafb;
+  --tw-prose-pre-code: #d1d5db;
+  --tw-prose-pre-bg: #1f2937;
+  --tw-prose-th-borders: #374151;
+  --tw-prose-td-borders: #4b5563;
+}
+
+/* Additional dark-mode overrides specifically for main content */
+html.dark main,
+html.dark main h1,
+html.dark main h2,
+html.dark main h3,
+html.dark main h4,
+html.dark main p,
+html.dark main a,
+html.dark main li {
+  color: #d1d5db !important; /* readable light gray */
+}
+
+/* Make links slightly brighter in main when dark mode */
+html.dark main a {
+  color: #60a5fa !important;
+}
+
+/* Ensure list markers are visible */
+html.dark main ul > li::marker {
+  color: #9ca3af !important;
+}
+
+/* Ensure headings are readable in dark mode outside of the prose plugin */
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+  color: #f9fafb !important;
+}
+
+/* Regular links should match surrounding text, underline by default, and only remove underline on hover/focus */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: currentColor;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: none;
+}
+
+/* Keep navigation links behaving as before (hover underline, but not underlined by default) */
+nav a {
+  text-decoration: none;
+}
+
+nav a:hover,
+nav a:focus-visible,
+nav a.underline {
+  text-decoration: underline;
 }

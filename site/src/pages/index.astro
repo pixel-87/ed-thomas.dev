@@ -22,8 +22,8 @@ const latestProjects = allProjects
       <h1 class="text-lg mb-4">Welcome to my personal website!</h1>
       <p class="text-gray-700">
         Hi! I'm Ed, a developer who likes making
-        <a href="/blog" class="underline hover:no-underline">notes</a>,
-        <a href="/projects" class="underline hover:no-underline">coding</a>, and
+        <a href="/blog">notes</a>,
+        <a href="/projects">coding</a>, and
         learning new things.
       </p>
       <br />
@@ -41,7 +41,7 @@ const latestProjects = allProjects
             <div class="min-h-[44px]">
               <a
                 href={`/blog/${post.slug}`}
-                class="hover:underline min-h-[44px] flex items-center px-2 py-2 -mx-2 rounded"
+                class="min-h-[44px] flex items-center px-2 py-2 -mx-2 rounded"
               >
                 {post.data.title}
               </a>
@@ -67,7 +67,7 @@ const latestProjects = allProjects
         <div class="mt-1">
           <a
             href="/blog"
-            class="hover:underline min-h-[36px] flex items-center px-2 py-1 -mx-2 rounded"
+            class="min-h-[36px] flex items-center px-2 py-1 -mx-2 rounded"
           >
             All notes →
           </a>
@@ -84,7 +84,7 @@ const latestProjects = allProjects
             <div class="min-h-[44px]">
               <a
                 href={`/projects/${project.slug}`}
-                class="hover:underline font-medium min-h-[44px] flex items-center px-2 py-2 -mx-2 rounded"
+                class="font-medium min-h-[44px] flex items-center px-2 py-2 -mx-2 rounded"
               >
                 {project.data.title}
               </a>
@@ -104,7 +104,7 @@ const latestProjects = allProjects
         <div class="mt-1">
           <a
             href="/projects"
-            class="hover:underline min-h-[36px] flex items-center px-2 py-1 -mx-2 rounded"
+            class="min-h-[36px] flex items-center px-2 py-1 -mx-2 rounded"
           >
             More projects →
           </a>
