@@ -47,9 +47,9 @@ body {
   background: linear-gradient(
     to right,
     transparent 0%,
-    color-mix(in srgb, var(--grad) 1%, transparent) 8%,
-    color-mix(in srgb, var(--grad) 5%, transparent) 12%,
-    color-mix(in srgb, var(--grad) 10%, transparent) 16%,
+    color-mix(in srgb, var(--grad) 3%, transparent) 8%,
+    color-mix(in srgb, var(--grad) 8%, transparent) 12%,
+    color-mix(in srgb, var(--grad) 15%, transparent) 16%,
     color-mix(in srgb, var(--grad) 30%, transparent) 20%,
     color-mix(in srgb, var(--grad) 50%, transparent) 25%,
     color-mix(in srgb, var(--grad) 70%, transparent) 30%,
@@ -63,9 +63,9 @@ body {
     color-mix(in srgb, var(--grad) 70%, transparent) 70%,
     color-mix(in srgb, var(--grad) 50%, transparent) 75%,
     color-mix(in srgb, var(--grad) 30%, transparent) 80%,
-    color-mix(in srgb, var(--grad) 10%, transparent) 84%,
-    color-mix(in srgb, var(--grad) 5%, transparent) 88%,
-    color-mix(in srgb, var(--grad) 1%, transparent) 92%,
+    color-mix(in srgb, var(--grad) 15%, transparent) 84%,
+    color-mix(in srgb, var(--grad) 8%, transparent) 88%,
+    color-mix(in srgb, var(--grad) 3%, transparent) 92%,
     transparent 100%
   );
 }
@@ -130,9 +130,9 @@ html.dark .gradient-overlay {
   background: linear-gradient(
     to right,
     transparent 0%,
-    color-mix(in srgb, var(--grad) 1%, transparent) 8%,
-    color-mix(in srgb, var(--grad) 5%, transparent) 12%,
-    color-mix(in srgb, var(--grad) 10%, transparent) 16%,
+    color-mix(in srgb, var(--grad) 3%, transparent) 8%,
+    color-mix(in srgb, var(--grad) 8%, transparent) 12%,
+    color-mix(in srgb, var(--grad) 15%, transparent) 16%,
     color-mix(in srgb, var(--grad) 30%, transparent) 20%,
     color-mix(in srgb, var(--grad) 50%, transparent) 25%,
     color-mix(in srgb, var(--grad) 70%, transparent) 30%,
@@ -146,9 +146,9 @@ html.dark .gradient-overlay {
     color-mix(in srgb, var(--grad) 70%, transparent) 70%,
     color-mix(in srgb, var(--grad) 50%, transparent) 75%,
     color-mix(in srgb, var(--grad) 30%, transparent) 80%,
-    color-mix(in srgb, var(--grad) 10%, transparent) 84%,
-    color-mix(in srgb, var(--grad) 5%, transparent) 88%,
-    color-mix(in srgb, var(--grad) 1%, transparent) 92%,
+    color-mix(in srgb, var(--grad) 15%, transparent) 84%,
+    color-mix(in srgb, var(--grad) 8%, transparent) 88%,
+    color-mix(in srgb, var(--grad) 3%, transparent) 92%,
     transparent 100%
   );
 }
@@ -259,6 +259,13 @@ html.dark .border-t {
 article.prose {
   max-width: 65ch;
   line-height: 1.7;
+}
+
+/* Increase blog post width on desktop for better readability */
+@media (min-width: 1024px) {
+  article.prose {
+    max-width: 75ch;
+  }
 }
 
 .dark .prose {
