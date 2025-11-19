@@ -23,8 +23,7 @@ const latestProjects = allProjects
       <p class="text-gray-700">
         Hi! I'm Ed, a developer who likes making
         <a href="/blog">notes</a>,
-        <a href="/projects">coding</a>, and
-        learning new things.
+        <a href="/projects">coding</a>, and learning new things.
       </p>
       <br />
       <p>
@@ -92,7 +91,7 @@ const latestProjects = allProjects
                 {project.data.description}
               </p>
               <div class="flex gap-2 mt-2 pl-2">
-                {project.data.technologies.map((tech) => (
+                {project.data.tags.map((tech) => (
                   <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded min-h-[32px] flex items-center">
                     {tech}
                   </span>

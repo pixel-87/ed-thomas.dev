@@ -16,9 +16,7 @@ const projects = allProjects.sort(
         projects.map((project) => (
           <article class="border border-gray-200 rounded-lg p-6 w-full">
             <h2 class="text-xl font-semibold mb-2">
-              <a href={`/projects/${project.slug}`}>
-                {project.data.title}
-              </a>
+              <a href={`/projects/${project.slug}`}>{project.data.title}</a>
             </h2>
             {project.data.date ? (
               <div class="text-gray-500 text-sm mb-2">
@@ -26,9 +24,9 @@ const projects = allProjects.sort(
               </div>
             ) : null}
             <p class="text-gray-700 mb-4">{project.data.description}</p>
-            {project.data.technologies && project.data.technologies.length ? (
+            {project.data.tags && project.data.tags.length ? (
               <div class="flex gap-2 flex-wrap">
-                {project.data.technologies.map((tech) => (
+                {project.data.tags.map((tech) => (
                   <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
                     {tech}
                   </span>
