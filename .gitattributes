@@ -1,0 +1,2 @@
+# Exclude MDX files from GitHub language statistics
+*.mdx linguist-documentation
