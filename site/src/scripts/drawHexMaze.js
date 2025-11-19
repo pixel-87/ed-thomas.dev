@@ -1,31 +1,135 @@
 // drawHexMaze.js - animated hex-grid line system with flat-top doubled-row coordinates
+
+const CONFIG = {
+  HEX_SIZE: 20, // hex radius (center to vertex)
+  SQRT3: Math.sqrt(3),
+  LINE_SPEED: 3, // nodes per second
+  LINE_SEGMENT_COUNT_MAX: 20,
+  LINE_SEGMENT_COUNT_VARIANCE: 10,
+  LINE_COLOR: "#00A69C",
+  SPAWN_COUNT_CLICK: 6,
+  SPAWN_COUNT_MOVE: 1,
+  MOVE_THROTTLE_MS: 150,
+};
+
+class MazeLine {
+  constructor(startNodeId, adj, nodeList) {
+    this.current = startNodeId;
+    this.prev = null;
+    this.target = null;
+    this.progress = 0; // 0 to 1
+    this.vertices = [startNodeId]; // visited nodes for drawing
+    this.end = false;
+    this.adj = adj;
+    this.nodeList = nodeList;
+
+    // Generate segment count: minimum segments + random variance
+    const minSegments =
+      CONFIG.LINE_SEGMENT_COUNT_MAX - CONFIG.LINE_SEGMENT_COUNT_VARIANCE;
+    this.segmentCount =
+      Math.floor(Math.random() * CONFIG.LINE_SEGMENT_COUNT_VARIANCE) +
+      minSegments;
+
+    // Pick initial target
+    this.pickNextTarget();
+  }
+
+  pickNextTarget() {
+    const neighbors = this.adj.get(this.current) || [];
+    if (neighbors.length === 0) {
+      this.end = true;
+      return;
+    }
+
+    // Prefer not to backtrack immediately
+    const available = neighbors.filter((n) => n !== this.prev);
+    const choices = available.length > 0 ? available : neighbors;
+
+    this.target = choices[Math.floor(Math.random() * choices.length)];
+  }
+
+  step(deltaTime) {
+    if (this.end || this.target === null) return;
+
+    this.progress += CONFIG.LINE_SPEED * deltaTime;
+
+    while (this.progress >= 1.0 && !this.end) {
+      // Complete the step
+      this.prev = this.current;
+      this.current = this.target;
+      this.vertices.push(this.current);
+      this.progress -= 1.0;
+
+      // Check if we should end
+      if (this.vertices.length >= this.segmentCount) {
+        this.end = true;
+        break;
+      }
+
+      // Pick next target
+      this.pickNextTarget();
+      if (this.end) break;
+    }
+  }
+
+  draw(ctx, host) {
+    if (this.vertices.length === 0) return;
+
+    // Read styling from CSS variables
+    const cs = getComputedStyle(
+      host instanceof Element ? host : document.documentElement,
+    );
+    const strokeColor =
+      cs.getPropertyValue("--maze-line-color") || CONFIG.LINE_COLOR;
+    const strokeWidth =
+      parseFloat(cs.getPropertyValue("--maze-line-width")) || 2;
+
+    ctx.beginPath();
+    ctx.lineWidth = strokeWidth;
+    ctx.strokeStyle = strokeColor.trim();
+
+    // Start from first vertex
+    const startNode = this.nodeList[this.vertices[0]];
+    ctx.moveTo(startNode.x, startNode.y);
+
+    // Draw through all visited vertices
+    for (let i = 1; i < this.vertices.length; i++) {
+      const node = this.nodeList[this.vertices[i]];
+      ctx.lineTo(node.x, node.y);
+    }
+
+    // Draw progress to current target if not ended
+    if (!this.end && this.target !== null && this.progress > 0) {
+      const currentNode = this.nodeList[this.current];
+      const targetNode = this.nodeList[this.target];
+      const progressX =
+        currentNode.x + (targetNode.x - currentNode.x) * this.progress;
+      const progressY =
+        currentNode.y + (targetNode.y - currentNode.y) * this.progress;
+      ctx.lineTo(progressX, progressY);
+    }
+
+    ctx.stroke();
+  }
+}
+
 export default function initHexMaze({ canvas, container } = {}) {
   const host = container || document.body;
   let createdCanvas = false;
+
   if (!canvas) {
     canvas = document.createElement("canvas");
-    canvas.style.position = "absolute";
-    canvas.style.inset = "0";
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
+    Object.assign(canvas.style, {
+      position: "absolute",
+      inset: "0",
+      width: "100%",
+      height: "100%",
+    });
     host.appendChild(canvas);
     createdCanvas = true;
   }
 
   const ctx = canvas.getContext("2d");
-
-  const HEX_SIZE = 20; // hex radius (center to vertex)
-  const SQRT3 = Math.sqrt(3);
-  const LINE_SPEED = 3; // nodes per second
-  const LINE_SEGMENT_COUNT_MAX = 20; // increase max segments so agents wander farther
-  const LINE_SEGMENT_COUNT_VARIANCE = 10; // wider variance for longer/shorter paths
-  // Default stroke colour for the maze lines (can be overridden with CSS var)
-  const LINE_COLOR = "#00A69C"; // , #538349ff,  , #9AB5FF, #61cf5a, #FF46A2, #00A69C, #61cf5a
-
-  // Spawning behavior
-  const SPAWN_COUNT_CLICK = 6;
-  const SPAWN_COUNT_MOVE = 1;
-  const MOVE_THROTTLE_MS = 150;
 
   let allEnded = false;
   let animating = false;
@@ -38,9 +142,9 @@ export default function initHexMaze({ canvas, container } = {}) {
 
   // Build the hex graph - create hexagon edges only
   function buildGraph(width, height) {
-    const margin = HEX_SIZE * 3;
-    const hexWidth = HEX_SIZE * SQRT3;
-    const hexHeight = HEX_SIZE * 1.5;
+    const margin = CONFIG.HEX_SIZE * 3;
+    const hexWidth = CONFIG.HEX_SIZE * CONFIG.SQRT3;
+    const hexHeight = CONFIG.HEX_SIZE * 1.5;
 
     nodeList = [];
     adj = new Map();
@@ -65,9 +169,10 @@ export default function initHexMaze({ canvas, container } = {}) {
         const hexVertices = [];
         for (let v = 0; v < 6; v++) {
           const angle = (Math.PI / 3) * v + Math.PI / 6;
-          const vx = hexX + HEX_SIZE * Math.cos(angle);
-          const vy = hexY + HEX_SIZE * Math.sin(angle);
+          const vx = hexX + CONFIG.HEX_SIZE * Math.cos(angle);
+          const vy = hexY + CONFIG.HEX_SIZE * Math.sin(angle);
 
+          // Use integer keys for better map performance/reliability
           const key = `${Math.round(vx * 100)},${Math.round(vy * 100)}`;
 
           if (!nodeMap.has(key)) {
@@ -95,6 +200,7 @@ export default function initHexMaze({ canvas, container } = {}) {
     }
 
     // Filter nodes within bounds and remap IDs
+    // This step ensures we don't keep nodes that are way off-screen
     const validNodes = [];
     const nodeIdMapping = new Map();
 
@@ -134,11 +240,16 @@ export default function initHexMaze({ canvas, container } = {}) {
     let nearestNode = 0;
     let nearestDist = Infinity;
 
+    // Optimization: Check if we can skip some nodes?
+    // For now, linear scan is fast enough for < 5000 nodes
     for (let i = 0; i < nodeList.length; i++) {
       const node = nodeList[i];
-      const dist = Math.sqrt((node.x - x) ** 2 + (node.y - y) ** 2);
-      if (dist < nearestDist) {
-        nearestDist = dist;
+      const dx = node.x - x;
+      const dy = node.y - y;
+      // Avoid sqrt for comparison
+      const distSq = dx * dx + dy * dy;
+      if (distSq < nearestDist) {
+        nearestDist = distSq;
         nearestNode = i;
       }
     }
@@ -153,17 +264,19 @@ export default function initHexMaze({ canvas, container } = {}) {
 
     // Pre-calculate nearby nodes once for all spawns
     const nearbyNodes = [];
-    const searchRadius = HEX_SIZE * 3;
+    const searchRadius = CONFIG.HEX_SIZE * 3;
+    const searchRadiusSq = searchRadius * searchRadius;
+
     for (let j = 0; j < nodeList.length; j++) {
       const node = nodeList[j];
-      const dist = Math.sqrt((node.x - x) ** 2 + (node.y - y) ** 2);
-      if (dist < searchRadius) {
+      const dx = node.x - x;
+      const dy = node.y - y;
+      if (dx * dx + dy * dy < searchRadiusSq) {
         nearbyNodes.push(j);
       }
     }
 
     for (let i = 0; i < count; i++) {
-      // Spread starting nodes around the area to avoid clustering
       let startNodeId = nearestNodeId;
 
       if (i > 0 && nearbyNodes.length > 1) {
@@ -171,7 +284,7 @@ export default function initHexMaze({ canvas, container } = {}) {
           nearbyNodes[Math.floor(Math.random() * nearbyNodes.length)];
       }
 
-      lines.push(new Line(startNodeId));
+      lines.push(new MazeLine(startNodeId, adj, nodeList));
     }
 
     if (!animating) {
@@ -180,101 +293,6 @@ export default function initHexMaze({ canvas, container } = {}) {
       rafId = requestAnimationFrame(animate);
     }
   }
-
-  // Line/Agent constructor
-  function Line(startNodeId) {
-    this.current = startNodeId;
-    this.prev = null;
-    this.target = null;
-    this.progress = 0; // 0 to 1
-    this.vertices = [startNodeId]; // visited nodes for drawing
-    this.end = false;
-
-    // Generate segment count: minimum segments + random variance
-    const minSegments = LINE_SEGMENT_COUNT_MAX - LINE_SEGMENT_COUNT_VARIANCE;
-    this.segmentCount =
-      Math.floor(Math.random() * LINE_SEGMENT_COUNT_VARIANCE) + minSegments;
-
-    // Pick initial target
-    this.pickNextTarget();
-  }
-
-  Line.prototype.pickNextTarget = function () {
-    const neighbors = adj.get(this.current) || [];
-    if (neighbors.length === 0) {
-      this.end = true;
-      return;
-    }
-
-    // Prefer not to backtrack immediately
-    const available = neighbors.filter((n) => n !== this.prev);
-    const choices = available.length > 0 ? available : neighbors;
-
-    this.target = choices[Math.floor(Math.random() * choices.length)];
-  };
-
-  Line.prototype.step = function (deltaTime) {
-    if (this.end || this.target === null) return;
-
-    this.progress += LINE_SPEED * deltaTime;
-
-    while (this.progress >= 1.0 && !this.end) {
-      // Complete the step
-      this.prev = this.current;
-      this.current = this.target;
-      this.vertices.push(this.current);
-      this.progress -= 1.0;
-
-      // Check if we should end
-      if (this.vertices.length >= this.segmentCount) {
-        this.end = true;
-        break;
-      }
-
-      // Pick next target
-      this.pickNextTarget();
-      if (this.end) break;
-    }
-  };
-
-  Line.prototype.draw = function (ctx) {
-    if (this.vertices.length === 0) return;
-
-    // Read styling from CSS variables
-    const cs = getComputedStyle(
-      host instanceof Element ? host : document.documentElement,
-    );
-    const strokeColor = cs.getPropertyValue("--maze-line-color") || LINE_COLOR;
-    const strokeWidth =
-      parseFloat(cs.getPropertyValue("--maze-line-width")) || 2;
-
-    ctx.beginPath();
-    ctx.lineWidth = strokeWidth;
-    ctx.strokeStyle = strokeColor.trim();
-
-    // Start from first vertex
-    const startNode = nodeList[this.vertices[0]];
-    ctx.moveTo(startNode.x, startNode.y);
-
-    // Draw through all visited vertices
-    for (let i = 1; i < this.vertices.length; i++) {
-      const node = nodeList[this.vertices[i]];
-      ctx.lineTo(node.x, node.y);
-    }
-
-    // Draw progress to current target if not ended
-    if (!this.end && this.target !== null && this.progress > 0) {
-      const currentNode = nodeList[this.current];
-      const targetNode = nodeList[this.target];
-      const progressX =
-        currentNode.x + (targetNode.x - currentNode.x) * this.progress;
-      const progressY =
-        currentNode.y + (targetNode.y - currentNode.y) * this.progress;
-      ctx.lineTo(progressX, progressY);
-    }
-
-    ctx.stroke();
-  };
 
   // Animation loop
   let lastTime = 0;
@@ -286,28 +304,35 @@ export default function initHexMaze({ canvas, container } = {}) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       allEnded = true;
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
+      // Filter out ended lines to keep array small
+      lines = lines.filter((line) => {
         if (!line.end) {
           allEnded = false;
           line.step(deltaTime);
         }
-        line.draw(ctx);
-      }
+        line.draw(ctx, host);
+        // Keep line if not ended, or if it just ended (to draw one last time)
+        // Actually, we can just keep them until we clear.
+        // But for performance, maybe we want to remove them?
+        // The original code kept them. Let's keep them to avoid flickering or disappearance.
+        return true;
+      });
 
       rafId = requestAnimationFrame(animate);
     } else {
       // Final draw when all ended
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (let i = 0; i < lines.length; i++) {
-        lines[i].draw(ctx);
+        lines[i].draw(ctx, host);
       }
       animating = false;
       rafId = 0;
+      lastTime = 0; // Reset time for next animation start
     }
   }
 
-  // Resize handling
+  // Resize handling with debounce
+  let resizeTimeout;
   function resizeCanvas() {
     const rect =
       host === document.body
@@ -324,17 +349,20 @@ export default function initHexMaze({ canvas, container } = {}) {
 
     // Rebuild graph only if canvas expanded beyond current graph bounds
     if (newWidth > graphWidth || newHeight > graphHeight) {
-      // Clear lines before rebuilding to prevent stale node references
       lines = [];
       buildGraph(newWidth, newHeight);
 
-      // Restart animation if needed
       if (!animating) {
         animating = true;
         allEnded = false;
         rafId = requestAnimationFrame(animate);
       }
     }
+  }
+
+  function onResize() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(resizeCanvas, 200);
   }
 
   // Helper to convert pointer coordinates to canvas space
@@ -349,23 +377,23 @@ export default function initHexMaze({ canvas, container } = {}) {
   // Pointer controls
   function onClick(e) {
     const { x, y } = getCanvasCoordinates(e);
-    spawnFromCursor(x, y, SPAWN_COUNT_CLICK);
+    spawnFromCursor(x, y, CONFIG.SPAWN_COUNT_CLICK);
   }
 
   let lastMove = 0;
   function onPointerMove(e) {
     const now = Date.now();
-    if (now - lastMove > MOVE_THROTTLE_MS) {
+    if (now - lastMove > CONFIG.MOVE_THROTTLE_MS) {
       lastMove = now;
       const { x, y } = getCanvasCoordinates(e);
-      spawnFromCursor(x, y, SPAWN_COUNT_MOVE);
+      spawnFromCursor(x, y, CONFIG.SPAWN_COUNT_MOVE);
     }
   }
 
   // Initialize
   resizeCanvas();
-  buildGraph(canvas.width, canvas.height); // Build initial graph
-  window.addEventListener("resize", resizeCanvas);
+  buildGraph(canvas.width, canvas.height);
+  window.addEventListener("resize", onResize);
   host.addEventListener("click", onClick);
   host.addEventListener("pointermove", onPointerMove);
 
@@ -377,7 +405,7 @@ export default function initHexMaze({ canvas, container } = {}) {
   // Return destroy method for cleanup
   return {
     destroy() {
-      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", onResize);
       host.removeEventListener("click", onClick);
       host.removeEventListener("pointermove", onPointerMove);
       if (rafId) cancelAnimationFrame(rafId);
