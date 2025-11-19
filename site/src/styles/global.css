@@ -46,30 +46,30 @@
     color: #fff;
   }
 
-  /* Regular links */
+  /* Regular links - no underline by default, underline on hover */
   a {
     color: inherit;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-    text-decoration-color: currentColor;
+    text-decoration: none;
     transition: color 0.2s ease, text-decoration-color 0.2s ease;
   }
 
   a:hover,
   a:focus-visible {
-    text-decoration: none;
-  }
-
-  /* Navigation links */
-  nav a {
-    text-decoration: none;
-  }
-
-  nav a:hover,
-  nav a:focus-visible,
-  nav a.underline {
     text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  /* Prose links - underline by default for readability in long text */
+  .prose a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  .prose a:hover,
+  .prose a:focus-visible {
+    text-decoration: none;
   }
 
   /* Dark mode defaults for main content elements */
@@ -80,13 +80,16 @@
   html.dark main h3,
   html.dark main h4,
   html.dark main p,
-  html.dark main a,
   html.dark main li {
     color: #d1d5db; /* readable light gray */
   }
 
   html.dark main a {
-    color: #60a5fa;
+    color: #d1d5db; /* same as text for consistency */
+  }
+
+  html.dark main .prose a {
+    color: #60a5fa; /* blue for prose content links */
   }
 
   html.dark main ul > li::marker {
