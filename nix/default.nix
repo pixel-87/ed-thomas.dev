@@ -23,7 +23,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   pnpmDeps = pnpm.fetchDeps {
     inherit (finalAttrs) pname version src;
     fetcherVersion = 2;
-    hash = "sha256-r8f6qoWhgbCziGe8lghV9Kssw5j51x/tUQS1zRTdxjM=";
+    hash = "sha256-9xFyI205ZAdFDT6A9uE086za7lBrPMSUxGVRFM2WnmY=";
   };
 
   env.ASTRO_TELEMETRY_DISABLED = 1;
@@ -51,7 +51,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   meta = {
     description = "Ed Thomas personal website (Astro)";
     homepage = "https://ed-thomas.dev";
-    license = lib.licenses.mit;
+    license = lib.licenses.gpl3Plus;
     maintainers = with lib.maintainers; [ ];
   };
 })
