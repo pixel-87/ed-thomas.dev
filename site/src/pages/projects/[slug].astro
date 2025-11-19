@@ -27,7 +27,7 @@ const { Content } = await entry.render();
 
         <div class="flex gap-2 mb-4">
           {
-            entry.data.technologies.map((tech: string) => (
+            entry.data.tags.map((tech: string) => (
               <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
                 {tech}
               </span>
@@ -56,9 +56,7 @@ const { Content } = await entry.render();
       <Content />
 
       <footer class="mt-8 pt-4 border-t text-center">
-        <a href="/projects" class="text-sm"
-          >← Back to projects</a
-        >
+        <a href="/projects" class="text-sm">← Back to projects</a>
       </footer>
     </article>
   </main>

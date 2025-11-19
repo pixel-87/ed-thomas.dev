@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
+import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,6 +12,7 @@ export default defineConfig({
   site: "https://ed-thomas.dev",
   integrations: [mdx(), tailwind(), sitemap()],
   markdown: {
+    remarkPlugins: [remarkReadingTime],
     shikiConfig: {
       theme: "github-light",
       wrap: true,
