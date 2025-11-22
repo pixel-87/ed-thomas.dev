@@ -9,24 +9,24 @@ const sortedPosts = allPosts.sort(
 ---
 
 <Layout title="Notes">
-  <main>
+  <main class="h-feed">
     <h1 class="text-lg font-bold mb-6">Notes</h1>
 
     <div class="space-y-4">
       {
         sortedPosts.map((post) => (
-          <article>
+          <article class="h-entry">
             <div class="mb-1">
-              <a href={`/blog/${post.slug}`}>
+              <a href={`/blog/${post.slug}`} class="p-name u-url">
                 {post.data.title}
               </a>
-              <span class="text-gray-500 ml-2 text-xs">
+              <time class="text-gray-500 ml-2 text-xs dt-published" datetime={post.data.pubDate.toISOString()}>
                 {post.data.pubDate.toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
                 })}
-              </span>
+              </time>
             </div>
             <p class="text-gray-600 text-sm">{post.data.description}</p>
             {post.data.tags && (
