@@ -41,6 +41,14 @@ const imageURL = new URL(image, Astro.url);
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={imageURL} />
 
+<!-- IndieWeb identity links (rel=me) -->
+<link rel="me" href="https://github.com/pixel-87" />
+<link rel="me" href="https://hachyderm.io/@EdThomas" />
+<link rel="me" href="https://www.linkedin.com/in/edthomas87" />
+
+<!-- Webmention endpoint (configure at webmention.io or another host) -->
+<link rel="webmention" href="https://webmention.io/ed-thomas.dev/webmention" />
+
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
