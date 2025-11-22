@@ -8,12 +8,12 @@ import { Image } from "astro:assets";
     <h1 class="text-3xl font-bold mb-6">Miscellaneous</h1>
 
     <div class="space-y-8">
-      <section>
-          <h2 class="text-xl font-semibold mt-6 mb-3">
+      <section class="h-entry">
+          <h2 class="text-xl font-semibold mt-6 mb-3 p-name">
             What I'm doing <a
               href="https://nownownow.com/about">now</a>
           </h2>
-        <div class="prose prose-lg max-w-none">
+        <div class="prose prose-lg max-w-none e-content">
           <h3 class="text-lg font-semibold mt-4 mb-2">Currently working on:</h3>
           <ul
             class="list-dash list-outside marker:text-gray-700 text-gray-700 space-y-2 pl-3 sm:pl-6"
@@ -25,7 +25,7 @@ import { Image } from "astro:assets";
             <li>I just came second place in a ctf :)</li>
           </ul>
           <p class="text-sm text-gray-500 mt-4">
-            Last updated: 9th November, 2025
+            Last updated: <time class="dt-updated" datetime="2025-11-09">9th November, 2025</time>
           </p>
         </div>
       </section>
