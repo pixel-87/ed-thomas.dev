@@ -8,6 +8,7 @@ const blog = defineCollection({
     pubDate: z.date(),
     tags: z.array(z.string()).optional(),
     featured: z.boolean().default(false),
+    area: z.enum(["tech", "life"]).optional(),
   }),
 });
 

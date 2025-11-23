@@ -6,15 +6,58 @@ const allPosts = await getCollection("blog");
 const sortedPosts = allPosts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const techPosts = sortedPosts.filter(post => post.data.area === "tech");
+const lifePosts = sortedPosts.filter(post => post.data.area === "life");
 ---
 
 <Layout title="Notes">
   <main class="h-feed">
     <h1 class="text-lg font-bold mb-6">Notes</h1>
 
-    <div class="space-y-4">
+    <!-- Toggle Bar -->
+    <div class="mb-6 relative flex w-full" role="tablist">
+      <button id="tech-btn" role="tab" aria-selected="true" aria-controls="tech-section" class="flex-1 py-2 text-sm font-medium cursor-pointer text-center hover:opacity-75 transition-opacity">Tech</button>
+      <button id="life-btn" role="tab" aria-selected="false" aria-controls="life-section" class="flex-1 py-2 text-sm font-medium cursor-pointer text-center hover:opacity-75 transition-opacity">Life</button>
+      <div id="slider" class="absolute bottom-1 h-0.5 bg-current transition-all duration-300 ease-in-out" style="width: 40%; left: 5%;"></div>
+    </div>
+
+    <!-- Tech Posts -->
+    <div id="tech-section" class="space-y-4">
       {
-        sortedPosts.map((post) => (
+        techPosts.map((post) => (
+          <article class="h-entry">
+            <div class="mb-1">
+              <a href={`/blog/${post.slug}`} class="p-name u-url">
+                {post.data.title}
+              </a>
+              <time class="text-gray-500 ml-2 text-xs dt-published" datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+            </div>
+            <p class="text-gray-600 text-sm">{post.data.description}</p>
+            {post.data.tags && (
+              <div class="flex gap-1 mt-2">
+                {post.data.tags.map((tag: string) => (
+                  <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Life Posts -->
+    <div id="life-section" class="space-y-4 hidden">
+      {
+        lifePosts.map((post) => (
           <article class="h-entry">
             <div class="mb-1">
               <a href={`/blog/${post.slug}`} class="p-name u-url">
@@ -44,3 +87,46 @@ const sortedPosts = allPosts.sort(
     </div>
   </main>
 </Layout>
+
+<script>
+  let currentSection: "tech" | "life" = "tech";
+
+  const techBtn = document.getElementById("tech-btn") as HTMLButtonElement;
+  const lifeBtn = document.getElementById("life-btn") as HTMLButtonElement;
+  const slider = document.getElementById("slider") as HTMLDivElement;
+  const techSection = document.getElementById("tech-section") as HTMLDivElement;
+  const lifeSection = document.getElementById("life-section") as HTMLDivElement;
+
+  function updateUI() {
+    if (currentSection === "tech") {
+      techBtn.classList.add("font-bold");
+      techBtn.setAttribute("aria-selected", "true");
+      lifeBtn.classList.remove("font-bold");
+      lifeBtn.setAttribute("aria-selected", "false");
+      slider.style.left = "5%";
+      techSection.classList.remove("hidden");
+      lifeSection.classList.add("hidden");
+    } else {
+      lifeBtn.classList.add("font-bold");
+      lifeBtn.setAttribute("aria-selected", "true");
+      techBtn.classList.remove("font-bold");
+      techBtn.setAttribute("aria-selected", "false");
+      slider.style.left = "55%";
+      lifeSection.classList.remove("hidden");
+      techSection.classList.add("hidden");
+    }
+  }
+
+  techBtn.addEventListener("click", () => {
+    currentSection = "tech";
+    updateUI();
+  });
+
+  lifeBtn.addEventListener("click", () => {
+    currentSection = "life";
+    updateUI();
+  });
+
+  // Initialize
+  updateUI();
+</script>
