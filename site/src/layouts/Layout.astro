@@ -29,16 +29,26 @@ function isActive(path: string) {
     <meta charset="utf-8" />
     <BaseHead title={title} description={description} image={image} />
 
-    <!-- Critical CSS variables for theme setup -->
+    <!-- Critical CSS variables for theme setup
+         Increase saturation of maze line color so it remains visible
+         on lower-quality displays while keeping the existing palette. -->
     <style is:inline>
       :root {
-        --maze-line-color: #5d5066;
-        --gradient-base-r: 208;
-        --gradient-base-g: 219;
-        --gradient-base-b: 203;
+        /* Slightly more saturated purple for better visibility */
+        --maze-line-color: #6f3fcf;
+        /* Optional: line width can be tuned by changing --maze-line-width */
+        --maze-line-width: 1.8;
+
+        /* Base gradient color (light background) - increased saturation */
+        /* Previously: 208,219,203 (very pale). Bumped saturation for visibility. */
+        --gradient-base-r: 150;
+        --gradient-base-g: 210;
+        --gradient-base-b: 165;
       }
       html.dark {
-        --maze-line-color: #cc6600;
+        /* Brighter, more saturated orange for dark mode */
+        --maze-line-color: #ff7a00;
+        --maze-line-width: 1.8;
         --gradient-base-r: 0;
         --gradient-base-g: 0;
         --gradient-base-b: 0;
