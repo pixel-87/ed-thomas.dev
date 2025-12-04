@@ -71,7 +71,7 @@ function isActive(path: string) {
       >
         <header class="mb-8 relative">
           <nav
-            class="grid grid-cols-6 gap-x-2 gap-y-1 items-center justify-items-center md:flex md:flex-wrap md:justify-center md:gap-6 tracking-wide text-sm md:text-base pr-10 md:pr-0"
+            class="flex flex-wrap justify-center gap-4 md:grid md:grid-cols-6 md:gap-x-2 md:gap-y-1 md:items-center md:justify-items-center md:gap-6 tracking-wide text-sm md:text-base pr-10 md:pr-0"
           >
             <NavLink href="/" label="HOME" isActive={isActive("/")} />
             <NavLink href="/blog" label="BLOG" isActive={isActive("/blog")} />
@@ -84,13 +84,13 @@ function isActive(path: string) {
               href="/misc"
               label="MISC"
               isActive={isActive("/misc")}
-              colStart="col-start-2"
+              colStart="md:col-start-2"
             />
             <NavLink
               href="/cv"
               label="CV"
               isActive={isActive("/cv")}
-              colStart="col-start-4"
+              colStart="md:col-start-4"
             />
           </nav>
 
