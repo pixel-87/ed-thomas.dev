@@ -1,0 +1,25 @@
+---
+export interface Props {
+  path?: string;
+}
+
+const { path = "/" } = Astro.props;
+
+// Convert URL path to terminal-style path
+// "/" -> "~/"
+// "/blog" -> "~/blog/"
+// "/blog/some-post" -> "~/blog/some-post"
+function toTerminalPath(urlPath: string): string {
+  if (urlPath === "/") return "~/";
+  // Remove trailing slash, add ~/ prefix
+  const cleanPath = urlPath.replace(/\/$/, "");
+  return `~${cleanPath}/`;
+}
+
+const terminalPath = toTerminalPath(path);
+---
+
+<div class="flex items-center gap-1 font-mono text-sm mb-6">
+  <span class="terminal-path">{terminalPath}</span>
+  <span class="inline-block w-2 h-4 animate-blink terminal-cursor"></span>
+</div>

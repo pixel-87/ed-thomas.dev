@@ -3,24 +3,45 @@ import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("blog");
-const publishedPosts = allPosts.filter(post => !post.data.draft);
+const publishedPosts = allPosts.filter((post) => !post.data.draft);
 const sortedPosts = publishedPosts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-const techPosts = sortedPosts.filter(post => post.data.area === "tech");
-const lifePosts = sortedPosts.filter(post => post.data.area === "life");
+const techPosts = sortedPosts.filter((post) => post.data.area === "tech");
+const lifePosts = sortedPosts.filter((post) => post.data.area === "life");
 ---
 
 <Layout title="Notes">
   <main class="h-feed">
-    <h1 class="text-3xl font-bold mb-6">Notes</h1>
+    <h1 class="text-2xl font-bold mb-6">
+      <span class="text-orange-500 dark:text-orange-400">*</span> blog
+    </h1>
 
     <!-- Toggle Bar -->
     <div class="mb-6 relative flex w-full" role="tablist">
-      <button id="tech-btn" role="tab" aria-selected="true" aria-controls="tech-section" class="flex-1 py-2 text-sm font-medium cursor-pointer text-center hover:opacity-75 transition-opacity">Tech</button>
-      <button id="life-btn" role="tab" aria-selected="false" aria-controls="life-section" class="flex-1 py-2 text-sm font-medium cursor-pointer text-center hover:opacity-75 transition-opacity">Life</button>
-      <div id="slider" class="absolute bottom-1 h-0.5 bg-current transition-all duration-300 ease-in-out" style="width: 40%; left: 5%;"></div>
+      <button
+        id="tech-btn"
+        role="tab"
+        aria-selected="true"
+        aria-controls="tech-section"
+        class="flex-1 py-2 text-sm font-medium cursor-pointer text-center hover:opacity-75 transition-opacity"
+        >Tech</button
+      >
+      <button
+        id="life-btn"
+        role="tab"
+        aria-selected="false"
+        aria-controls="life-section"
+        class="flex-1 py-2 text-sm font-medium cursor-pointer text-center hover:opacity-75 transition-opacity"
+        >Life</button
+      >
+      <div
+        id="slider"
+        class="absolute bottom-1 h-0.5 bg-current transition-all duration-300 ease-in-out"
+        style="width: 40%; left: 5%;"
+      >
+      </div>
     </div>
 
     <!-- Tech Posts -->
@@ -32,7 +53,10 @@ const lifePosts = sortedPosts.filter(post => post.data.area === "life");
               <a href={`/blog/${post.slug}`} class="p-name u-url">
                 {post.data.title}
               </a>
-              <time class="text-gray-500 ml-2 text-xs dt-published" datetime={post.data.pubDate.toISOString()}>
+              <time
+                class="muted ml-2 text-xs dt-published"
+                datetime={post.data.pubDate.toISOString()}
+              >
                 {post.data.pubDate.toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",
@@ -40,11 +64,11 @@ const lifePosts = sortedPosts.filter(post => post.data.area === "life");
                 })}
               </time>
             </div>
-            <p class="text-gray-600 text-sm">{post.data.description}</p>
+            <p class="muted text-sm">{post.data.description}</p>
             {post.data.tags && (
               <div class="flex gap-1 mt-2">
                 {post.data.tags.map((tag: string) => (
-                  <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                  <span class="bg-gray-100 text-xs px-2 py-1 rounded">
                     {tag}
                   </span>
                 ))}
@@ -64,7 +88,10 @@ const lifePosts = sortedPosts.filter(post => post.data.area === "life");
               <a href={`/blog/${post.slug}`} class="p-name u-url">
                 {post.data.title}
               </a>
-              <time class="text-gray-500 ml-2 text-xs dt-published" datetime={post.data.pubDate.toISOString()}>
+              <time
+                class="muted ml-2 text-xs dt-published"
+                datetime={post.data.pubDate.toISOString()}
+              >
                 {post.data.pubDate.toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",
@@ -72,11 +99,11 @@ const lifePosts = sortedPosts.filter(post => post.data.area === "life");
                 })}
               </time>
             </div>
-            <p class="text-gray-600 text-sm">{post.data.description}</p>
+            <p class="muted text-sm">{post.data.description}</p>
             {post.data.tags && (
               <div class="flex gap-1 mt-2">
                 {post.data.tags.map((tag: string) => (
-                  <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                  <span class="bg-gray-100 text-xs px-2 py-1 rounded">
                     {tag}
                   </span>
                 ))}

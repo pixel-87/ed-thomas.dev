@@ -5,13 +5,15 @@ import MazeBackground from "../components/mazeBackground.astro";
 import ThemeIcon from "../components/ThemeIcon.astro";
 import NavLink from "../components/NavLink.astro";
 import SocialLinks from "../components/SocialLinks.astro";
+import PathBreadcrumb from "../components/PathBreadcrumb.astro";
 
 export interface Props {
   title: string;
   description?: string;
   image?: string;
+  showPath?: boolean;
 }
-const { title, description, image } = Astro.props;
+const { title, description, image, showPath = true } = Astro.props;
 // Determine the current request path so we can highlight active nav links
 const currentPath =
   typeof Astro.request !== "undefined" && Astro.request?.url
@@ -42,6 +44,10 @@ function isActive(path: string) {
         --gradient-base-r: 179;
         --gradient-base-g: 214;
         --gradient-base-b: 184;
+        /* Content color tokens to prevent FOUC and centralize theme values */
+        --content-color: #0f172a; /* slate-900 - main text in light mode */
+        --muted-color: #1f2937; /* slate-800 - even darker for better contrast against gradient */
+        --badge-text: #374151; /* gray-700 for badge/tag text */
       }
       html.dark {
         --maze-line-color: #e17105;
@@ -49,6 +55,10 @@ function isActive(path: string) {
         --gradient-base-r: 17;
         --gradient-base-g: 17;
         --gradient-base-b: 17;
+        /* Dark-mode overrides for content tokens */
+        --content-color: #d1d5db; /* gray-300 for dark mode text */
+        --muted-color: #9ca3af; /* gray-400 for secondary dark text */
+        --badge-text: #e5e7eb; /* lighter badge text in dark mode */
       }
     </style>
 
@@ -70,22 +80,26 @@ function isActive(path: string) {
           <nav
             class="flex flex-wrap justify-center gap-4 md:grid md:grid-cols-6 md:gap-x-2 md:gap-y-1 md:items-center md:justify-items-center md:gap-6 tracking-wide text-sm md:text-base pr-10 md:pr-0"
           >
-            <NavLink href="/" label="HOME" isActive={isActive("/")} />
-            <NavLink href="/blog" label="BLOG" isActive={isActive("/blog")} />
+            <NavLink href="/" label="HOME [h]" isActive={isActive("/")} />
+            <NavLink
+              href="/blog"
+              label="BLOG [b]"
+              isActive={isActive("/blog")}
+            />
             <NavLink
               href="/projects"
-              label="PROJECTS"
+              label="PROJECTS [p]"
               isActive={isActive("/projects")}
             />
             <NavLink
               href="/misc"
-              label="MISC"
+              label="MISC [m]"
               isActive={isActive("/misc")}
               colStart="md:col-start-2"
             />
             <NavLink
               href="/cv"
-              label="CV"
+              label="CV [c]"
               isActive={isActive("/cv")}
               colStart="md:col-start-4"
             />
@@ -96,7 +110,33 @@ function isActive(path: string) {
           </div>
         </header>
 
+        <script>
+          // Keyboard navigation
+          document.addEventListener("keydown", (e) => {
+            // Don't trigger if user is typing in an input
+            if (
+              e.target instanceof HTMLInputElement ||
+              e.target instanceof HTMLTextAreaElement
+            )
+              return;
+
+            const shortcuts: Record<string, string> = {
+              h: "/",
+              b: "/blog",
+              p: "/projects",
+              m: "/misc",
+              c: "/cv",
+            };
+
+            const path = shortcuts[e.key.toLowerCase()];
+            if (path && !e.ctrlKey && !e.metaKey && !e.altKey) {
+              window.location.href = path;
+            }
+          });
+        </script>
+
         <main class="flex-1">
+          {showPath && <PathBreadcrumb path={currentPath} />}
           <slot />
         </main>
 
