@@ -32,6 +32,10 @@
     to prevent FOUC (Flash of Unstyled Content).
   */
 
+  /* Content color variables are defined inline in Layout.astro to
+     prevent FOUC (Flash of Unstyled Content) and keep critical tokens
+     together. */
+
   body {
     background-color: rgb(
       var(--gradient-base-r),
@@ -72,38 +76,10 @@
     text-decoration: none;
   }
 
-  /* Dark mode defaults for main content elements */
-  /* Using high specificity to override default browser styles and some utilities if needed */
-  html.dark main,
-  html.dark main h1,
-  html.dark main h2,
-  html.dark main h3,
-  html.dark main h4,
-  html.dark main p,
-  html.dark main li {
-    color: #d1d5db; /* readable light gray */
-  }
-
-  html.dark main a {
-    color: #d1d5db; /* same as text for consistency */
-  }
-
-  html.dark main .prose a {
-    color: #60a5fa; /* blue for prose content links */
-  }
-
-  html.dark main ul > li::marker {
-    color: #9ca3af;
-  }
-
-  html.dark h1,
-  html.dark h2,
-  html.dark h3,
-  html.dark h4,
-  html.dark h5,
-  html.dark h6 {
-    color: #f9fafb;
-  }
+  /* Main content colors are enforced globally via variables in
+     Layout.astro (applied inline to prevent FOUC). We re-apply a small set
+     of utility rules at the end of this file to ensure content is readable
+     across both light and dark modes. */
 }
 
 @layer components {
@@ -330,14 +306,81 @@
     margin: 0.25rem 0;
   }
 
-  /* Custom dash marker for unordered lists */
+  /* Custom dash marker for unordered lists
+     Use a larger en-dash glyph and theme-aware color so the marker is
+     visible in both light and dark modes. */
   ul.list-dash > li::marker {
-    content: "- ";
-    font-weight: bold;
+    content: "– "; /* en-dash for better visibility */
+    font-weight: 700;
+    color: var(--muted-color);
+  }
+
+  /* Ensure list-dash marker color is readable in dark mode too */
+  html.dark ul.list-dash > li::marker {
+    color: var(--muted-color);
+  }
+
+  /* Terminal breadcrumb styles */
+  .terminal-path {
+    color: var(--content-color);
+  }
+
+  .terminal-cursor {
+    background: var(--content-color);
+  }
+
+  @keyframes blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .animate-blink {
+    animation: blink 1s step-end infinite;
   }
 }
 
 @layer utilities {
+  /* Main content enforcement: use inline variables from Layout.astro */
+  main,
+  main h1,
+  main h2,
+  main h3,
+  main h4,
+  main h5,
+  main h6,
+  main p,
+  main li {
+    color: var(--content-color);
+  }
+
+  main a,
+  main p,
+  main li,
+  main h1,
+  main h2,
+  main h3 {
+    color: var(--content-color);
+  }
+
+  /* Muted text (dates, helper text) */
+  .muted,
+  main .muted,
+  main small,
+  main .text-muted {
+    color: var(--muted-color);
+  }
+
+  /* Badge/tag pills in light mode should use a darker label color for legibility */
+  main .bg-gray-100 {
+    color: var(--badge-text);
+  }
+
   /* Dark-mode utility overrides */
   html.dark .text-gray-700 {
     color: #d1d5db; /* gray-300 */
@@ -370,5 +413,13 @@
 
   html.dark .border-t {
     border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  /* Ensure prose headings remain readable in dark mode. Sometimes the
+     Tailwind `prose` token values can be out of sync with site-wide
+     content tokens — prefer the centralized `--content-color` on headings
+     to avoid low-contrast headings. */
+  html.dark .prose :where(h1,h2,h3,h4,h5,h6) {
+    color: var(--content-color);
   }
 }
