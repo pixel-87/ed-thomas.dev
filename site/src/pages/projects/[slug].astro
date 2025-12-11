@@ -23,14 +23,12 @@ const { Content } = await entry.render();
     <article class="prose prose-sm max-w-none">
       <header class="mb-8">
         <h1 class="text-lg font-bold mb-2">{entry.data.title}</h1>
-        <p class="text-gray-600 mb-4">{entry.data.description}</p>
+        <p class="muted mb-4">{entry.data.description}</p>
 
         <div class="flex gap-2 mb-4">
           {
             entry.data.tags.map((tech: string) => (
-              <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
-                {tech}
-              </span>
+              <span class="bg-gray-100 text-xs px-2 py-1 rounded">{tech}</span>
             ))
           }
         </div>

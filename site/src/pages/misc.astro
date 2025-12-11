@@ -4,40 +4,39 @@ import { Image } from "astro:assets";
 ---
 
 <Layout title="Misc">
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-6">Miscellaneous</h1>
+  <main class="max-w-4xl mx-auto">
+    <h1 class="text-2xl font-bold mb-6">
+      <span class="text-orange-500 dark:text-orange-400">*</span> misc
+    </h1>
 
     <div class="space-y-8">
       <section class="h-entry">
-          <h2 class="text-xl font-semibold mt-6 mb-3 p-name">
-            What I'm doing <a
-              href="https://nownownow.com/about">now</a>
-          </h2>
+        <h2 class="text-xl font-semibold mt-6 mb-3 p-name">
+          What I'm doing <a href="https://nownownow.com/about">now</a>
+        </h2>
         <div class="prose prose-lg max-w-none e-content">
           <h3 class="text-lg font-semibold mt-4 mb-2">Currently working on:</h3>
-          <ul
-            class="list-dash list-outside marker:text-gray-700 text-gray-700 space-y-2 pl-3 sm:pl-6"
-          >
+          <ul class="list-dash list-outside space-y-2 pl-3 sm:pl-6">
             <li>Tinkering with the homelab (Nix, K3s)</li>
             <li>Working on my dissertation</li>
             <li>Getting faster with Colemak-DH</li>
             <li>Learning GCP</li>
             <li>I just came second place in a ctf :)</li>
           </ul>
-          <p class="text-sm text-gray-500 mt-4">
-            Last updated: <time class="dt-updated" datetime="2025-11-09">9th November, 2025</time>
+          <p class="text-sm muted mt-4">
+            Last updated: <time class="dt-updated" datetime="2025-11-09"
+              >9th November, 2025</time
+            >
           </p>
         </div>
       </section>
 
       <section>
         <h2 class="text-xl font-semibold mb-3">Some computer bits</h2>
-        <ul
-          class="list-dash list-outside marker:text-gray-700 text-gray-700 space-y-1 pl-3 sm:pl-6"
-        >
+        <ul class="list-dash list-outside space-y-1 pl-3 sm:pl-6">
           <li>
-            <a
-              href="https://www.github.com/pixel-87/cantor-pixel">Cantor-remix keyboard</a
+            <a href="https://www.github.com/pixel-87/cantor-pixel"
+              >Cantor-remix keyboard</a
             >
           </li>
           <li>Ryzen 7500F</li>
@@ -47,89 +46,104 @@ import { Image } from "astro:assets";
 
       <section>
         <h2 class="text-xl font-semibold mb-3">Books I'm reading</h2>
-        <p class="text-gray-600">
+        <div>
           <ul>
             <li>"Crucial Conversations" by Kerry Patterson</li>
             <li>"How to Win Friends and Influence People" by Dale Carnegie</li>
             <li>"Designing Data-Intensive Applications" by Martin Kleppmann</li>
             <li>Loads of different fantasy web novels :)</li>
           </ul>
-        </p>
+        </div>
       </section>
 
       <section>
         <h2 class="text-xl font-semibold mb-3">Random</h2>
-        <p class="text-gray-600">Random things.</p>
-        <p class="text-gray-600">
+        <p>Random things.</p>
+        <div>
           I'm learning Welsh on Duolingo! <br />
           My current streak: <span id="streak-number" aria-live="polite"
           ></span>🔥
-        <p>  <a href="https://github.com/pixel-87/duo-streak-widget" rel="ed.thomas.dev"><img loading="lazy" decoding="async" src="https://api.pixel-87.uk/api/duolingo/button?username=Edward527516" alt="Ed's Duolingo" title="Ed's Duolingo" /></a> 
-        </p>
-      </section>
-
-      <section>
-        <h2 class="text-xl font-semibold mb-3">About this site</h2>
-        <div class="prose max-w-none">
-          <p>
-            This site is built with <a href="https://astro.build/">Astro</a> and
-            <a href="https://nixos.org/">Nix</a>.
-            <br />
-            I self host it on a K3s <a
-              href="https://github.com/pixel-87/nixos-config">homelab</a
-            >.
-          </p>
-
-          <p>
-            The site is packaged using a <a
-              href="https://www.nixos.wiki/Flakes.com/">Nix flake</a
-            >, producing both a package and an OCI container, uploaded to the <a
-              href="https://github.com/features/packages"
-              >GitHub Container Registry</a
-            > using <a
-              href="https://github.com/pixel-87/ed-thomas.dev/blob/main/.github/workflows/deploy.yml"
-              >GitHub Actions</a
-            >.
-          </p>
-
-          <p>There is also a <a href="/rss.xml">RSS feed</a> for this site.</p>
-          <p>
-            The source code is available on <a
-              href="https://github.com/pixel-87/ed-thomas.dev">GitHub</a
-            >.
-          </p>
-
-          <figure class="my-6">
-            <Image
-              src="/images/lighthouse-100.png"
-              alt="Lighthouse 100 score screenshot"
-              class="w-full max-w-md mx-auto rounded shadow-md"
-              width={800}
-              height={450}
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
+          <div class="mt-2">
+            <a
+              href="https://github.com/pixel-87/duo-streak-widget"
+              rel="ed.thomas.dev"
+            >
+              <img
+                loading="lazy"
+                decoding="async"
+                src="https://api.pixel-87.uk/api/duolingo/button?username=Edward527516"
+                alt="Ed's Duolingo"
+                title="Ed's Duolingo"
+              />
+            </a>
+          </div>
         </div>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">About this site</h2>
+          <div class="prose max-w-none">
+            <p>
+              This site is built with <a href="https://astro.build/">Astro</a> and
+              <a href="https://nixos.org/">Nix</a>.
+              <br />
+              I self host it on a K3s <a
+                href="https://github.com/pixel-87/nixos-config">homelab</a
+              >.
+            </p>
+
+            <p>
+              The site is packaged using a <a
+                href="https://www.nixos.wiki/Flakes.com/">Nix flake</a
+              >, producing both a package and an OCI container, uploaded to the <a
+                href="https://github.com/features/packages"
+                >GitHub Container Registry</a
+              > using <a
+                href="https://github.com/pixel-87/ed-thomas.dev/blob/main/.github/workflows/deploy.yml"
+                >GitHub Actions</a
+              >.
+            </p>
+
+            <p>
+              There is also a <a href="/rss.xml">RSS feed</a> for this site.
+            </p>
+            <p>
+              The source code is available on <a
+                href="https://github.com/pixel-87/ed-thomas.dev">GitHub</a
+              >.
+            </p>
+
+            <figure class="my-6">
+              <Image
+                src="/images/lighthouse-100.png"
+                alt="Lighthouse 100 score screenshot"
+                class="w-full max-w-md mx-auto rounded shadow-md"
+                width={800}
+                height={450}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+        </section>
       </section>
     </div>
+    <script>
+      // Minimal fetch to read an integer from a raw gist and display it
+      const _g =
+        "https://gist.githubusercontent.com/pixel-87/f4db826c7a94c24c6dde14ce28cd86dd/raw";
+      const el = document.getElementById("streak-number");
+      if (el) {
+        fetch(_g, { cache: "no-store" })
+          .then((r) => (r.ok ? r.text() : Promise.reject(r.status)))
+          .then((t) => t.trim())
+          .then((t) => {
+            const n = parseInt(t, 10);
+            el.textContent = Number.isFinite(n) ? String(n) : "?";
+          })
+          .catch(() => {
+            el.textContent = "?";
+          });
+      }
+    </script>
   </main>
-  <script>
-    // Minimal fetch to read an integer from a raw gist and display it
-    const _g =
-      "https://gist.githubusercontent.com/pixel-87/f4db826c7a94c24c6dde14ce28cd86dd/raw";
-    const el = document.getElementById("streak-number");
-    if (el) {
-      fetch(_g, { cache: "no-store" })
-        .then((r) => (r.ok ? r.text() : Promise.reject(r.status)))
-        .then((t) => t.trim())
-        .then((t) => {
-          const n = parseInt(t, 10);
-          el.textContent = Number.isFinite(n) ? String(n) : "?";
-        })
-        .catch(() => {
-          el.textContent = "?";
-        });
-    }
-  </script>
 </Layout>

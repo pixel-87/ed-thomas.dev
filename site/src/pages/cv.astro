@@ -3,14 +3,16 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="CV">
-  <main class="max-w-4xl mx-auto px-4 py-8">
+  <main class="max-w-4xl mx-auto">
     <header class="mb-4 h-card vcard">
-      <h1 class="text-3xl font-bold p-name">Edward Thomas</h1>
+      <h1 class="text-2xl font-bold p-name">
+        <span class="text-orange-500 dark:text-orange-400">*</span> cv
+      </h1>
     </header>
 
     <section class="mb-6">
       <h2 class="text-xl font-semibold mb-2">Professional Summary</h2>
-      <p class="text-gray-700 p-note">
+      <p class="p-note">
         Final-year Computer Science student with a strong focus on back-end
         systems, platform engineering, and automation. Bringing hands-on
         experience in Python, Linux, and Containerisation to a graduate software
@@ -23,10 +25,10 @@ import Layout from "../layouts/Layout.astro";
 
       <div class="mb-3">
         <p class="font-semibold">University of Exeter — Exeter, England</p>
-        <p class="text-sm text-gray-500">
+        <p class="text-sm muted">
           BSc (Hons) Computer Science · Sept 2023 — May 2026
         </p>
-        <ul class="list-disc ml-5 mt-2 text-gray-700">
+        <ul class="list-disc ml-5 mt-2">
           <li>Predicted high 2:1.</li>
           <li>
             Relevant Modules: Data Structures, Software Development,
@@ -37,10 +39,8 @@ import Layout from "../layouts/Layout.astro";
 
       <div>
         <p class="font-semibold">St. Michael's School — Llanelli, Wales</p>
-        <p class="text-sm text-gray-500">
-          A-Levels & AS-Level · Sept 2016 — June 2023
-        </p>
-        <ul class="list-disc ml-5 mt-2 text-gray-700">
+        <p class="text-sm muted">A-Levels & AS-Level · Sept 2016 — June 2023</p>
+        <ul class="list-disc ml-5 mt-2">
           <li>A-Levels: A*A*A — Maths, Physics, Computer Science.</li>
           <li>AS-Level: A — Chemistry.</li>
         </ul>
@@ -52,11 +52,11 @@ import Layout from "../layouts/Layout.astro";
 
       <article>
         <p class="font-semibold">
-            Excode Workshop Leaders - Google Developer Student Club (GDSC) (<a
+          Excode Workshop Leaders - Google Developer Student Club (GDSC) (<a
             href="https://excode.co.uk">excode.co.uk</a
-          >) <span class="text-sm text-gray-500">Sept 2025 — Nov 2025</span>
+          >) <span class="text-sm muted">Sept 2025 — Nov 2025</span>
         </p>
-        <ul class="list-disc ml-5 mt-2 text-gray-700">
+        <ul class="list-disc ml-5 mt-2">
           <li>Co-lead beginner-friendly Python workshops.</li>
           <li>
             Guide 20+ students through practical exercises in fundamental, core
@@ -67,14 +67,14 @@ import Layout from "../layouts/Layout.astro";
 
       <article class="mt-4 mb-4">
         <p class="font-semibold">
-          Onboarding Assistant <span class="text-sm text-gray-500"
+          Onboarding Assistant <span class="text-sm muted"
             >June 2024 — Sept 2024</span
           >
         </p>
-        <p class="text-sm text-gray-500">
+        <p class="text-sm muted">
           Pembrokeshire County Council · Pembrokeshire, Wales
         </p>
-        <ul class="list-disc ml-5 mt-2 text-gray-700">
+        <ul class="list-disc ml-5 mt-2">
           <li>
             Streamlined daily workflow by developing a Python script to automate
             data filtering, reducing manual processing time by 60% and
@@ -90,10 +90,10 @@ import Layout from "../layouts/Layout.astro";
       <article class="mb-4">
         <p class="font-semibold">
           Social Secretary — University of Exeter Climbing Club <span
-            class="text-sm text-gray-500">Sept 2024 — June 2025</span
+            class="text-sm muted">Sept 2024 — June 2025</span
           >
         </p>
-        <ul class="list-disc ml-5 mt-2 text-gray-700">
+        <ul class="list-disc ml-5 mt-2">
           <li>Organised weekly socials for up to 100+ people.</li>
           <li>
             ‣ Coordinated with venues to schedule events and manage logistics.
@@ -104,11 +104,11 @@ import Layout from "../layouts/Layout.astro";
 
       <article>
         <p class="font-semibold">
-          Digital Prefect <span class="text-sm text-gray-500"
+          Digital Prefect <span class="text-sm muted"
             >Sept 2022 — June 2023</span
           >
         </p>
-        <ul class="list-disc ml-5 mt-2 text-gray-700">
+        <ul class="list-disc ml-5 mt-2">
           <li>
             Provided weekly technical guidance and mentorship to 15+ younger
             students.
@@ -126,11 +126,11 @@ import Layout from "../layouts/Layout.astro";
 
       <article class="mb-3">
         <p class="font-semibold">
-          Home server <a
-            href="https://github.com/pixel-87/nixos-config"
-            >github.com/pixel-87/nixos-config</a>
+          Home server <a href="https://github.com/pixel-87/nixos-config"
+            >github.com/pixel-87/nixos-config</a
+          >
         </p>
-        <ul class="list-disc ml-5 mt-2 text-gray-700">
+        <ul class="list-disc ml-5 mt-2">
           <li>
             Built and maintain 2 node cluster with Linux (NixOS) and Kubernetes
             (K3s).
@@ -148,11 +148,9 @@ import Layout from "../layouts/Layout.astro";
 
       <article class="mb-3">
         <p class="font-semibold">
-          Personal Website — <a href="https://ed-thomas.dev"
-            >ed-thomas.dev</a
-          >
+          Personal Website — <a href="https://ed-thomas.dev">ed-thomas.dev</a>
         </p>
-        <ul class="list-disc ml-5 mt-2 text-gray-700">
+        <ul class="list-disc ml-5 mt-2">
           <li>
             Developed a personal developer website using Astro, HTML, CSS, JS.
           </li>
@@ -170,7 +168,7 @@ import Layout from "../layouts/Layout.astro";
             >github.com/pixel-87/cantor-pixel</a
           >
         </p>
-        <ul class="list-disc ml-5 mt-2 text-gray-700">
+        <ul class="list-disc ml-5 mt-2">
           <li>
             Adapted and assembled a split ergonomic keyboard, learning to solder
             key switches and microcontrollers, and configuring firmware.
@@ -181,14 +179,14 @@ import Layout from "../layouts/Layout.astro";
 
     <section class="mb-6">
       <h2 class="text-xl font-semibold mb-2">Certificates</h2>
-      <ul class="list-disc ml-5 mt-2 text-gray-700">
+      <ul class="list-disc ml-5 mt-2">
         <li>Github Foundations, Github · Oct 2025</li>
       </ul>
     </section>
 
     <section class="mb-6">
       <h2 class="text-xl font-semibold mb-2">Skills</h2>
-      <ul class="list-disc ml-5 mt-2 text-gray-700">
+      <ul class="list-disc ml-5 mt-2">
         <li>
           Programming Languages: Python, Java, SQL, Haskell, Nix, HTML/CSS,
           Prolog.
