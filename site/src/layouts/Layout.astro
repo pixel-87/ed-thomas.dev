@@ -34,24 +34,21 @@ function isActive(path: string) {
          on lower-quality displays while keeping the existing palette. -->
     <style is:inline>
       :root {
-        /* Slightly more saturated purple for better visibility */
-        --maze-line-color: #6f3fcf;
-        /* Optional: line width can be tuned by changing --maze-line-width */
+        --maze-line-color: #8a6fd0;
         --maze-line-width: 1.8;
 
-        /* Base gradient color (light background) - increased saturation */
-        /* Previously: 208,219,203 (very pale). Bumped saturation for visibility. */
-        --gradient-base-r: 150;
-        --gradient-base-g: 210;
-        --gradient-base-b: 165;
+        /* Base gradient color (light background) - middle-ground between
+           previous (208,219,203) and current (150,210,165). */
+        --gradient-base-r: 179;
+        --gradient-base-g: 214;
+        --gradient-base-b: 184;
       }
       html.dark {
-        /* Brighter, more saturated orange for dark mode */
-        --maze-line-color: #ff7a00;
+        --maze-line-color: #e17105;
         --maze-line-width: 1.8;
-        --gradient-base-r: 0;
-        --gradient-base-g: 0;
-        --gradient-base-b: 0;
+        --gradient-base-r: 17;
+        --gradient-base-g: 17;
+        --gradient-base-b: 17;
       }
     </style>
 
