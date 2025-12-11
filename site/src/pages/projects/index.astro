@@ -22,7 +22,11 @@ const projects = allProjects.sort(
             </h2>
             {project.data.date ? (
               <div class="muted text-sm mb-2">
-                {project.data.date.toLocaleDateString()}
+                {project.data.date.toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
               </div>
             ) : null}
             <p class="muted mb-4">{project.data.description}</p>
