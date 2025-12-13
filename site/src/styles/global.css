@@ -422,4 +422,51 @@
   html.dark .prose :where(h1,h2,h3,h4,h5,h6) {
     color: var(--content-color);
   }
+  /* Improve callout visibility in dark mode */
+  html.dark .callout {
+    color: var(--content-color);
+  }
+
+  html.dark .callout.note {
+    border-left-color: #60a5fa; /* lighter blue */
+    background: rgba(96,165,250,0.12);
+  }
+
+  html.dark .callout.warning {
+    border-left-color: #fb923c; /* lighter orange */
+    background: rgba(251,146,60,0.12);
+  }
+
+  html.dark .callout.success {
+    border-left-color: #34d399; /* lighter green */
+    background: rgba(52,211,153,0.10);
+  }
+
+  html.dark .callout .callout-heading {
+    color: var(--content-color);
+  }
+
+  html.dark .callout :where(p, ul, ol, pre, code) {
+    color: var(--content-color);
+  }
+
+  /* Improve code block and inline code contrast in dark mode */
+  html.dark pre,
+  html.dark .prose pre {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--content-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow: auto;
+  }
+
+  html.dark code,
+  html.dark .prose code {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: var(--content-color);
+    padding: 0.12rem 0.32rem;
+    border-radius: 0.25rem;
+  }
+
 }
