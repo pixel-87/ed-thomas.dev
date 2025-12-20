@@ -1,0 +1,110 @@
+---
+title: "Finally Understanding OOP"
+description: "I can't believe it took me this long"
+pubDate: 2025-11-13
+tags: ["Programming", "OOP"]
+featured: false
+draft: true
+area: "tech"
+---
+
+# I Finally Get It
+
+So even though I've had two modules at uni about using Java I've only just had that "click" with understanding on how and what Object Oriented Programming (OOP) is.
+
+I'll give a little background on why I think it took so long for me to fully get it, and the steps it took me to realise it.
+
+## background
+
+So as of writing I'm in my third/final year. I had a module in first year introducing OOP through Java, and in second year we covered more topics like abstract classes, and threads.
+
+I know classes are blueprints and objects the actual creation, that classes are just custom types and that interfaces can be implemented so a class requires certain methods.
+
+Through these I learned the individual parts of OOP I didn't really put all the pieces together.
+
+I'd put lack of full understanding down to a few reasons.
+
+1. I didn't need abstract classes or interfaces in my Java courseworks, so while I knew about them, not having to use them meant I didn't really have to understand them.
+2. I'd learnt programming through Python, so static typing was new to me. 
+3. We were taught an older, more verbose style of Java. So coming from Python I found all the boilerplate such a pain when learning it.
+
+## Realisation
+
+While I'd say Java is the classic OOP language, I came to this revelation when learning Golang on [Boot.dev](http://www.boot.dev), even though Go is only [kind of object-oriented](https://go.dev/doc/faq#Is_Go_an_object-oriented_language).
+
+### Structs and interfaces
+
+Learning Go, I understood structs fine, but I kept getting stuck on interfaces. 
+
+In Go, interfaces are implemented *implicitly*, so only if a struct's methods have all the same signatures as those defined in the interface is it implemented. This really confused me, how was the compiler meant to shout at me if my struct was missing a method, if I had to first define every method?
+
+So going back and forth with an llm, it kept listing the benefits but I still wasn't understanding, it wasn't until Gemini showed how it was useful for testing that I finally got it.
+
+When having more than a few structs of similar types (e.g. different users) it becomes obvious why interfaces are needed.
+
+### The Example That Made Me See The Light
+```go
+type Guest struct { IP string }
+type Member struct { Email string }
+type Admin struct { Phone string }
+type Bot struct { BotID string }
+```
+
+Since in Go is statically typed, we need a type in our function signature, but since any user can make a comment, this means without an interface our function signature becomes very long, making for a parameter explosion.
+
+```go
+func NotifyUser(
+    guest *Guest, 
+    member *Member, 
+    admin *Admin, 
+    bot *Bot, 
+    msg string,
+) {
+    if guest != nil {
+        fmt.Printf("Alerting Guest: %s\n", msg)
+    } else if member != nil {
+        fmt.Printf("Emailing Member: %s\n", msg)
+    } else if admin != nil {
+        fmt.Printf("SMSing Admin: %s\n", msg)
+    } else if bot != nil {
+        fmt.Printf("Notifying Bot: %s\n", msg)
+    }
+}
+```
+
+As seen above, our function signature has become quite long, even though only two arguments are used for a given function call. This continues for every new user type we add, so we have to modify the existing function every time we want a new user type.
+
+Instead, we can use an interface that creates a sort of *generic* type for the function to accept.
+```go
+type User interface {
+    Notify(msg string)
+}
+
+func (g Guest) Notify(msg string) {
+    fmt.Printf("Alerting Guest IP %s: %s\n", g.IP, msg)
+}
+
+func (m Member) Notify(msg string) {
+    fmt.Printf("Emailing Member %s: %s\n", m.Email, msg)
+}
+
+func (a Admin) Notify(msg string) {
+    fmt.Printf("SMSing Admin %s: %s\n", a.Phone, msg)
+}
+
+func NotifyUser(u User, msg string) {
+    u.Notify(msg) // Polymorphism: Go figures out which method to run
+}
+```
+
+Since these structs has a `Notify(msg string)` method, then they implement the `User` interface.
+
+So now, the `NotifyUser(u user, msg string)` never changes and will work for any user, as long as they implement the `Notify()` method.
+
+## Conclusion
+
+I don't know how I couldn't understand this before, now I've got it, it feels so obviously simple.
+
+I think what held me back for so long was being so comfortable in a dynamically typed language. In Python, I didn't have to care about the type of a parameter, it just figured it out. 
+
+From understanding this, the rest clicked into place. I fully understood the point of a class or struct not being this abstract 'blueprint for an object' but just a custom data type and its associated methods.
