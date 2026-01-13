@@ -10,38 +10,18 @@ import { Image } from "astro:assets";
     </h1>
 
     <div class="space-y-8">
-      <section class="h-entry">
-        <h2 class="text-xl font-semibold mt-6 mb-3 p-name">
-          What I'm doing <a href="https://nownownow.com/about">now</a>
-        </h2>
-        <div class="prose prose-lg max-w-none e-content">
-          <h3 class="text-lg font-semibold mt-4 mb-2">Currently working on:</h3>
-          <ul class="list-dash list-outside space-y-2 pl-3 sm:pl-6">
-            <li>Tinkering with the homelab (Nix, K3s)</li>
-            <li>Working on my dissertation</li>
-            <li>Getting faster with Colemak-DH</li>
-            <li>Learning GCP</li>
-            <li>I just came second place in a ctf :)</li>
-          </ul>
-          <p class="text-sm muted mt-4">
-            Last updated: <time class="dt-updated" datetime="2025-11-09"
-              >9th November, 2025</time
-            >
-          </p>
-        </div>
-      </section>
-
       <section>
-        <h2 class="text-xl font-semibold mb-3">Some computer bits</h2>
-        <ul class="list-dash list-outside space-y-1 pl-3 sm:pl-6">
-          <li>
-            <a href="https://www.github.com/pixel-87/cantor-pixel"
-              >Cantor-remix keyboard</a
-            >
-          </li>
-          <li>Ryzen 7500F</li>
-          <li>Radeon RX 6650 XT</li>
-        </ul>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <a href="/now" class="group block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-orange-500 transition-colors">
+            <h2 class="text-lg font-semibold group-hover:text-orange-500 transition-colors">/now</h2>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">What I'm currently up to</p>
+          </a>
+          
+          <a href="/uses" class="group block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-orange-500 transition-colors">
+            <h2 class="text-lg font-semibold group-hover:text-orange-500 transition-colors">/uses</h2>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">My hardware and software tools</p>
+          </a>
+        </div>
       </section>
 
       <section>
