@@ -1,6 +1,6 @@
 My tech blog / dev website at [ed-thomas.dev](https://ed-thomas.dev). 
 
-I love learning and want to try and express my knowledge to fully test and solidify my learning.
+Wanted to try some interesting coordinate stuff with js, also wanted to get better at writing so I made a blog as well
 
 ### License
 
