@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         maze: {
-          light: "#5d5066",
+          light: "#5D3B8E",
           dark: "#cc6600",
         },
       },
