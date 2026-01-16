@@ -3,6 +3,8 @@
   stdenvNoCC,
   nodejs_24,
   pnpm_10,
+  fetchPnpmDeps,
+  pnpmConfigHook,
 }:
 let
   nodejs = nodejs_24;
@@ -17,13 +19,13 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [
     nodejs
-    pnpm.configHook
+    pnpmConfigHook
   ];
 
-  pnpmDeps = pnpm.fetchDeps {
+  pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
     fetcherVersion = 2;
-    hash = "sha256-9xFyI205ZAdFDT6A9uE086za7lBrPMSUxGVRFM2WnmY=";
+    hash = "sha256-WeDopap6rDSAPIylK61eaklOGvr92I8xnxAgKhi5u1w=";
   };
 
   env.ASTRO_TELEMETRY_DISABLED = 1;
