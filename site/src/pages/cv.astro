@@ -11,40 +11,89 @@ import Layout from "../layouts/Layout.astro";
     </header>
 
     <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Professional Summary</h2>
-      <p class="p-note">
-        Final-year Computer Science student with a strong focus on back-end
-        systems, platform engineering, and automation. Bringing hands-on
-        experience in Python, Linux, and Containerisation to a graduate software
-        or DevOps/SRE role.
-      </p>
+      <h2 class="text-xl font-semibold mb-2">Skills</h2>
+      <ul class="list-disc ml-5 mt-2">
+        <li>DevOps: Kubernetes (K3s), Linux, Docker, GitOps (Flux).</li>
+        <li>
+          Programming Languages: Python, Java, Go, SQL, Haskell, Nix, HTML/CSS.
+        </li>
+        <li>Technologies: Git, Django, Astro, Google Cloud Platform (GCP).</li>
+      </ul>
     </section>
 
     <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Education</h2>
+      <h2 class="text-xl font-semibold mb-2">Projects</h2>
 
-      <div class="mb-3">
-        <p class="font-semibold">University of Exeter — Exeter, England</p>
-        <p class="text-sm muted">
-          BSc (Hons) Computer Science · Sept 2023 — May 2026
+      <article class="mb-3">
+        <p class="font-semibold">
+          Home Server — <a href="https://github.com/pixel-87/nixos-config"
+            >github.com/pixel-87/nixos-config</a
+          >
         </p>
         <ul class="list-disc ml-5 mt-2">
-          <li>Predicted high 2:1.</li>
           <li>
-            Relevant Modules: Data Structures, Software Development,
-            Computational Maths, Discrete Maths,
+            Built and maintain 2 node cluster with Linux (NixOS) and Kubernetes
+            (K3s).
+          </li>
+          <li>
+            Set up and maintain applications for media, ad-blocking, web
+            hosting, game server for 5+ users, automations.
+          </li>
+          <li>
+            Implemented a GitOps workflow using Flux for my personal website,
+            automating deployment.
           </li>
         </ul>
-      </div>
+      </article>
 
-      <div>
-        <p class="font-semibold">St. Michael's School — Llanelli, Wales</p>
-        <p class="text-sm muted">A-Levels & AS-Level · Sept 2016 — June 2023</p>
+      <article class="mb-3">
+        <p class="font-semibold">
+          Streak Buttons — <a href="https://github.com/pixel-87/duo-streak-widget"
+            >github.com/pixel-87/duo-streak-widget</a
+          >
+        </p>
         <ul class="list-disc ml-5 mt-2">
-          <li>A-Levels: A*A*A — Maths, Physics, Computer Science.</li>
-          <li>AS-Level: A — Chemistry.</li>
+          <li>
+            Designed a Go microservice to generate personal streak
+            buttons/widgets e.g. Duolingo, Github.
+          </li>
+          <li>
+            Entirely cloud native, using Terraform to manage serverless GCP
+            Cloud Run.
+          </li>
+          <li>Utilising CI for code quality through testing and linting.</li>
         </ul>
-      </div>
+      </article>
+
+      <article class="mb-3">
+        <p class="font-semibold">
+          Personal Website — <a href="https://ed-thomas.dev">ed-thomas.dev</a>
+        </p>
+        <ul class="list-disc ml-5 mt-2">
+          <li>
+            Developed a personal developer website using Astro, HTML, CSS, JS.
+          </li>
+          <li>
+            Write blog posts on various tech, to document my learning and share
+            my journey.
+          </li>
+        </ul>
+      </article>
+
+      <article>
+        <p class="font-semibold">
+          Custom Split Ergonomic Keyboard — <a
+            href="https://github.com/pixel-87/cantor-pixel"
+            >github.com/pixel-87/cantor-pixel</a
+          >
+        </p>
+        <ul class="list-disc ml-5 mt-2">
+          <li>
+            Adapted and assembled a split ergonomic keyboard: soldering switches
+            and microcontrollers, and configuring firmware.
+          </li>
+        </ul>
+      </article>
     </section>
 
     <section class="mb-6">
@@ -52,7 +101,7 @@ import Layout from "../layouts/Layout.astro";
 
       <article>
         <p class="font-semibold">
-          Excode Workshop Leaders - Google Developer Student Club (GDSC) (<a
+          Excode Workshop Leader — Google Developer Student Club (GDSC) (<a
             href="https://excode.co.uk">excode.co.uk</a
           >) <span class="text-sm muted">Sept 2025 — Nov 2025</span>
         </p>
@@ -60,7 +109,7 @@ import Layout from "../layouts/Layout.astro";
           <li>Co-lead beginner-friendly Python workshops.</li>
           <li>
             Guide 20+ students through practical exercises in fundamental, core
-            python concepts, program design, and debugging strategies.
+            Python concepts, program design, and debugging strategies.
           </li>
         </ul>
       </article>
@@ -94,9 +143,9 @@ import Layout from "../layouts/Layout.astro";
           >
         </p>
         <ul class="list-disc ml-5 mt-2">
-          <li>Organised weekly socials for up to 100+ people.</li>
           <li>
-            ‣ Coordinated with venues to schedule events and manage logistics.
+            Organised weekly socials for 100+ people, coordinating with venues
+            to schedule events and manage logistics.
           </li>
           <li>Taught new members climbing fundamentals and safety.</li>
         </ul>
@@ -113,88 +162,42 @@ import Layout from "../layouts/Layout.astro";
             Provided weekly technical guidance and mentorship to 15+ younger
             students.
           </li>
-          <li>
-            Troubleshot common bugs and broke down complex concepts to assist
-            with coursework.
-          </li>
         </ul>
       </article>
     </section>
 
     <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Projects</h2>
+      <h2 class="text-xl font-semibold mb-2">Education</h2>
 
-      <article class="mb-3">
-        <p class="font-semibold">
-          Home server <a href="https://github.com/pixel-87/nixos-config"
-            >github.com/pixel-87/nixos-config</a
-          >
+      <div class="mb-3">
+        <p class="font-semibold">University of Exeter — Exeter, England</p>
+        <p class="text-sm muted">
+          BSc (Hons) Computer Science · Sept 2023 — May 2026
         </p>
         <ul class="list-disc ml-5 mt-2">
+          <li>Predicted high 2:1.</li>
           <li>
-            Built and maintain 2 node cluster with Linux (NixOS) and Kubernetes
-            (K3s).
-          </li>
-          <li>
-            Set up and maintain applications for media, ad-blocking, web
-            hosting, game server for 5+ users, automations.
-          </li>
-          <li>
-            Implemented a GitOps workflow using Flux for my personal website,
-            automating deployment.
+            Relevant Modules: Data Structures, Software Development, Discrete
+            Maths, Database Theory and Design, Enterprise Computing, High
+            Performance Computing, Data Science at Scale.
           </li>
         </ul>
-      </article>
+      </div>
 
-      <article class="mb-3">
-        <p class="font-semibold">
-          Personal Website — <a href="https://ed-thomas.dev">ed-thomas.dev</a>
-        </p>
+      <div>
+        <p class="font-semibold">St. Michael's School — Llanelli, Wales</p>
+        <p class="text-sm muted">A-Levels & AS-Level · Sept 2016 — June 2023</p>
         <ul class="list-disc ml-5 mt-2">
-          <li>
-            Developed a personal developer website using Astro, HTML, CSS, JS.
-          </li>
-          <li>
-            Write blog posts on various tech, to document my learning and share
-            my journey.
-          </li>
+          <li>A-Levels: A*A*A — Maths, Physics, Computer Science.</li>
+          <li>AS-Level: A — Chemistry.</li>
         </ul>
-      </article>
-
-      <article>
-        <p class="font-semibold">
-          Custom Split Erogonomic Keyboard — <a
-            href="https://github.com/pixel-87/cantor-pixel"
-            >github.com/pixel-87/cantor-pixel</a
-          >
-        </p>
-        <ul class="list-disc ml-5 mt-2">
-          <li>
-            Adapted and assembled a split ergonomic keyboard, learning to solder
-            key switches and microcontrollers, and configuring firmware.
-          </li>
-        </ul>
-      </article>
+      </div>
     </section>
 
     <section class="mb-6">
       <h2 class="text-xl font-semibold mb-2">Certificates</h2>
       <ul class="list-disc ml-5 mt-2">
         <li>Github Foundations, Github · Oct 2025</li>
-      </ul>
-    </section>
-
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Skills</h2>
-      <ul class="list-disc ml-5 mt-2">
-        <li>
-          Programming Languages: Python, Java, SQL, Haskell, Nix, HTML/CSS,
-          Prolog.
-        </li>
-        <li>
-          Technologies: Linux, Git, Docker, Kubernetes, Django, Astro, Google
-          Cloud Platform.
-        </li>
       </ul>
     </section>
   </main>
