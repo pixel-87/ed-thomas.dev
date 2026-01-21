@@ -19,6 +19,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [
     nodejs
+    pnpm
     pnpmConfigHook
   ];
 
