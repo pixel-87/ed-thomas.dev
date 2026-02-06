@@ -3,202 +3,177 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="CV">
-  <main class="max-w-4xl mx-auto">
-    <header class="mb-4 h-card vcard">
-      <h1 class="text-2xl font-bold p-name">
-        <span class="text-[#5D3B8E] dark:text-[#cc6600]">*</span> cv
-      </h1>
-    </header>
+  <main class="max-w-4xl mx-auto py-8 px-4">
 
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Skills</h2>
-      <ul class="list-disc ml-5 mt-2">
-        <li>DevOps: Kubernetes (K3s), Linux, Docker, GitOps (Flux).</li>
-        <li>
-          Programming Languages: Python, Java, Go, SQL, Haskell, Nix, HTML/CSS.
-        </li>
-        <li>Technologies: Git, Django, Astro, Google Cloud Platform (GCP).</li>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-3 border-b-2 border-gray-200 dark:border-gray-700 pb-1">Skills</h2>
+      <ul class="list-disc ml-5 space-y-1">
+        <li><span class="font-medium">DevOps:</span> Kubernetes (K3s), Linux (NixOS), Docker, GitOps (Flux), Nixpkgs Maintainer (torcs).</li>
+        <li><span class="font-medium">Programming Languages:</span> Python, Java, Go, SQL, Haskell, Nix, HTML/CSS.</li>
+        <li><span class="font-medium">Technologies:</span> Git, Django, Astro, Google Cloud Platform (GCP).</li>
       </ul>
     </section>
 
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Projects</h2>
-
-      <article class="mb-3">
-        <p class="font-semibold">
-          Home Server — <a href="https://github.com/pixel-87/nixos-config"
-            >github.com/pixel-87/nixos-config</a
-          >
-        </p>
-        <ul class="list-disc ml-5 mt-2">
-          <li>
-            Built and maintain 2 node cluster with Linux (NixOS) and Kubernetes
-            (K3s).
-          </li>
-          <li>
-            Set up and maintain applications for media, ad-blocking, web
-            hosting, game server for 5+ users, automations.
-          </li>
-          <li>
-            Implemented a GitOps workflow using Flux for my personal website,
-            automating deployment.
-          </li>
-        </ul>
-      </article>
-
-      <article class="mb-3">
-        <p class="font-semibold">
-          Streak Buttons — <a href="https://github.com/pixel-87/duo-streak-widget"
-            >github.com/pixel-87/duo-streak-widget</a
-          >
-        </p>
-        <ul class="list-disc ml-5 mt-2">
-          <li>
-            Designed a Go microservice to generate personal streak
-            buttons/widgets e.g. Duolingo, Github.
-          </li>
-          <li>
-            Entirely cloud native, using Terraform to manage serverless GCP
-            Cloud Run.
-          </li>
-          <li>Utilising CI for code quality through testing and linting.</li>
-        </ul>
-      </article>
-
-      <article class="mb-3">
-        <p class="font-semibold">
-          Personal Website — <a href="https://ed-thomas.dev">ed-thomas.dev</a>
-        </p>
-        <ul class="list-disc ml-5 mt-2">
-          <li>
-            Developed a personal developer website using Astro, HTML, CSS, JS.
-          </li>
-          <li>
-            Write blog posts on various tech, to document my learning and share
-            my journey.
-          </li>
-        </ul>
-      </article>
-
-      <article>
-        <p class="font-semibold">
-          Custom Split Ergonomic Keyboard — <a
-            href="https://github.com/pixel-87/cantor-pixel"
-            >github.com/pixel-87/cantor-pixel</a
-          >
-        </p>
-        <ul class="list-disc ml-5 mt-2">
-          <li>
-            Adapted and assembled a split ergonomic keyboard: soldering switches
-            and microcontrollers, and configuring firmware.
-          </li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Experience</h2>
-
-      <article>
-        <p class="font-semibold">
-          Excode Workshop Leader — Google Developer Student Club (GDSC) (<a
-            href="https://excode.co.uk">excode.co.uk</a
-          >) <span class="text-sm muted">Sept 2025 — Nov 2025</span>
-        </p>
-        <ul class="list-disc ml-5 mt-2">
-          <li>Co-lead beginner-friendly Python workshops.</li>
-          <li>
-            Guide 20+ students through practical exercises in fundamental, core
-            Python concepts, program design, and debugging strategies.
-          </li>
-        </ul>
-      </article>
-
-      <article class="mt-4 mb-4">
-        <p class="font-semibold">
-          Onboarding Assistant <span class="text-sm muted"
-            >June 2024 — Sept 2024</span
-          >
-        </p>
-        <p class="text-sm muted">
-          Pembrokeshire County Council · Pembrokeshire, Wales
-        </p>
-        <ul class="list-disc ml-5 mt-2">
-          <li>
-            Streamlined daily workflow by developing a Python script to automate
-            data filtering, reducing manual processing time by 60% and
-            eliminating human error.
-          </li>
-          <li>
-            Enabled system access for new employees, processing sensitive data
-            in compliance with GDPR.
-          </li>
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-3 border-b-2 border-gray-200 dark:border-gray-700 pb-1">Awards and Achievements</h2>
+      
+      <article class="mb-4">
+        <div class="flex justify-between items-baseline flex-wrap">
+          <h3 class="font-semibold">Hack South West Hackathon 2026 - 2nd place</h3>
+          <a href="https://github.com/apex-hinde/HSW-garbo" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">github.com/apex-hinde/HSW-garbo</a>
+        </div>
+        <ul class="list-disc ml-5 mt-1">
+          <li>Engineered a business logic platform in Go, integrating custom AI agent skills with a SQLite data layer to automate payroll and employee management.</li>
         </ul>
       </article>
 
       <article class="mb-4">
-        <p class="font-semibold">
-          Social Secretary — University of Exeter Climbing Club <span
-            class="text-sm muted">Sept 2024 — June 2025</span
-          >
-        </p>
-        <ul class="list-disc ml-5 mt-2">
-          <li>
-            Organised weekly socials for 100+ people, coordinating with venues
-            to schedule events and manage logistics.
-          </li>
+        <div class="flex justify-between items-baseline flex-wrap">
+          <h3 class="font-semibold">Hack South West CTF 2025 - 2nd place</h3>
+        </div>
+        <ul class="list-disc ml-5 mt-1">
+          <li>Solved challenges in Network Forensics (WireShark), Linux exploitation, and scripting (Python) in a high-pressure competitive environment.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-3 border-b-2 border-gray-200 dark:border-gray-700 pb-1">Projects</h2>
+
+      <article class="mb-4">
+        <div class="flex justify-between items-baseline flex-wrap">
+          <h3 class="font-semibold">Home Server</h3>
+          <a href="https://github.com/pixel-87/nixos-config" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">github.com/pixel-87/nixos-config</a>
+        </div>
+        <ul class="list-disc ml-5 mt-1">
+          <li>Built and maintain 2 node cluster with Linux (NixOS) and Kubernetes (K3s).</li>
+          <li>Set up and maintain applications for media, ad-blocking, web hosting, game server for 5+ users, automations.</li>
+          <li>Implemented a GitOps workflow using Flux for my personal website, automating deployment.</li>
+        </ul>
+      </article>
+
+      <article class="mb-4">
+        <div class="flex justify-between items-baseline flex-wrap">
+          <h3 class="font-semibold">Streak Buttons</h3>
+          <a href="https://github.com/pixel-87/duo-streak-widget" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">github.com/pixel-87/duo-streak-widget</a>
+        </div>
+        <ul class="list-disc ml-5 mt-1">
+          <li>designed a Go microservice to generate personal streak buttons/widgets e.g. Duolingo, Github.</li>
+          <li>Entirely cloud native, using Terraform to manage serverless GCP Cloud Run.</li>
+          <li>Utilising CI for code quality through testing and linting.</li>
+        </ul>
+      </article>
+
+      <article class="mb-4">
+        <div class="flex justify-between items-baseline flex-wrap">
+          <h3 class="font-semibold">Personal Website</h3>
+          <a href="https://ed-thomas.dev" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">ed-thomas.dev</a>
+        </div>
+        <ul class="list-disc ml-5 mt-1">
+          <li>Developed a personal developer website using Astro, HTML, CSS, JS.</li>
+          <li>Write blog posts on various tech, to document my learning and share my journey.</li>
+        </ul>
+      </article>
+
+      <article class="mb-4">
+        <div class="flex justify-between items-baseline flex-wrap">
+          <h3 class="font-semibold">Custom Split Ergonomic Keyboard</h3>
+          <a href="https://github.com/pixel-87/cantor-pixel" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">github.com/pixel-87/cantor-pixel</a>
+        </div>
+        <ul class="list-disc ml-5 mt-1">
+          <li>Adapted and assembled a split ergonomic keyboard: soldering switches and microcontrollers, and configuring firmware.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-3 border-b-2 border-gray-200 dark:border-gray-700 pb-1">Experience</h2>
+
+      <article class="mb-6">
+        <div class="flex justify-between items-baseline flex-wrap mb-1">
+          <h3 class="font-semibold text-lg">Excode Workshop Leader</h3>
+          <span class="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">Sept 2025 — Nov 2025</span>
+        </div>
+        <div class="text-gray-700 dark:text-gray-300 mb-2">
+          Google Developer Student Club (GDSC) — <a href="https://excode.co.uk" class="text-blue-600 hover:underline">excode.co.uk</a>
+        </div>
+        <ul class="list-disc ml-5">
+          <li>Co-lead beginner-friendly Python workshops.</li>
+          <li>Guide 20+ students through practical exercises in fundamental, core Python concepts, program design, and debugging strategies.</li>
+        </ul>
+      </article>
+
+      <article class="mb-6">
+        <div class="flex justify-between items-baseline flex-wrap mb-1">
+          <h3 class="font-semibold text-lg">Onboarding Assistant</h3>
+          <span class="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">June 2024 — Sept 2024</span>
+        </div>
+        <div class="text-gray-700 dark:text-gray-300 mb-2">
+          Pembrokeshire County Council · Pembrokeshire, Wales
+        </div>
+        <ul class="list-disc ml-5">
+          <li>Streamlined daily workflow by developing a Python script to automate data filtering, reducing manual processing time by 60% and eliminating human error.</li>
+          <li>Enabled system access for new employees, processing sensitive data in compliance with GDPR.</li>
+        </ul>
+      </article>
+
+      <article class="mb-6">
+        <div class="flex justify-between items-baseline flex-wrap mb-1">
+          <h3 class="font-semibold text-lg">Social Secretary</h3>
+          <span class="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">Sept 2024 — June 2025</span>
+        </div>
+        <div class="text-gray-700 dark:text-gray-300 mb-2">
+          University of Exeter Climbing Club
+        </div>
+        <ul class="list-disc ml-5">
+          <li>Organised weekly socials for 100+ people, coordinating with venues to schedule events and manage logistics.</li>
           <li>Taught new members climbing fundamentals and safety.</li>
         </ul>
       </article>
-
-      <article>
-        <p class="font-semibold">
-          Digital Prefect <span class="text-sm muted"
-            >Sept 2022 — June 2023</span
-          >
-        </p>
-        <ul class="list-disc ml-5 mt-2">
-          <li>
-            Provided weekly technical guidance and mentorship to 15+ younger
-            students.
-          </li>
-        </ul>
-      </article>
     </section>
 
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Education</h2>
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-3 border-b-2 border-gray-200 dark:border-gray-700 pb-1">Education</h2>
 
-      <div class="mb-3">
-        <p class="font-semibold">University of Exeter — Exeter, England</p>
-        <p class="text-sm muted">
-          BSc (Hons) Computer Science · Sept 2023 — May 2026
-        </p>
-        <ul class="list-disc ml-5 mt-2">
+      <div class="mb-5">
+        <div class="flex justify-between items-start flex-wrap mb-1">
+           <h3 class="font-semibold">University of Exeter</h3>
+           <span class="text-sm text-gray-600 dark:text-gray-400">Exeter, England</span>
+        </div>
+        <div class="flex justify-between items-baseline flex-wrap mb-1">
+           <span class="italic">BSc (Hons) Computer Science</span>
+           <span class="text-sm text-gray-600 dark:text-gray-400">Sept 2023 — May 2026</span>
+        </div>
+        <ul class="list-disc ml-5">
           <li>Predicted high 2:1.</li>
-          <li>
-            Relevant Modules: Data Structures, Software Development, Discrete
-            Maths, Database Theory and Design, Enterprise Computing, High
-            Performance Computing, Data Science at Scale.
-          </li>
+          <li>Relevant Modules: Data Structures, Software Development, Discrete Maths, Database Theory and design, Enterprise Computing, High Performance Computing, Data Science at Scale.</li>
         </ul>
       </div>
 
-      <div>
-        <p class="font-semibold">St. Michael's School — Llanelli, Wales</p>
-        <p class="text-sm muted">A-Levels & AS-Level · Sept 2016 — June 2023</p>
-        <ul class="list-disc ml-5 mt-2">
-          <li>A-Levels: A*A*A — Maths, Physics, Computer Science.</li>
-          <li>AS-Level: A — Chemistry.</li>
+      <div class="mb-5">
+        <div class="flex justify-between items-start flex-wrap mb-1">
+           <h3 class="font-semibold">St. Michael's School</h3>
+           <span class="text-sm text-gray-600 dark:text-gray-400">Llanelli, Wales</span>
+        </div>
+         <div class="flex justify-between items-baseline flex-wrap mb-1">
+             <span class="italic">A-Levels</span>
+             <span class="text-sm text-gray-600 dark:text-gray-400">Sept 2016 — June 2023</span>
+        </div>
+        <ul class="list-disc ml-5">
+          <li>A-Levels: A*A*A (Maths, Physics, CS); AS-Level: A (Chemistry)</li>
         </ul>
       </div>
     </section>
 
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Certificates</h2>
-      <ul class="list-disc ml-5 mt-2">
-        <li>Github Foundations, Github · Oct 2025</li>
-      </ul>
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-3 border-b-2 border-gray-200 dark:border-gray-700 pb-1">Certificates</h2>
+      <div class="flex justify-between items-center">
+        <ul class="list-disc ml-5">
+          <li>Github Foundations, Github</li>
+        </ul>
+        <span class="text-sm text-gray-600 dark:text-gray-400">Oct 2025</span>
+      </div>
     </section>
   </main>
 </Layout>
