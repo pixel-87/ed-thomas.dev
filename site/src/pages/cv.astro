@@ -4,6 +4,17 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="CV">
   <main class="max-w-4xl mx-auto py-8 px-4">
+    <div class="flex justify-end mb-4 print:hidden">
+      <button
+        id="copy-cv-btn"
+        class="flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-all duration-200 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300"
+        aria-label="Copy CV to clipboard"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span>Copy</span>
+      </button>
+    </div>
+    <div id="cv-content">
 
 
     <section class="mb-8">
@@ -175,5 +186,34 @@ import Layout from "../layouts/Layout.astro";
         <span class="text-sm text-gray-600 dark:text-gray-400">Oct 2025</span>
       </div>
     </section>
+    </div>
   </main>
+
+  <script>
+    const copyBtn = document.getElementById("copy-cv-btn");
+    const cvContent = document.getElementById("cv-content");
+
+    copyBtn?.addEventListener("click", async () => {
+      if (!cvContent) return;
+
+      try {
+        await navigator.clipboard.writeText(cvContent.innerText);
+        const originalHtml = copyBtn.innerHTML;
+        copyBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>Copied!</span>
+        `;
+        copyBtn.classList.add("text-green-700", "dark:text-green-400", "border-green-300", "dark:border-green-800", "bg-green-50", "dark:bg-green-900/30");
+        copyBtn.classList.remove("bg-gray-100", "dark:bg-gray-800", "border-gray-200", "dark:border-gray-700", "text-gray-700", "dark:text-gray-300");
+
+        setTimeout(() => {
+          copyBtn.innerHTML = originalHtml;
+          copyBtn.classList.remove("text-green-700", "dark:text-green-400", "border-green-300", "dark:border-green-800", "bg-green-50", "dark:bg-green-900/30");
+          copyBtn.classList.add("bg-gray-100", "dark:bg-gray-800", "border-gray-200", "dark:border-gray-700", "text-gray-700", "dark:text-gray-300");
+        }, 2000);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+      }
+    });
+  </script>
 </Layout>
