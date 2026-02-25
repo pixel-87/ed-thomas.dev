@@ -19,7 +19,7 @@ jobs:
       image_name: ${{ steps.image_name.outputs.name }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v19
@@ -27,14 +27,14 @@ jobs:
       - name: Setup Nix cache
         uses: DeterminateSystems/magic-nix-cache-action@v13
 
-      - name: Build flake image (Nix)
+      - name: Build flake container image (Nix)
         run: |
-          nix build -L .#packages.x86_64-linux.docker
+          nix build -L .#packages.x86_64-linux.container
 
       - name: Prepare image artifact
         run: |
           mkdir -p artifact
-          cp "$(readlink -f result)" artifact/docker-image.tar
+          cp "$(readlink -f result)" artifact/container-image.tar
 
       - name: Define image name
         id: image_name
@@ -43,7 +43,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: docker-image
+          name: container-image
           path: artifact
 
   deploy:
@@ -54,7 +54,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: docker-image
+          name: container-image
           path: artifact
 
       - name: GitHub Container Registry login
@@ -66,10 +66,10 @@ jobs:
 
       - name: Load image into Docker and push to GHCR
         run: |
-          docker load < artifact/docker-image.tar
+          docker load < artifact/container-image.tar
 
           # Define all the names and tags we need
-          IMAGE_NAME="ed-thomas.dev" # The name defined in nix/docker.nix
+          IMAGE_NAME="ed-thomas.dev" # The name defined in nix/container-image.nix
           IMAGE_ID="ghcr.io/${{ github.repository_owner }}/${IMAGE_NAME}"
           
           TIMESTAMP=$(date +%Y%m%d%H%M%S)
