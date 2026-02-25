@@ -1,31 +1,37 @@
 {
   description = "My dev site, using astro";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-  };
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
-  outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" "aarch64-linux" ];
-      
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
-        packages = {
-          site = pkgs.callPackage ./nix/default.nix { };
-          docker = pkgs.callPackage ./nix/docker.nix { 
-            site = config.packages.site;
-          };
-          default = config.packages.site;
+  outputs =
+    { self, nixpkgs, ... }:
+    let
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+
+      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
+    in
+    {
+      packages = forAllSystems (pkgs: {
+        ed-thomas-dev = pkgs.callPackage ./nix/default.nix { };
+        default = self.packages.${pkgs.stdenv.hostPlatform.system}.ed-thomas-dev;
+
+        container = pkgs.callPackage ./nix/container-image.nix {
+          edThomasDev = pkgs.callPackage ./nix/default.nix { };
         };
 
-        devShells.default = pkgs.callPackage ./nix/shell.nix { };
-      };
+      });
 
-      flake = {
-        overlays.default = final: _: { 
-          ed-thomas-dev = final.callPackage ./nix/default.nix { }; 
-        };
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.callPackage ./nix/shell.nix { };
+      });
+
+      overlays.default = final: _: {
+        ed-thomas-dev = final.callPackage ./nix/default.nix { };
       };
     };
 }

@@ -1,4 +1,4 @@
-{ pkgs, site }:
+{ pkgs, edThomasDev }:
 
 let
   port = "80";
@@ -6,19 +6,23 @@ in
 pkgs.dockerTools.buildLayeredImage {
   name = "ed-thomas.dev";
   tag = "latest";
-  
+
   contents = [ pkgs.static-web-server ];
 
   config = {
-    Cmd = [ 
+    Cmd = [
       "static-web-server"
-      "--port" port
-      "--root" site
-      "--compression" "true"
-      "--page-fallback" "404.html"
+      "--port"
+      port
+      "--root"
+      edThomasDev
+      "--compression"
+      "true"
+      "--page-fallback"
+      "404.html"
     ];
     ExposedPorts = {
-      "${port}/tcp" = {};
+      "${port}/tcp" = { };
     };
   };
 }

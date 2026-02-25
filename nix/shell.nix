@@ -1,5 +1,5 @@
 {
-  mkShell,
+  mkShellNoCC,
   callPackage,
   astro-language-server,
   typescript-language-server,
@@ -12,7 +12,7 @@
 let
   mainPkg = callPackage ./default.nix { };
 in
-mkShell {
+mkShellNoCC {
   inputsFrom = [ mainPkg ];
 
   packages = [
