@@ -11,7 +11,7 @@ let
   pnpm = pnpm_10.override { inherit nodejs; };
 in
 stdenvNoCC.mkDerivation (finalAttrs: {
-  pname = "ed-thomas-site";
+  pname = "ed-thomas-dev";
   version = "0.1.0";
 
   # Build from the site/ directory which contains the Astro project
@@ -41,11 +41,12 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     runHook preInstall
 
     mkdir -p "$out"
-    # Astro outputs to `dist` by default; copy its contents to $out
+    # Astro outputs to `dist` by default; copy all contents (including dotfiles) to $out
     if [ -d dist ]; then
-      cp -r dist/* "$out"
+      cp -r dist/. "$out"
     else
-      echo "Warning: no dist directory found after build"
+      echo "Error: no dist directory found after build"
+      exit 1
     fi
 
     runHook postInstall
@@ -55,6 +56,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     description = "Ed Thomas personal website (Astro)";
     homepage = "https://ed-thomas.dev";
     license = lib.licenses.gpl3Plus;
-    maintainers = with lib.maintainers; [ ];
+    maintainers = with lib.maintainers; [ pixel-87 ];
   };
 })
