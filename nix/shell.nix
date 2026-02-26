@@ -8,6 +8,7 @@
   eslint_d,
   prettierd,
   nixfmt,
+  vale,
 }:
 let
   mainPkg = callPackage ./default.nix { };
@@ -23,6 +24,7 @@ mkShellNoCC {
     eslint_d
     prettierd
     nixfmt
+    vale
   ];
 
   shellHook = ''

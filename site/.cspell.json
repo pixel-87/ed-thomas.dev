@@ -1,0 +1,47 @@
+{
+  "version": "0.2",
+  "language": "en,en-GB",
+  "useGitignore": true,
+  "files": [
+    "src/content/**/*.{md,mdx}"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "dist",
+    ".astro"
+  ],
+  "words": [
+    "ahaha",
+    "ahahah",
+    "Astro",
+    "blackpill",
+    "cashflow",
+    "Choc",
+    "colemak",
+    "Duolingo",
+    "eslint",
+    "flux",
+    "fluxCD",
+    "ghcertified",
+    "GitHub",
+    "homelab",
+    "Jellyfin",
+    "JLCPCB",
+    "Kailh",
+    "keybr",
+    "KiCad",
+    "mechboards",
+    "miryoku",
+    "mdx",
+    "NixOS",
+    "nixpkgs",
+    "ortholinear",
+    "pnpm",
+    "Salus",
+    "tailwindcss",
+    "Vallack",
+    "foldl",
+    "TRRS",
+    "TypeScript"
+  ]
+}
