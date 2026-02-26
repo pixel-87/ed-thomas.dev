@@ -28,6 +28,7 @@ site/.DS_Store
 site/.idea/
 
 site/.vscode/
+site/.vale/
 
 *.Identifier
 
