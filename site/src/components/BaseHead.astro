@@ -9,7 +9,7 @@ export interface Props {
 const {
   title,
   description = "Ed Thomas - Developer, writer, and technology enthusiast",
-  image = "/og-image.jpg",
+  image = "/og-image.png",
   canonical,
 } = Astro.props;
 
@@ -33,6 +33,8 @@ const imageURL = new URL(image, Astro.url);
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:alt" content={title} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
