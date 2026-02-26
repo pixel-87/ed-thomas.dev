@@ -13,8 +13,42 @@ permissions:
   packages: write
 
 jobs:
+  content-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "pnpm"
+          cache-dependency-path: site/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm --dir site install --frozen-lockfile
+
+      - name: Install Vale
+        uses: errata-ai/vale-action@reviewdog
+        with:
+          version: 3.13.0
+          vale_flags: "--no-exit"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Lint blog spelling and grammar
+        run: pnpm --dir site run lint:content
+
   build:
     runs-on: ubuntu-latest
+    needs: content-lint
     outputs:
       image_name: ${{ steps.image_name.outputs.name }}
     steps:
