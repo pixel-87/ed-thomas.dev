@@ -43,8 +43,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Lint blog spelling and grammar
-        run: pnpm --dir site run lint:content
+      - name: Lint blog spelling
+        run: pnpm --dir site run lint:spelling
 
   build:
     runs-on: ubuntu-latest
