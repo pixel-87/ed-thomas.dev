@@ -1,11 +1,10 @@
 ---
 // This component loads the maze asynchronously to avoid render blocking
-import drawHexMazeUrl from "../scripts/drawHexMaze.ts?url";
 ---
 
 <div class="relative w-full h-full">
   <!-- Canvas will be added dynamically after page load -->
-  <div id="maze-canvas-container" data-maze-script={drawHexMazeUrl}></div>
+  <div id="maze-canvas-container"></div>
 
   <!-- Semi-transparent overlay for better text readability -->
   <div class="fixed inset-0 z-5 pointer-events-none">
@@ -18,7 +17,7 @@ import drawHexMazeUrl from "../scripts/drawHexMaze.ts?url";
   </div>
 </div>
 
-<script is:inline>
+<script>
   // Use requestIdleCallback to load maze when browser is idle
   // Falls back to setTimeout for browsers that don't support it
   function loadMazeWhenIdle() {
@@ -33,19 +32,16 @@ import drawHexMazeUrl from "../scripts/drawHexMaze.ts?url";
       // Insert canvas at the beginning of the container's parent
       container.parentElement.insertBefore(canvas, container);
 
-      // Get the maze script URL from data attribute
-      const scriptUrl = container.getAttribute("data-maze-script");
-      if (scriptUrl) {
-        // Dynamically import and initialize the maze
-        import(scriptUrl)
-          .then((module) => {
-            const initMaze = module.default;
-            initMaze({ canvas });
-          })
-          .catch((error) => {
-            console.error("Failed to load maze script:", error);
-          });
-      }
+      // Dynamically import and initialize the maze. 
+      // Vite will bundle this .ts file into a separate .js chunk automatically.
+      import("../scripts/drawHexMaze.ts")
+        .then((module) => {
+          const initMaze = module.default;
+          initMaze({ canvas });
+        })
+        .catch((error) => {
+          console.error("Failed to load maze script:", error);
+        });
     }
   }
 
