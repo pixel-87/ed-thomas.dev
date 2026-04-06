@@ -1,0 +1,33 @@
+---
+title: "HackSouthWest Hackathon - Liminal Payroll"
+description: "2nd place project, combining AI agents with business logic for a crypto banking app"
+tags: ["AI Agents", "Blockchain Banking", "Hackathon", "Go"]
+featured: false
+github: "https://github.com/apex-hinde/HSW-garbo" 
+---
+
+So, me and some friends competed in a hackathon in exeter uni and we combined a few different bits of tech for our project.
+
+The main task was building something to do with AI agents for a blockchain banking startup called [Liminal](https://www.becomeliminal.com/). They gave us an sdk, an api key (that they rotated 3 or so times since it kept getting pushed) and 24 hours.
+
+We took a while to come up with something, just playing around with the sdk and trying to write our own skills for the agent.
+
+We settled on a business logic platform, so employees, payroll and cashflow could be managed and automated. This could be done through buttons to REST APIs, or by asking the chatbot.
+
+The machine learning side of it went through about 3 rewrites, initially being done in python and it ended up being all written in go.
+
+## My contribution
+
+My biggest contribution was the employee database, its CRUD functions, and making those funcs accessible to the chatbot.
+
+At first I wasn't actually that convinced with what I was building. I thought it was a bit of a waste of electricity to get a LLM to perform what just some buttons. When it was all built it was surprisingly useful.
+
+So, since its an LLM, the chatbot can understand natural language and then act on it. This means it is actually able to string together these tools we made for it.
+
+While we had functions to get employees by department and change salaries, there wasn't a button for changing a department's employees wages.
+The chatbot when prompted "reduce engineering's wage by 10%" called multiple of these tools one after another, almost like a unix pipe.
+
+(I found this when I asked it to drop the table, not realising that this wasn't a skill, it called all ids, and then remove them all).
+
+I'm still undecided on if its good to implement an LLM, we had claude sonnet 4 which was definitely overkill, when buttons / automated systems have worked fine for this for decades at this point. 
+Although, models have been getting more performant and cheaper to run, so maybe it could be worth it.

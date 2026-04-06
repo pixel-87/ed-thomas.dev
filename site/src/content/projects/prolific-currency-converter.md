@@ -1,8 +1,7 @@
 ---
 title: "prolific currency converter"
-description: "A browser extension to covert currencies on prolific.com"
+description: "A browser extension to convert currencies on prolific.com"
 tags: ["Browser extension", "TS/JS"]
-date: 2026-01-02
 featured: true
 github: "https://github.com/pixel-87/prolific_currency_converter"
 ---

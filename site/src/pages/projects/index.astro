@@ -2,10 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
-const allProjects = await getCollection("projects");
-const projects = allProjects.sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+const projects = await getCollection("projects");
 ---
 
 <Layout title="Projects">
@@ -20,15 +17,6 @@ const projects = allProjects.sort(
             <h2 class="text-xl font-semibold mb-2">
               <a href={`/projects/${project.slug}`}>{project.data.title}</a>
             </h2>
-            {project.data.date ? (
-              <div class="muted text-sm mb-2">
-                {project.data.date.toLocaleDateString("en-GB", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </div>
-            ) : null}
             <p class="muted mb-4">{project.data.description}</p>
             {project.data.tags && project.data.tags.length ? (
               <div class="flex gap-2 flex-wrap">

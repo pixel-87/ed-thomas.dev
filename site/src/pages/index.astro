@@ -10,9 +10,7 @@ const featuredPosts = allBlogPosts
 
 // Get latest 3 projects
 const allProjects = await getCollection("projects");
-const latestProjects = allProjects
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+const latestProjects = allProjects.slice(0, 3);
 ---
 
 <Layout title="Ed Thomas">
