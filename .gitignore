@@ -37,3 +37,12 @@ site/.vale/
 result
 
 .direnv/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+*.auto.tfvars
+terraform.tfvars
+terraform.tfvars.json
