@@ -65,45 +65,45 @@ import Layout from "../layouts/Layout.astro";
         </article>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-xl font-semibold mb-3 border-b-2 border-gray-200 dark:border-gray-700 pb-1">Projects</h2>
+       <section class="mb-8">
+         <h2 class="text-xl font-semibold mb-3 border-b-2 border-gray-200 dark:border-gray-700 pb-1">Projects</h2>
 
-        <article class="mb-4">
-          <div class="flex justify-between items-baseline flex-wrap">
-            <h3 class="font-semibold">Home Server (Kubernetes + GitOps)</h3>
-            <a href="https://github.com/pixel-87/nixos-config" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">github.com/pixel-87/nixos-config</a>
-          </div>
-          <ul class="list-disc ml-5 mt-1">
-            <li>Architected and operated a 2-node homelab platform using <strong>Linux (NixOS)</strong> and <strong>Kubernetes (K3s)</strong>, with <strong>MetalLB load balancing</strong>, applying <strong>DevOps</strong> practices around automation and observability.</li>
-            <li>Implemented a <strong>GitOps</strong>-driven <strong>CI/CD</strong> workflow with <strong>Flux</strong> to automate website deployments.</li>
-            <li>Deployed and managed self-hosted services (media, DNS, web hosting, game servers, and automations) for 5+ users.</li>
-            <li>Used <strong>Prometheus/Grafana</strong> with <strong>Flux Helm Releases</strong>, plus <strong>alerting</strong> and <strong>metrics dashboards</strong>.</li>
-          </ul>
-        </article>
+         <article class="mb-4">
+           <div class="flex justify-between items-baseline flex-wrap">
+             <h3 class="font-semibold">Home Server (Kubernetes + GitOps)</h3>
+             <a href="https://github.com/pixel-87/nixos-config" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">github.com/pixel-87/nixos-config</a>
+           </div>
+           <ul class="list-disc ml-5 mt-1">
+             <li>Architected and operated a 2-node homelab platform using <strong>Linux (NixOS)</strong> and <strong>Kubernetes (K3s)</strong>, with <strong>MetalLB load balancing</strong>, applying <strong>DevOps</strong> practices around automation and observability.</li>
+             <li>Implemented a <strong>GitOps</strong>-driven <strong>CI/CD</strong> workflow with <strong>Flux</strong> to automate website deployments.</li>
+             <li>Deployed and managed self-hosted services (media, DNS, web hosting, game servers, and automations - n8n) for 5+ users.</li>
+             <li>Used <strong>Prometheus/Grafana</strong> with <strong>Flux Helm Releases</strong>, plus <strong>alerting</strong> and <strong>metrics dashboards</strong>.</li>
+           </ul>
+         </article>
 
-        <article class="mb-4">
-          <div class="flex justify-between items-baseline flex-wrap">
-            <h3 class="font-semibold">Streak Buttons</h3>
-            <a href="https://github.com/pixel-87/duo-streak-widget" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">github.com/pixel-87/duo-streak-widget</a>
-          </div>
-          <ul class="list-disc ml-5 mt-1">
-            <li>Built a <strong>Go microservice</strong> to generate personal streak buttons/widgets, e.g. Duolingo and GitHub.</li>
-            <li>Managed a cloud-native stack with <strong>Infrastructure as Code (Terraform)</strong> on serverless <strong>Google Cloud Platform (GCP)</strong> Cloud Run, behind a <strong>Cloudflare Content Delivery Network (CDN)</strong>.</li>
-            <li>Used <strong>GitHub Actions CI</strong> to build <strong>Docker container</strong> images.</li>
-          </ul>
-        </article>
+         <article class="mb-4">
+           <div class="flex justify-between items-baseline flex-wrap">
+             <h3 class="font-semibold">Streak Buttons</h3>
+             <a href="https://github.com/pixel-87/duo-streak-widget" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">github.com/pixel-87/duo-streak-widget</a>
+           </div>
+           <ul class="list-disc ml-5 mt-1">
+             <li>Built a <strong>Go microservice</strong> to generate personal streak buttons/widgets, e.g. Duolingo and GitHub.</li>
+             <li>Managed a cloud-native stack with <strong>Infrastructure as Code (Terraform)</strong> on serverless <strong>Google Cloud Platform (GCP)</strong> Cloud Run, behind a <strong>Cloudflare Content Delivery Network (CDN)</strong>.</li>
+             <li>Used <strong>GitHub Actions CI</strong> to build <strong>Docker container</strong> images.</li>
+           </ul>
+         </article>
 
-        <article class="mb-4">
-          <div class="flex justify-between items-baseline flex-wrap">
-            <h3 class="font-semibold">Personal Website</h3>
-            <a href="https://ed-thomas.dev" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">ed-thomas.dev</a>
-          </div>
-          <ul class="list-disc ml-5 mt-1">
-            <li>Built a full <strong>CI/CD pipeline</strong> to deploy a <strong>container</strong> on push to my cluster.</li>
-            <li>Wrote blog posts on various tech, to document my learning and share my journey.</li>
-          </ul>
-        </article>
-      </section>
+         <article class="mb-4">
+           <div class="flex justify-between items-baseline flex-wrap">
+             <h3 class="font-semibold">Personal Website</h3>
+             <a href="https://ed-thomas.dev" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">ed-thomas.dev</a>
+           </div>
+           <ul class="list-disc ml-5 mt-1">
+             <li>Provisioned an automated failover using <strong>AWS CloudFront</strong> to reroute traffic to an <strong>S3</strong> backup to ensure uptime.</li>
+             <li>Built a full <strong>CI/CD pipeline</strong> to deploy a <strong>container</strong> on push to my cluster.</li>
+           </ul>
+         </article>
+       </section>
 
       <section class="mb-8">
         <h2 class="text-xl font-semibold mb-3 border-b-2 border-gray-200 dark:border-gray-700 pb-1">Experience</h2>
@@ -171,14 +171,14 @@ import Layout from "../layouts/Layout.astro";
         </div>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-xl font-semibold mb-3 border-b-2 border-gray-200 dark:border-gray-700 pb-1">Skills</h2>
-        <ul class="list-disc ml-5 space-y-1">
-          <li><span class="font-medium">Platform Engineering:</span> Linux (NixOS), Kubernetes (K3s), Docker, GitOps (Flux), Infrastructure as Code (IaC - Terraform), Helm, Prometheus, Grafana, Nixpkgs Maintainer.</li>
-          <li><span class="font-medium">Programming Languages:</span> Python, Java, Go, SQL, Nix.</li>
-          <li><span class="font-medium">Technologies:</span> Git, Django, go-chi, Astro, Google Cloud Platform (GCP).</li>
-        </ul>
-      </section>
+       <section class="mb-8">
+         <h2 class="text-xl font-semibold mb-3 border-b-2 border-gray-200 dark:border-gray-700 pb-1">Skills</h2>
+         <ul class="list-disc ml-5 space-y-1">
+           <li><span class="font-medium">Platform Engineering:</span> Linux (NixOS), Kubernetes (K3s), Docker, GitOps (Flux), Infrastructure as Code (IaC - Terraform), Helm, Prometheus, Grafana, Nixpkgs Maintainer, n8n.</li>
+           <li><span class="font-medium">Programming Languages:</span> Python, Go, Java, SQL, Nix.</li>
+           <li><span class="font-medium">Technologies:</span> AWS, Google Cloud Platform (GCP), Git, Django, go-chi, Astro.</li>
+         </ul>
+       </section>
     </div>
   </main>
 
