@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 resource "aws_s3_bucket" "site" {
-  bucket = "ed-thomas-dev-site-assets" # Must be globally unique
+  bucket = "${replace(var.domain_name, ".", "-")}-site-assets"
 }
 
 resource "aws_s3_bucket_public_access_block" "site_pab" {
@@ -20,8 +20,8 @@ resource "aws_s3_bucket_public_access_block" "site_pab" {
 # -----------------------------------------------------------------------------
 
 resource "aws_cloudfront_origin_access_control" "site_oac" {
-  name                              = "ed-thomas.dev-oac"
-  description                       = "OAC for ed-thomas.dev S3 Origin"
+  name                              = "${replace(var.domain_name, ".", "-")}-oac"
+  description                       = "OAC for ${var.domain_name} S3 Origin"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
@@ -32,7 +32,7 @@ resource "aws_cloudfront_origin_access_control" "site_oac" {
 # -----------------------------------------------------------------------------
 
 resource "aws_cloudfront_function" "rewrite_uri" {
-  name    = "ed-thomas-dev-rewrite-uri"
+  name    = "${replace(var.domain_name, ".", "-")}-rewrite-uri"
   runtime = "cloudfront-js-2.0"
   comment = "Appends index.html to directory requests"
   publish = true
@@ -55,6 +55,14 @@ resource "aws_cloudfront_function" "rewrite_uri" {
   EOT
 }
 
+data "aws_cloudfront_origin_request_policy" "all_viewer" {
+  name = "Managed-AllViewer"
+}
+
+data "aws_cloudfront_cache_policy" "optimized" {
+  name = "Managed-CachingOptimized"
+}
+
 # -----------------------------------------------------------------------------
 # CLOUDFRONT DISTRIBUTION
 # -----------------------------------------------------------------------------
@@ -63,8 +71,24 @@ resource "aws_cloudfront_distribution" "site" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-  aliases             = ["backup.ed-thomas.dev"]
+  aliases             = [var.domain_name, "www.${var.domain_name}", "backup.${var.domain_name}"]
   price_class         = "PriceClass_100" # Cheapest option, US/Europe edge locations only
+
+  origin {
+    domain_name = cloudflare_record.home_a.hostname
+    origin_id   = "home_server"
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "https-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+      origin_read_timeout    = 4
+    }
+
+    connection_attempts = 2
+    connection_timeout  = 4
+  }
 
   origin {
     domain_name              = aws_s3_bucket.site.bucket_regional_domain_name
@@ -72,16 +96,38 @@ resource "aws_cloudfront_distribution" "site" {
     origin_access_control_id = aws_cloudfront_origin_access_control.site_oac.id
   }
 
+  origin_group {
+    origin_id = "failover_group"
+
+    failover_criteria {
+      status_codes = [500, 502, 503, 504]
+    }
+
+    member {
+      origin_id = "home_server"
+    }
+
+    member {
+      origin_id = aws_s3_bucket.site.id
+    }
+  }
+
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = aws_s3_bucket.site.id
+    target_origin_id = "failover_group"
 
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
 
     # Using the AWS Managed CachingOptimized policy
-    cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    cache_policy_id = data.aws_cloudfront_cache_policy.optimized.id
+
+    # Forward the Host header to the origin so SNI matches the live domain
+    # AWS Managed AllViewerOriginRequest policy forwards Host
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.all_viewer.id
+
+
 
     function_association {
       event_type   = "viewer-request"

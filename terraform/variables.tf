@@ -25,3 +25,9 @@ variable "alert_email_address" {
   type        = string
   description = "Email address to receive AWS billing alerts."
 }
+
+variable "domain_name" {
+  type        = string
+  description = "The root domain name for the site."
+  default     = "ed-thomas.dev"
+}
