@@ -1,0 +1,6 @@
+{
+  "$schema": "https://agentskills.io/schema/v0.2.0/skill.json",
+  "name": "ed-thomas-skills",
+  "description": "Skills for interacting with ed-thomas.dev",
+  "instructions": "Use standard web browsing capabilities to read the blog."
+}

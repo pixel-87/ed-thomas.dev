@@ -2,6 +2,8 @@
 
 let
   port = "80";
+  # Read the SWS configuration directly from the tracked file to keep them in sync
+  swsConfig = ./sws.toml;
 in
 pkgs.dockerTools.buildLayeredImage {
   name = "ed-thomas.dev";
@@ -12,6 +14,8 @@ pkgs.dockerTools.buildLayeredImage {
   config = {
     Cmd = [
       "static-web-server"
+      "--config-file"
+      swsConfig
       "--port"
       port
       "--root"
@@ -20,6 +24,8 @@ pkgs.dockerTools.buildLayeredImage {
       "true"
       "--page-fallback"
       "404.html"
+      "--accept-markdown"
+      "true"
     ];
     ExposedPorts = {
       "${port}/tcp" = { };

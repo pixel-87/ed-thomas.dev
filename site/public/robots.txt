@@ -1,18 +1,30 @@
 # robots.txt - site-wide crawler rules
-# Block a few known AI / indexing agents while allowing normal search engines.
+# Allow AI / indexing agents so the site can be found in AI chat tools like ChatGPT, Perplexity, etc.
 # Note: robots.txt is advisory; some scrapers ignore it.
 
-User-agent: OpenAI
-Disallow: /
+User-agent: GPTBot
+Allow: /
 
-User-agent: Anthropic
-Disallow: /
+User-agent: OAI-SearchBot
+Allow: /
 
-User-agent: Perplexity
-Disallow: /
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
 
 User-agent: Mistral
-Disallow: /
+Allow: /
 
 # Allow standard search engine bots (explicit allow is optional)
 User-agent: Googlebot
@@ -25,3 +37,9 @@ Disallow:
 
 # Point search engines to the sitemap index
 Sitemap: https://ed-thomas.dev/sitemap-index.xml
+
+# Content Signals
+# ai-train=no blocks base model training
+# search=yes allows indexing
+# ai-input=yes allows content to be shown in RAG/chat windows
+Content-Signal: ai-train=no, search=yes, ai-input=yes

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agentskills.io/schema/v0.2.0/index.json",
+  "skills": [
+    {
+      "name": "ed-thomas-skills",
+      "type": "agent-skill",
+      "description": "Skills for interacting with ed-thomas.dev",
+      "url": "https://ed-thomas.dev/.well-known/agent-skills/skill.json",
+      "digest": "sha256:daf0bee2496c5527f72f6c3f57571536776a840c9f91d0d51008da1e9a36e07c"
+    }
+  ]
+}

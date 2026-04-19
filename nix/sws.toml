@@ -1,0 +1,6 @@
+[general]
+accept-markdown = true
+
+[[advanced.headers]]
+source = "**"
+headers = { "Link" = "</.well-known/agent-skills/index.json>; rel=\"agent-skills\"" }

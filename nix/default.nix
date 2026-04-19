@@ -5,6 +5,7 @@
   pnpm_10,
   fetchPnpmDeps,
   pnpmConfigHook,
+  pandoc,
 }:
 let
   nodejs = nodejs_24;
@@ -21,6 +22,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     nodejs
     pnpm
     pnpmConfigHook
+    pandoc
   ];
 
   pnpmDeps = fetchPnpmDeps {
@@ -34,6 +36,12 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   buildPhase = ''
     runHook preBuild
     pnpm run build
+
+    echo "Converting HTML to Markdown for SWS --accept-markdown..."
+    find dist -type f -name '*.html' | while read -r file; do
+      pandoc -f html -t markdown "$file" -o "''${file%.html}.md" || true
+    done
+
     runHook postBuild
   '';
 
@@ -44,6 +52,11 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     # Astro outputs to `dist` by default; copy all contents (including dotfiles) to $out
     if [ -d dist ]; then
       cp -r dist/. "$out"
+      
+      # Ensure .well-known is copied from public if Astro missed it
+      if [ -d public/.well-known ]; then
+        cp -r public/.well-known "$out/"
+      fi
     else
       echo "Error: no dist directory found after build"
       exit 1

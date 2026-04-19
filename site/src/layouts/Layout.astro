@@ -135,6 +135,55 @@ function isActive(path: string) {
           });
         </script>
 
+        <script>
+          // WebMCP Integration
+          if (typeof navigator !== "undefined" && "modelContext" in navigator) {
+            // @ts-ignore - modelContext is not in standard lib yet
+            navigator.modelContext.provideContext({
+              tools: [
+                {
+                  name: "read_page_content",
+                  description: "Reads the main text content of the current page.",
+                  inputSchema: { type: "object", properties: {} },
+                  execute: async () => {
+                    const main = document.querySelector("main");
+                    return {
+                      content: [
+                        {
+                          type: "text",
+                          text: main ? main.innerText : document.body.innerText,
+                        },
+                      ],
+                    };
+                  },
+                },
+                {
+                  name: "navigate_to_page",
+                  description: "Navigate to a different page on the site.",
+                  inputSchema: {
+                    type: "object",
+                    properties: {
+                      path: {
+                        type: "string",
+                        description: "The path to navigate to, e.g., /blog, /projects",
+                      },
+                    },
+                    required: ["path"],
+                  },
+                  execute: async (args) => {
+                    window.location.href = args.path;
+                    return {
+                      content: [
+                        { type: "text", text: `Navigating to ${args.path}...` },
+                      ],
+                    };
+                  },
+                },
+              ],
+            });
+          }
+        </script>
+
         <main class="flex-1">
           {showPath && <PathBreadcrumb path={currentPath} />}
           <slot />
