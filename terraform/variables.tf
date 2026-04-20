@@ -31,3 +31,9 @@ variable "domain_name" {
   description = "The root domain name for the site."
   default     = "ed-thomas.dev"
 }
+
+variable "home_ip" {
+  type        = string
+  description = "The IP address for the home record."
+  sensitive   = true
+}
