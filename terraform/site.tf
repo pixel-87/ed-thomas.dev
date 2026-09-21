@@ -55,10 +55,6 @@ resource "aws_cloudfront_function" "rewrite_uri" {
   EOT
 }
 
-data "aws_cloudfront_origin_request_policy" "all_viewer" {
-  name = "Managed-AllViewer"
-}
-
 data "aws_cloudfront_cache_policy" "optimized" {
   name = "Managed-CachingOptimized"
 }
@@ -83,11 +79,11 @@ resource "aws_cloudfront_distribution" "site" {
       https_port             = 443
       origin_protocol_policy = "https-only"
       origin_ssl_protocols   = ["TLSv1.2"]
-      origin_read_timeout    = 4
+      origin_read_timeout    = 1
     }
 
-    connection_attempts = 2
-    connection_timeout  = 4
+    connection_attempts = 1
+    connection_timeout  = 1
   }
 
   origin {
@@ -122,12 +118,6 @@ resource "aws_cloudfront_distribution" "site" {
 
     # Using the AWS Managed CachingOptimized policy
     cache_policy_id = data.aws_cloudfront_cache_policy.optimized.id
-
-    # Forward the Host header to the origin so SNI matches the live domain
-    # AWS Managed AllViewerOriginRequest policy forwards Host
-    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.all_viewer.id
-
-
 
     function_association {
       event_type   = "viewer-request"
